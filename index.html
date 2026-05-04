@@ -36,46 +36,82 @@
         .card-hover { transition: all 0.3s ease; }
         .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
 
-        /* ===== MOLECULE LABEL OVERLAY ===== */
+        /* ===== CALLOUT ARROW LABEL OVERLAY ===== */
         #mol-labels-overlay {
             position: absolute;
             inset: 0;
             pointer-events: none;
             z-index: 20;
         }
+        /* Full-size SVG for arrow lines */
+        #callout-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: visible;
+        }
+        .callout-line {
+            stroke-dasharray: 120;
+            stroke-dashoffset: 120;
+            animation: drawLine 0.5s ease forwards;
+        }
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+        /* Label cards */
         .mol-label {
             position: absolute;
-            display: flex;
-            align-items: center;
-            gap: 6px;
             pointer-events: none;
-            animation: labelFadeIn 0.4s ease;
+            animation: labelFadeIn 0.45s ease forwards;
+            opacity: 0;
         }
         @keyframes labelFadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: scale(0.92); }
+            to { opacity: 1; transform: scale(1); }
         }
-        .mol-label-dot {
-            width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-            box-shadow: 0 0 6px currentColor;
-        }
-        .mol-label-text {
-            background: rgba(0,0,0,0.72);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 6px;
-            padding: 3px 8px;
-            font-size: 11px;
-            font-weight: 600;
-            color: #fff;
-            line-height: 1.4;
+        .mol-label-card {
+            background: rgba(10,14,26,0.88);
+            border-radius: 8px;
+            padding: 6px 10px;
+            border-left: 3px solid var(--accent);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.07);
             white-space: nowrap;
         }
-        .mol-label-text span {
-            display: block;
+        .mol-label-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.3;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .mol-label-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 5px var(--accent);
+            flex-shrink: 0;
+        }
+        .mol-label-sub {
             font-size: 9px;
             font-weight: 400;
-            color: rgba(255,255,255,0.65);
-            margin-top: 1px;
+            color: rgba(255,255,255,0.55);
+            margin-top: 2px;
+            line-height: 1.3;
+        }
+        /* Anchor dot on the 3D object target point */
+        .callout-anchor {
+            position: absolute;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: anchorPulse 1.8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes anchorPulse {
+            0%, 100% { box-shadow: 0 0 0 0 var(--accent-fade); }
+            50% { box-shadow: 0 0 0 6px transparent; }
         }
 
         /* Process step badges inside canvas */
@@ -415,7 +451,24 @@
             </div>
             <div class="relative bg-gray-800 rounded-2xl md:rounded-3xl overflow-hidden border border-gray-700 shadow-2xl slide-in">
                 <div id="canvas-container"></div>
-                <div id="mol-labels-overlay"></div>
+                <div id="mol-labels-overlay">
+                    <svg id="callout-svg" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <marker id="arr-yellow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#facc15" opacity="0.9"/></marker>
+                            <marker id="arr-blue"   markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#60a5fa" opacity="0.9"/></marker>
+                            <marker id="arr-gray"   markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#9ca3af" opacity="0.9"/></marker>
+                            <marker id="arr-green"  markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#22c55e" opacity="0.9"/></marker>
+                            <marker id="arr-red"    markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#f87171" opacity="0.9"/></marker>
+                            <marker id="arr-purple" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#a78bfa" opacity="0.9"/></marker>
+                            <marker id="arr-pink"   markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#f472b6" opacity="0.9"/></marker>
+                            <marker id="arr-orange" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#fb923c" opacity="0.9"/></marker>
+                            <marker id="arr-lime"   markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#86efac" opacity="0.9"/></marker>
+                            <marker id="arr-amber"  markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#fbbf24" opacity="0.9"/></marker>
+                        </defs>
+                        <!-- callout lines injected by JS -->
+                    </svg>
+                    <!-- label cards + anchor dots injected by JS -->
+                </div>
                 <div id="sim-steps-overlay"></div>
 
                 <div class="absolute top-2 md:top-4 left-2 md:left-4 bg-black/60 backdrop-blur-md p-3 md:p-4 rounded-lg md:rounded-xl max-w-[200px] md:max-w-xs border border-white/10" style="z-index:15;">
@@ -428,7 +481,7 @@
                 <div class="absolute bottom-12 md:bottom-14 right-2 md:right-4 bg-black/60 backdrop-blur-md p-3 md:p-4 rounded-lg md:rounded-xl border border-white/10" style="z-index:15; max-width:160px; min-width:130px;">
                     <div class="text-[10px] md:text-xs font-semibold mb-1 md:mb-2 text-gray-400">Legenda:</div>
                     <div class="space-y-1 text-[10px] md:text-xs">
-                        <div class="flex items-center gap-1.5 md:gap-2"><span class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500"></span><span>Zat terlarut</span></div>
+                        <div class="flex items-center gap-1.5 md:gap-2"><span class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-yellow-400"></span><span>Zat terlarut</span></div>
                         <div class="flex items-center gap-1.5 md:gap-2"><span class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-gradient-to-r from-blue-400 to-blue-600"></span><span>Kepala fosfolipid</span></div>
                         <div class="flex items-center gap-1.5 md:gap-2"><span class="w-3 h-2 md:w-4 md:h-2 rounded bg-gradient-to-r from-gray-400 to-gray-600"></span><span>Ekor fosfolipid</span></div>
                         <div id="legend-protein" class="flex items-center gap-1.5 md:gap-2 hidden">
@@ -818,28 +871,106 @@
         }
     }
 
-    // ===== MOLECULE LABELS OVERLAY =====
+    // ===== CALLOUT ARROW LABEL DATA =====
+    // Each entry: anchor = dot ON the 3D object (% of canvas)
+    //             label  = where the card floats (% of canvas)
+    //             color  = accent color hex, markerKey = SVG marker id suffix
     const SIM_LABELS = {
         diffusion: [
-            { top: '18%', left: '62%', dot: '#facc15', title: 'Molekul O₂ / CO₂', sub: 'Bergerak dari konsentrasi tinggi → rendah' },
-            { top: '70%', left: '60%', dot: '#facc15', title: 'Konsentrasi Rendah', sub: 'Sisi tujuan difusi (spontan, tanpa ATP)' },
-            { top: '44%', left: '5%', dot: '#60a5fa', title: 'Kepala Fosfolipid', sub: 'Hidrofilik — suka air' },
-            { top: '54%', left: '5%', dot: '#9ca3af', title: 'Ekor Fosfolipid', sub: 'Hidrofobik — tolak air' },
-            { top: '22%', left: '30%', dot: '#86efac', title: 'Daerah Konsentrasi Tinggi', sub: 'Molekul berkumpul di sini' },
+            {
+                anchor: { x: 62, y: 20 }, label: { x: 72, y: 8 },
+                color: '#facc15', markerKey: 'yellow',
+                title: 'Molekul O₂ / CO₂',
+                sub: 'Bergerak konsentrasi tinggi → rendah'
+            },
+            {
+                anchor: { x: 38, y: 22 }, label: { x: 18, y: 8 },
+                color: '#86efac', markerKey: 'lime',
+                title: 'Zona Konsentrasi Tinggi',
+                sub: 'Molekul padat di atas membran'
+            },
+            {
+                anchor: { x: 50, y: 50 }, label: { x: 3, y: 40 },
+                color: '#60a5fa', markerKey: 'blue',
+                title: 'Kepala Fosfolipid',
+                sub: 'Hidrofilik — suka air'
+            },
+            {
+                anchor: { x: 50, y: 57 }, label: { x: 3, y: 62 },
+                color: '#9ca3af', markerKey: 'gray',
+                title: 'Ekor Fosfolipid',
+                sub: 'Hidrofobik — tolak air'
+            },
+            {
+                anchor: { x: 55, y: 78 }, label: { x: 62, y: 86 },
+                color: '#facc15', markerKey: 'yellow',
+                title: 'Zona Konsentrasi Rendah',
+                sub: 'Sisi tujuan difusi (tanpa ATP)'
+            },
         ],
         osmosis: [
-            { top: '15%', left: '55%', dot: '#60a5fa', title: 'Molekul Air (H₂O)', sub: 'Bergerak menuju konsentrasi air rendah' },
-            { top: '20%', left: '5%', dot: '#f87171', title: 'Zat Terlarut (Garam)', sub: 'Tidak bisa melewati membran' },
-            { top: '44%', left: '5%', dot: '#60a5fa', title: 'Kepala Fosfolipid', sub: 'Membentuk bilayer membran' },
-            { top: '55%', left: '60%', dot: '#22c55e', title: 'Protein Saluran Air', sub: 'Aquaporin — memfasilitasi osmosis' },
-            { top: '75%', left: '35%', dot: '#fbbf24', title: 'Membran Semipermeabel', sub: 'Selektif: hanya air yang bisa lewat' },
+            {
+                anchor: { x: 30, y: 20 }, label: { x: 3, y: 8 },
+                color: '#60a5fa', markerKey: 'blue',
+                title: 'Molekul Air (H₂O)',
+                sub: 'Bergerak menuju konsentrasi air rendah'
+            },
+            {
+                anchor: { x: 72, y: 30 }, label: { x: 68, y: 8 },
+                color: '#f87171', markerKey: 'red',
+                title: 'Zat Terlarut (Garam)',
+                sub: 'Tidak bisa melewati membran'
+            },
+            {
+                anchor: { x: 50, y: 48 }, label: { x: 3, y: 40 },
+                color: '#60a5fa', markerKey: 'blue',
+                title: 'Kepala Fosfolipid',
+                sub: 'Membentuk bilayer membran'
+            },
+            {
+                anchor: { x: 50, y: 53 }, label: { x: 3, y: 60 },
+                color: '#22c55e', markerKey: 'green',
+                title: 'Aquaporin (Protein Air)',
+                sub: 'Kanal air — memfasilitasi osmosis'
+            },
+            {
+                anchor: { x: 50, y: 50 }, label: { x: 62, y: 75 },
+                color: '#fbbf24', markerKey: 'amber',
+                title: 'Membran Semipermeabel',
+                sub: 'Selektif: hanya air yang lewat'
+            },
         ],
         active: [
-            { top: '15%', left: '52%', dot: '#facc15', title: 'Ion Na⁺ (Natrium)', sub: 'Dipompa keluar sel — melawan gradien' },
-            { top: '68%', left: '52%', dot: '#a78bfa', title: 'Ion K⁺ (Kalium)', sub: 'Dipompa masuk sel — melawan gradien' },
-            { top: '44%', left: '5%', dot: '#22c55e', title: 'Protein Pompa Na⁺/K⁺', sub: 'ATPase — menggunakan energi ATP' },
-            { top: '34%', left: '62%', dot: '#f472b6', title: 'ATP (Energi)', sub: 'Adenosin Trifosfat — bahan bakar pompa' },
-            { top: '56%', left: '15%', dot: '#fb923c', title: 'Gradien Dilawan', sub: 'Dari konsentrasi rendah → tinggi' },
+            {
+                anchor: { x: 48, y: 20 }, label: { x: 60, y: 7 },
+                color: '#facc15', markerKey: 'yellow',
+                title: 'Ion Na⁺ (Natrium)',
+                sub: 'Dipompa keluar — melawan gradien'
+            },
+            {
+                anchor: { x: 48, y: 78 }, label: { x: 60, y: 87 },
+                color: '#a78bfa', markerKey: 'purple',
+                title: 'Ion K⁺ (Kalium)',
+                sub: 'Dipompa masuk — melawan gradien'
+            },
+            {
+                anchor: { x: 50, y: 50 }, label: { x: 3, y: 40 },
+                color: '#22c55e', markerKey: 'green',
+                title: 'Protein Pompa Na⁺/K⁺',
+                sub: 'ATPase — menggunakan energi ATP'
+            },
+            {
+                anchor: { x: 38, y: 50 }, label: { x: 3, y: 62 },
+                color: '#f472b6', markerKey: 'pink',
+                title: 'ATP (Energi)',
+                sub: 'Adenosin Trifosfat — bahan bakar pompa'
+            },
+            {
+                anchor: { x: 52, y: 50 }, label: { x: 60, y: 52 },
+                color: '#fb923c', markerKey: 'orange',
+                title: 'Gradien Dilawan',
+                sub: 'Dari konsentrasi rendah → tinggi'
+            },
         ],
     };
 
@@ -863,19 +994,125 @@
 
     function renderMolLabels(type) {
         var overlay = document.getElementById('mol-labels-overlay');
+        var svg     = document.getElementById('callout-svg');
         var stepsEl = document.getElementById('sim-steps-overlay');
-        overlay.innerHTML = '';
+
+        // Clear previous labels (keep SVG defs)
+        // Remove all non-defs children from svg
+        Array.from(svg.children).forEach(function(child) {
+            if (child.tagName !== 'defs') svg.removeChild(child);
+        });
+        // Remove label cards and anchor dots (everything except the svg itself)
+        Array.from(overlay.children).forEach(function(child) {
+            if (child.id !== 'callout-svg') overlay.removeChild(child);
+        });
         stepsEl.innerHTML = '';
 
-        (SIM_LABELS[type] || []).forEach(function(lbl) {
-            var wrap = document.createElement('div');
-            wrap.className = 'mol-label';
-            wrap.style.cssText = 'top:' + lbl.top + ';left:' + lbl.left + ';';
-            wrap.innerHTML = '<div class="mol-label-dot" style="background:' + lbl.dot + ';"></div>' +
-                '<div class="mol-label-text">' + lbl.title + '<span>' + lbl.sub + '</span></div>';
-            overlay.appendChild(wrap);
+        var container = document.getElementById('canvas-container');
+        var W = container.clientWidth;
+        var H = container.clientHeight;
+
+        (SIM_LABELS[type] || []).forEach(function(lbl, idx) {
+            var delay = idx * 0.12; // stagger
+
+            // --- Anchor dot (pulsing circle on the 3D target point) ---
+            var ax = lbl.anchor.x / 100 * W;
+            var ay = lbl.anchor.y / 100 * H;
+
+            var anchor = document.createElement('div');
+            anchor.className = 'callout-anchor';
+            anchor.style.cssText = [
+                'left:' + ax + 'px',
+                'top:' + ay + 'px',
+                'background:' + lbl.color,
+                '--accent:' + lbl.color,
+                '--accent-fade:' + lbl.color + '66',
+                'animation-delay:' + delay + 's',
+                'box-shadow:0 0 0 2px ' + lbl.color + ',0 0 8px ' + lbl.color + '88'
+            ].join(';');
+            overlay.appendChild(anchor);
+
+            // --- Label card ---
+            var lx = lbl.label.x / 100 * W;
+            var ly = lbl.label.y / 100 * H;
+
+            var card = document.createElement('div');
+            card.className = 'mol-label';
+            card.style.cssText = [
+                'left:' + lx + 'px',
+                'top:' + ly + 'px',
+                'animation-delay:' + delay + 's',
+                '--accent:' + lbl.color
+            ].join(';');
+            card.innerHTML =
+                '<div class="mol-label-card" style="--accent:' + lbl.color + ';border-left-color:' + lbl.color + '">' +
+                  '<div class="mol-label-title">' +
+                    '<div class="mol-label-dot" style="background:' + lbl.color + ';box-shadow:0 0 5px ' + lbl.color + '"></div>' +
+                    lbl.title +
+                  '</div>' +
+                  '<div class="mol-label-sub">' + lbl.sub + '</div>' +
+                '</div>';
+            overlay.appendChild(card);
+
+            // After card is in DOM, compute its real size for arrow endpoint
+            // We do it in a rAF so layout is done
+            (function(c, aXi, aYi, labelX, labelY, color, key, d) {
+                requestAnimationFrame(function() {
+                    var rect = c.getBoundingClientRect();
+                    var overlayRect = overlay.getBoundingClientRect();
+
+                    // card top-left relative to overlay
+                    var cardLeft = rect.left - overlayRect.left;
+                    var cardTop  = rect.top  - overlayRect.top;
+                    var cw = rect.width, ch = rect.height;
+
+                    // Find the edge midpoint of the card closest to the anchor
+                    // Possible connection points: left-mid, right-mid, top-mid, bottom-mid
+                    var candidates = [
+                        { x: cardLeft,           y: cardTop + ch / 2, name: 'left'   },
+                        { x: cardLeft + cw,      y: cardTop + ch / 2, name: 'right'  },
+                        { x: cardLeft + cw / 2,  y: cardTop,          name: 'top'    },
+                        { x: cardLeft + cw / 2,  y: cardTop + ch,     name: 'bottom' },
+                    ];
+                    var best = candidates.reduce(function(prev, cur) {
+                        var pd = Math.hypot(prev.x - aXi, prev.y - aYi);
+                        var cd = Math.hypot(cur.x  - aXi, cur.y  - aYi);
+                        return cd < pd ? cur : prev;
+                    });
+
+                    // Draw elbow path: anchor → midpoint bend → card edge
+                    var mx, my;
+                    if (best.name === 'left' || best.name === 'right') {
+                        mx = best.x; my = aYi;
+                    } else {
+                        mx = aXi; my = best.y;
+                    }
+
+                    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    var d_attr = 'M ' + aXi + ' ' + aYi +
+                                 ' L ' + mx  + ' ' + my  +
+                                 ' L ' + best.x + ' ' + best.y;
+                    path.setAttribute('d', d_attr);
+                    path.setAttribute('stroke', color);
+                    path.setAttribute('stroke-width', '1.5');
+                    path.setAttribute('fill', 'none');
+                    path.setAttribute('opacity', '0.85');
+                    path.setAttribute('stroke-linecap', 'round');
+                    path.setAttribute('stroke-linejoin', 'round');
+                    path.setAttribute('marker-end', 'url(#arr-' + key + ')');
+
+                    // Animate line drawing
+                    var len = path.getTotalLength ? path.getTotalLength() : 120;
+                    path.style.strokeDasharray  = len;
+                    path.style.strokeDashoffset = len;
+                    path.style.animation = 'drawLine ' + 0.45 + 's ' + d + 's ease forwards';
+
+                    svg.appendChild(path);
+                });
+            })(card, ax, ay, lx, ly, lbl.color, lbl.markerKey, delay);
         });
 
+        // Step badges
         (SIM_STEPS[type] || []).forEach(function(step) {
             var badge = document.createElement('div');
             badge.className = 'step-badge';
@@ -1046,6 +1283,8 @@
             camera.updateProjectionMatrix();
             renderer.setSize(c.clientWidth, c.clientHeight);
         }
+        // Redraw callout labels so arrows match new canvas size
+        if (currentSimulation) renderMolLabels(currentSimulation);
     });
 
     // ============================================================
