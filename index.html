@@ -527,6 +527,18 @@
                         <h4 class="font-bold text-xs md:text-sm text-pink-400">🐛 Sel Hewan</h4>
                     </div>
                     <canvas id="animal-canvas" class="w-full" style="height: 350px;"></canvas>
+                    <!-- Callout overlay for animal cell -->
+                    <div id="animal-callout-overlay" class="absolute inset-0 pointer-events-none" style="z-index:11;">
+                        <svg id="animal-callout-svg" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;">
+                            <defs>
+                                <marker id="osm-arr-blue"  markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#60a5fa" opacity="0.9"/></marker>
+                                <marker id="osm-arr-red"   markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#f87171" opacity="0.9"/></marker>
+                                <marker id="osm-arr-pink"  markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#f472b6" opacity="0.9"/></marker>
+                                <marker id="osm-arr-purple" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#a78bfa" opacity="0.9"/></marker>
+                                <marker id="osm-arr-green" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#22c55e" opacity="0.9"/></marker>
+                            </defs>
+                        </svg>
+                    </div>
                     <div class="absolute bottom-3 right-3 md:bottom-4 md:right-4 z-10 bg-black/60 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 rounded-lg border border-white/10 max-w-[180px] md:max-w-xs">
                         <p id="animal-status" class="text-[10px] md:text-xs text-gray-300">Air masuk ke dalam sel</p>
                     </div>
@@ -536,6 +548,18 @@
                         <h4 class="font-bold text-xs md:text-sm text-green-400">🌱 Sel Tumbuhan</h4>
                     </div>
                     <canvas id="plant-canvas" class="w-full" style="height: 350px;"></canvas>
+                    <!-- Callout overlay for plant cell -->
+                    <div id="plant-callout-overlay" class="absolute inset-0 pointer-events-none" style="z-index:11;">
+                        <svg id="plant-callout-svg" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;">
+                            <defs>
+                                <marker id="osm-arr-blue2"  markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#60a5fa" opacity="0.9"/></marker>
+                                <marker id="osm-arr-red2"   markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#f87171" opacity="0.9"/></marker>
+                                <marker id="osm-arr-green2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#22c55e" opacity="0.9"/></marker>
+                                <marker id="osm-arr-yellow2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#facc15" opacity="0.9"/></marker>
+                                <marker id="osm-arr-orange2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0,7 3.5,0 7" fill="#fb923c" opacity="0.9"/></marker>
+                            </defs>
+                        </svg>
+                    </div>
                     <div class="absolute bottom-3 right-3 md:bottom-4 md:right-4 z-10 bg-black/60 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 rounded-lg border border-white/10 max-w-[180px] md:max-w-xs">
                         <p id="plant-status" class="text-[10px] md:text-xs text-gray-300">Sel menjadi turgid</p>
                     </div>
@@ -1534,8 +1558,169 @@
     }
 
     // ============================================================
-    // OSMOSIS CANVAS
+    // OSMOSIS CALLOUT ARROWS
     // ============================================================
+    // Labels for each cell type and osmosis condition
+    // anchor: position of the dot on the canvas (% of canvas W/H)
+    // label:  position of the card (% of canvas W/H)
+    var OSMOSIS_LABELS = {
+        animal: {
+            hypotonic: [
+                { anchor:{x:50,y:50}, label:{x:62,y:20}, color:'#f472b6', marker:'osm-arr-pink',   title:'Membran Sel', sub:'Membungkus & melindungi sel hewan' },
+                { anchor:{x:50,y:50}, label:{x:5, y:50},  color:'#a78bfa', marker:'osm-arr-purple', title:'Nukleus', sub:'Inti sel tetap stabil' },
+                { anchor:{x:25,y:35}, label:{x:3, y:15},  color:'#60a5fa', marker:'osm-arr-blue',   title:'Molekul Air (H₂O)', sub:'Masuk ke dalam sel (hipotonik)' },
+                { anchor:{x:50,y:80}, label:{x:30,y:88},  color:'#f87171', marker:'osm-arr-red',    title:'Sel Membesar → Lisis', sub:'Terlalu banyak air masuk → pecah' },
+            ],
+            isotonic: [
+                { anchor:{x:50,y:50}, label:{x:62,y:20}, color:'#f472b6', marker:'osm-arr-pink',   title:'Membran Sel', sub:'Kondisi normal & stabil' },
+                { anchor:{x:50,y:50}, label:{x:5, y:50},  color:'#a78bfa', marker:'osm-arr-purple', title:'Nukleus', sub:'Inti sel aktif & normal' },
+                { anchor:{x:20,y:40}, label:{x:3, y:18},  color:'#60a5fa', marker:'osm-arr-blue',   title:'Molekul Air', sub:'Keluar-masuk seimbang (isotonik)' },
+                { anchor:{x:50,y:78}, label:{x:30,y:88},  color:'#22c55e', marker:'osm-arr-green',  title:'Sel Normal', sub:'Tidak ada perubahan ukuran' },
+            ],
+            hypertonic: [
+                { anchor:{x:50,y:50}, label:{x:62,y:20}, color:'#f472b6', marker:'osm-arr-pink',   title:'Membran Sel', sub:'Mengerut mengikuti kehilangan air' },
+                { anchor:{x:50,y:50}, label:{x:5, y:50},  color:'#a78bfa', marker:'osm-arr-purple', title:'Nukleus', sub:'Inti sel terkompresi' },
+                { anchor:{x:75,y:35}, label:{x:58,y:12},  color:'#60a5fa', marker:'osm-arr-blue',   title:'Molekul Air (H₂O)', sub:'Keluar dari sel (hipertonik)' },
+                { anchor:{x:50,y:78}, label:{x:28,y:88},  color:'#f87171', marker:'osm-arr-red',    title:'Krenasi', sub:'Sel mengkerut karena kehilangan air' },
+            ],
+        },
+        plant: {
+            hypotonic: [
+                { anchor:{x:50,y:12}, label:{x:55,y:3},   color:'#22c55e', marker:'osm-arr-green2', title:'Dinding Sel', sub:'Mencegah sel pecah saat turgid' },
+                { anchor:{x:50,y:50}, label:{x:5, y:30},  color:'#60a5fa', marker:'osm-arr-blue2',  title:'Membran Sel', sub:'Di dalam dinding sel' },
+                { anchor:{x:50,y:50}, label:{x:55,y:55},  color:'#facc15', marker:'osm-arr-yellow2',title:'Vakuola Besar', sub:'Terisi penuh air → sel turgid' },
+                { anchor:{x:20,y:35}, label:{x:3, y:15},  color:'#60a5fa', marker:'osm-arr-blue2',  title:'Air Masuk', sub:'Osmosis: luar → dalam sel' },
+                { anchor:{x:50,y:83}, label:{x:28,y:90},  color:'#22c55e', marker:'osm-arr-green2', title:'Sel Turgid', sub:'Kaku & tegang — kondisi ideal' },
+            ],
+            isotonic: [
+                { anchor:{x:50,y:12}, label:{x:55,y:3},   color:'#22c55e', marker:'osm-arr-green2', title:'Dinding Sel', sub:'Memberikan bentuk tetap' },
+                { anchor:{x:50,y:50}, label:{x:5, y:30},  color:'#60a5fa', marker:'osm-arr-blue2',  title:'Membran Sel', sub:'Menempel pada dinding sel' },
+                { anchor:{x:50,y:50}, label:{x:55,y:55},  color:'#facc15', marker:'osm-arr-yellow2',title:'Vakuola Sedang', sub:'Air setimbang — kondisi flasid' },
+                { anchor:{x:20,y:35}, label:{x:3, y:15},  color:'#60a5fa', marker:'osm-arr-blue2',  title:'Air Seimbang', sub:'Tidak ada aliran bersih' },
+                { anchor:{x:50,y:83}, label:{x:28,y:90},  color:'#facc15', marker:'osm-arr-yellow2',title:'Sel Flasid', sub:'Sedikit layu, tidak ada turgor' },
+            ],
+            hypertonic: [
+                { anchor:{x:50,y:12}, label:{x:55,y:3},   color:'#22c55e', marker:'osm-arr-green2', title:'Dinding Sel', sub:'Tetap kaku, tidak ikut mengkerut' },
+                { anchor:{x:50,y:50}, label:{x:5, y:30},  color:'#fb923c', marker:'osm-arr-orange2',title:'Membran Sel', sub:'Menjauh dari dinding → plasmolisis' },
+                { anchor:{x:50,y:50}, label:{x:55,y:55},  color:'#facc15', marker:'osm-arr-yellow2',title:'Vakuola Mengecil', sub:'Air keluar dari vakuola' },
+                { anchor:{x:75,y:35}, label:{x:57,y:12},  color:'#60a5fa', marker:'osm-arr-blue2',  title:'Air Keluar', sub:'Osmosis: dalam → luar sel' },
+                { anchor:{x:50,y:83}, label:{x:28,y:90},  color:'#f87171', marker:'osm-arr-red2',   title:'Plasmolisis', sub:'Membran terlepas dari dinding sel' },
+            ],
+        },
+    };
+
+    function renderOsmosisCallouts(type) {
+        ['animal', 'plant'].forEach(function(cellType) {
+            var overlayId = cellType + '-callout-overlay';
+            var svgId     = cellType + '-callout-svg';
+            var canvasId  = cellType + '-canvas';
+
+            var overlay = document.getElementById(overlayId);
+            var svg     = document.getElementById(svgId);
+            var canvas  = document.getElementById(canvasId);
+            if (!overlay || !svg || !canvas) return;
+
+            // Clear previous labels (keep defs)
+            Array.from(svg.children).forEach(function(child) {
+                if (child.tagName !== 'defs') svg.removeChild(child);
+            });
+            Array.from(overlay.children).forEach(function(child) {
+                if (child.id !== svgId) overlay.removeChild(child);
+            });
+
+            var W = canvas.clientWidth;
+            var H = canvas.clientHeight || 350;
+            var labels = (OSMOSIS_LABELS[cellType] || {})[type] || [];
+
+            labels.forEach(function(lbl, idx) {
+                var delay = idx * 0.1;
+                var ax = lbl.anchor.x / 100 * W;
+                var ay = lbl.anchor.y / 100 * H;
+
+                // Anchor pulsing dot
+                var anchorEl = document.createElement('div');
+                anchorEl.style.cssText = [
+                    'position:absolute',
+                    'width:10px', 'height:10px',
+                    'border-radius:50%',
+                    'background:' + lbl.color,
+                    'box-shadow:0 0 0 2px ' + lbl.color + ',0 0 8px ' + lbl.color + '88',
+                    'left:' + ax + 'px',
+                    'top:' + ay + 'px',
+                    'transform:translate(-50%,-50%)',
+                    'animation:anchorPulse 1.8s ease-in-out ' + delay + 's infinite',
+                    '--accent:' + lbl.color,
+                    '--accent-fade:' + lbl.color + '66',
+                    'pointer-events:none'
+                ].join(';');
+                overlay.appendChild(anchorEl);
+
+                // Label card
+                var lx = lbl.label.x / 100 * W;
+                var ly = lbl.label.y / 100 * H;
+
+                var card = document.createElement('div');
+                card.style.cssText = [
+                    'position:absolute',
+                    'left:' + lx + 'px',
+                    'top:' + ly + 'px',
+                    'pointer-events:none',
+                    'animation:labelFadeIn 0.45s ' + delay + 's ease forwards',
+                    'opacity:0'
+                ].join(';');
+                card.innerHTML =
+                    '<div style="background:rgba(10,14,26,0.88);border-radius:8px;padding:5px 9px;border-left:3px solid ' + lbl.color + ';box-shadow:0 2px 12px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.07);white-space:nowrap;">' +
+                        '<div style="font-size:10px;font-weight:700;color:#fff;display:flex;align-items:center;gap:5px;">' +
+                            '<div style="width:7px;height:7px;border-radius:50%;background:' + lbl.color + ';box-shadow:0 0 5px ' + lbl.color + ';flex-shrink:0;"></div>' +
+                            lbl.title +
+                        '</div>' +
+                        '<div style="font-size:8.5px;color:rgba(255,255,255,0.55);margin-top:2px;line-height:1.3;">' + lbl.sub + '</div>' +
+                    '</div>';
+                overlay.appendChild(card);
+
+                // Draw arrow after card is in DOM
+                (function(c, aX, aY, color, marker, d) {
+                    requestAnimationFrame(function() {
+                        var rect        = c.getBoundingClientRect();
+                        var overlayRect = overlay.getBoundingClientRect();
+                        var cardLeft = rect.left - overlayRect.left;
+                        var cardTop  = rect.top  - overlayRect.top;
+                        var cw = rect.width, ch = rect.height;
+
+                        var candidates = [
+                            { x: cardLeft,          y: cardTop + ch / 2 },
+                            { x: cardLeft + cw,     y: cardTop + ch / 2 },
+                            { x: cardLeft + cw / 2, y: cardTop           },
+                            { x: cardLeft + cw / 2, y: cardTop + ch      },
+                        ];
+                        var best = candidates.reduce(function(p, cur) {
+                            return Math.hypot(cur.x - aX, cur.y - aY) < Math.hypot(p.x - aX, p.y - aY) ? cur : p;
+                        });
+
+                        var horiz = Math.abs(best.x - (cardLeft + cw/2)) > Math.abs(best.y - (cardTop + ch/2));
+                        var mx = horiz ? best.x : aX;
+                        var my = horiz ? aY     : best.y;
+
+                        var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                        path.setAttribute('d', 'M ' + aX + ' ' + aY + ' L ' + mx + ' ' + my + ' L ' + best.x + ' ' + best.y);
+                        path.setAttribute('stroke', color);
+                        path.setAttribute('stroke-width', '1.5');
+                        path.setAttribute('fill', 'none');
+                        path.setAttribute('opacity', '0.85');
+                        path.setAttribute('stroke-linecap', 'round');
+                        path.setAttribute('stroke-linejoin', 'round');
+                        path.setAttribute('marker-end', 'url(#' + marker + ')');
+
+                        var len = 150;
+                        path.style.strokeDasharray  = len;
+                        path.style.strokeDashoffset = len;
+                        path.style.animation = 'drawLine 0.45s ' + d + 's ease forwards';
+                        svg.appendChild(path);
+                    });
+                })(card, ax, ay, lbl.color, lbl.marker, delay);
+            });
+        });
+    }
     var voiceExplanations = {
         hypotonic: { title: "Osmosis Hipotonik", text: "Osmosis hipotonik. Dalam larutan hipotonik, konsentrasi zat terlarut di luar sel lebih rendah dibandingkan di dalam sel. Akibatnya, air bergerak masuk ke dalam sel melalui membran semipermeabel. Pada sel hewan, air masuk menyebabkan sel membesar dan bisa pecah, yang disebut lisis. Namun, pada sel tumbuhan, meskipun air juga masuk, sel tidak pecah karena dilindungi oleh dinding sel yang kaku. Sel tumbuhan justru menjadi turgid, yaitu kaku dan tegang." },
         isotonic: { title: "Osmosis Isotonik", text: "Osmosis isotonik. Dalam larutan isotonik, konsentrasi zat terlarut di luar dan di dalam sel adalah sama. Karena tidak ada perbedaan gradien konsentrasi, tidak ada pergerakan air bersih yang signifikan melintasi membran sel. Pada sel hewan, sel tetap dalam kondisi normal dan stabil. Sedangkan pada sel tumbuhan, sel berada dalam kondisi flasid, yaitu sedikit layu karena tidak ada tekanan turgor." },
@@ -1588,6 +1773,7 @@
         document.getElementById('animal-status').textContent = sm[type].animal;
         document.getElementById('plant-status').textContent = sm[type].plant;
         createParticles();
+        renderOsmosisCallouts(type);
         if (isSpeaking) { stopVoice(); setTimeout(function() { playVoice(); }, 500); }
     }
 
@@ -1804,6 +1990,8 @@
         initThreeJS();
         initHero3D();
         initOsmosisCanvas();
+        // Render initial osmosis callout arrows after a short delay so canvas sizes are settled
+        setTimeout(function() { renderOsmosisCallouts('hypotonic'); }, 200);
         loadQuestion();
         document.querySelectorAll('a[href^="#"]').forEach(function(a) {
             a.addEventListener('click', function(e) {
