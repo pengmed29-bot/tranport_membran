@@ -37,106 +37,31 @@
         .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
 
         #mol-labels-overlay {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: 20;
+            position: absolute; inset: 0; pointer-events: none; z-index: 20;
         }
         #callout-svg {
-            position: absolute;
-            inset: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            overflow: visible;
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: visible;
         }
-        .callout-line {
-            stroke-dasharray: 120;
-            stroke-dashoffset: 120;
-            animation: drawLine 0.5s ease forwards;
-        }
-        @keyframes drawLine {
-            to { stroke-dashoffset: 0; }
-        }
-        .mol-label {
-            position: absolute;
-            pointer-events: none;
-            animation: labelFadeIn 0.45s ease forwards;
-            opacity: 0;
-        }
-        @keyframes labelFadeIn {
-            from { opacity: 0; transform: scale(0.92); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        .callout-line { stroke-dasharray: 120; stroke-dashoffset: 120; animation: drawLine 0.5s ease forwards; }
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
+        .mol-label { position: absolute; pointer-events: none; animation: labelFadeIn 0.45s ease forwards; opacity: 0; }
+        @keyframes labelFadeIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
         .mol-label-card {
-            background: rgba(10,14,26,0.88);
-            border-radius: 8px;
-            padding: 6px 10px;
+            background: rgba(10,14,26,0.88); border-radius: 8px; padding: 6px 10px;
             border-left: 3px solid var(--accent);
             box-shadow: 0 2px 12px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.07);
             white-space: nowrap;
         }
-        .mol-label-title {
-            font-size: 11px;
-            font-weight: 700;
-            color: #fff;
-            line-height: 1.3;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .mol-label-dot {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 5px var(--accent);
-            flex-shrink: 0;
-        }
-        .mol-label-sub {
-            font-size: 9px;
-            font-weight: 400;
-            color: rgba(255,255,255,0.55);
-            margin-top: 2px;
-            line-height: 1.3;
-        }
-        .callout-anchor {
-            position: absolute;
-            width: 10px; height: 10px;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            animation: anchorPulse 1.8s ease-in-out infinite;
-            pointer-events: none;
-        }
-        @keyframes anchorPulse {
-            0%, 100% { box-shadow: 0 0 0 0 var(--accent-fade); }
-            50% { box-shadow: 0 0 0 6px transparent; }
-        }
+        .mol-label-title { font-size: 11px; font-weight: 700; color: #fff; line-height: 1.3; display: flex; align-items: center; gap: 5px; }
+        .mol-label-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 5px var(--accent); flex-shrink: 0; }
+        .mol-label-sub { font-size: 9px; font-weight: 400; color: rgba(255,255,255,0.55); margin-top: 2px; line-height: 1.3; }
+        .callout-anchor { position: absolute; width: 10px; height: 10px; border-radius: 50%; transform: translate(-50%, -50%); animation: anchorPulse 1.8s ease-in-out infinite; pointer-events: none; }
+        @keyframes anchorPulse { 0%, 100% { box-shadow: 0 0 0 0 var(--accent-fade); } 50% { box-shadow: 0 0 0 6px transparent; } }
 
-        #sim-steps-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0; right: 0;
-            z-index: 20;
-            pointer-events: none;
-            padding: 10px 12px;
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .step-badge {
-            background: rgba(0,0,0,0.7);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 20px;
-            padding: 4px 10px;
-            font-size: 10px;
-            color: rgba(255,255,255,0.85);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            animation: labelFadeIn 0.5s ease;
-        }
-        .step-badge-dot {
-            width: 7px; height: 7px; border-radius: 50%;
-        }
+        #sim-steps-overlay { position: absolute; bottom: 0; left: 0; right: 0; z-index: 20; pointer-events: none; padding: 10px 12px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+        .step-badge { background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 4px 10px; font-size: 10px; color: rgba(255,255,255,0.85); display: flex; align-items: center; gap: 5px; animation: labelFadeIn 0.5s ease; }
+        .step-badge-dot { width: 7px; height: 7px; border-radius: 50%; }
 
         @media(max-width: 640px) {
             .hero-title { font-size: 2rem !important; line-height: 1.2 !important; }
@@ -155,25 +80,32 @@
         }
 
         .touch-feedback { position: relative; overflow: hidden; }
-        .touch-feedback::after {
-            content: '';
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 0; height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s;
-        }
+        .touch-feedback::after { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: rgba(255,255,255,0.3); transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s; }
         .touch-feedback:active::after { width: 200px; height: 200px; }
 
-        /* ── Stat panel animations ── */
         .stat-bar-fill { transition: width 0.7s cubic-bezier(.4,0,.2,1); }
-        @keyframes countUp {
-            from { opacity: 0; transform: translateY(6px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes countUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
         .stat-value { animation: countUp 0.5s ease forwards; }
+
+        /* ── DASHBOARD STYLES ── */
+        .dashboard-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 16px;
+            transition: all 0.3s ease;
+        }
+        .dashboard-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14); }
+        .live-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 0 0 rgba(34,197,94,0.4); animation: livePulse 1.5s ease-in-out infinite; }
+        @keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); } 70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
+        .sparkline-bar { background: linear-gradient(180deg, #667eea, #764ba2); border-radius: 3px 3px 0 0; transition: height 0.4s ease; }
+        @keyframes numberRoll { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+        .number-roll { animation: numberRoll 0.5s ease forwards; }
+        .ring-chart { position: relative; display: flex; align-items: center; justify-content: center; }
+        .ring-chart svg { transform: rotate(-90deg); }
+        .ring-center { position: absolute; text-align: center; }
+        @keyframes dash { to { stroke-dashoffset: 0; } }
+        .activity-row { border-left: 3px solid; padding-left: 10px; margin-bottom: 8px; border-radius: 0 6px 6px 0; background: rgba(255,255,255,0.03); padding: 6px 10px; }
     </style>
 </head>
 <body class="bg-gray-900 text-white">
@@ -190,6 +122,7 @@
             </button>
             <div id="desktop-nav" class="hidden md:flex gap-6 text-sm font-medium">
                 <a href="#beranda" class="nav-link hover:text-yellow-400 transition">Beranda</a>
+                <a href="#dashboard" class="nav-link hover:text-yellow-400 transition">Dashboard</a>
                 <a href="#materi" class="nav-link hover:text-yellow-400 transition">Materi</a>
                 <a href="#simulasi" class="nav-link hover:text-yellow-400 transition">Simulasi 3D</a>
                 <a href="#osmosis-anim" class="nav-link hover:text-yellow-400 transition">Osmosis</a>
@@ -200,6 +133,7 @@
         <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-white/10 pt-4">
             <div class="flex flex-col gap-3 text-sm font-medium">
                 <a href="#beranda" class="py-2 px-4 hover:bg-white/10 rounded-lg transition" onclick="toggleMobileMenu()">🏠 Beranda</a>
+                <a href="#dashboard" class="py-2 px-4 hover:bg-white/10 rounded-lg transition" onclick="toggleMobileMenu()">📊 Dashboard</a>
                 <a href="#materi" class="py-2 px-4 hover:bg-white/10 rounded-lg transition" onclick="toggleMobileMenu()">📚 Materi</a>
                 <a href="#simulasi" class="py-2 px-4 hover:bg-white/10 rounded-lg transition" onclick="toggleMobileMenu()">🔬 Simulasi 3D</a>
                 <a href="#osmosis-anim" class="py-2 px-4 hover:bg-white/10 rounded-lg transition" onclick="toggleMobileMenu()">💧 Osmosis</a>
@@ -242,6 +176,155 @@
                 <div class="relative w-full aspect-square max-w-xs md:max-w-md mx-auto">
                     <div class="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-full blur-3xl"></div>
                     <div id="hero-3d" class="w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-white/10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- DASHBOARD STATISTIK REAL-TIME (PERSISTENT)                   -->
+    <!-- ============================================================ -->
+    <section id="dashboard" class="py-12 md:py-20 bg-gray-950 relative overflow-hidden">
+        <!-- bg grid -->
+        <div class="absolute inset-0 opacity-5" style="background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:40px 40px;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+            <div class="text-center mb-8 md:mb-12 slide-in">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/15 text-green-400 text-sm font-semibold mb-3">
+                    <div class="live-dot"></div> LIVE — Data Tersimpan Otomatis
+                </div>
+                <h2 class="section-title text-3xl md:text-4xl font-bold mb-3">Dashboard Statistik</h2>
+                <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto">Data pengunjung, kuis, dan game tersimpan di browser kamu — tetap ada meski halaman di-refresh</p>
+            </div>
+
+            <!-- ── ROW 1: Pengunjung + Aktivitas ── -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-4 slide-in">
+                <!-- Total Pengunjung -->
+                <div class="dashboard-card col-span-2 md:col-span-1">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs text-gray-400 uppercase tracking-wider">Total Pengunjung</span>
+                        <span class="text-lg">👥</span>
+                    </div>
+                    <p id="dash-visitors" class="text-4xl font-bold text-white number-roll">0</p>
+                    <p class="text-xs text-gray-500 mt-1">kunjungan unik</p>
+                    <div class="mt-3 pt-3 border-t border-white/5 flex items-center gap-2">
+                        <div class="live-dot" style="width:6px;height:6px;"></div>
+                        <span id="dash-today-visitors" class="text-xs text-green-400">0 hari ini</span>
+                    </div>
+                </div>
+
+                <!-- Kuis Dimainkan -->
+                <div class="dashboard-card">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs text-gray-400 uppercase tracking-wider">Kuis Dimainkan</span>
+                        <span class="text-lg">📝</span>
+                    </div>
+                    <p id="dash-quiz-plays" class="text-4xl font-bold text-blue-400 number-roll">0</p>
+                    <p class="text-xs text-gray-500 mt-1">percobaan total</p>
+                    <div class="mt-3 pt-3 border-t border-white/5">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-gray-500">Rata-rata</span>
+                            <span id="dash-quiz-avg" class="text-blue-400 font-bold">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Dimainkan -->
+                <div class="dashboard-card">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs text-gray-400 uppercase tracking-wider">Game Dimainkan</span>
+                        <span class="text-lg">🎮</span>
+                    </div>
+                    <p id="dash-game-plays" class="text-4xl font-bold text-purple-400 number-roll">0</p>
+                    <p class="text-xs text-gray-500 mt-1">percobaan total</p>
+                    <div class="mt-3 pt-3 border-t border-white/5">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-gray-500">Rata-rata</span>
+                            <span id="dash-game-avg" class="text-purple-400 font-bold">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nilai Terbaik -->
+                <div class="dashboard-card">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs text-gray-400 uppercase tracking-wider">Nilai Terbaik</span>
+                        <span class="text-lg">🏆</span>
+                    </div>
+                    <p id="dash-best-score" class="text-4xl font-bold text-yellow-400 number-roll">–</p>
+                    <p class="text-xs text-gray-500 mt-1">kuis tertinggi</p>
+                    <div class="mt-3 pt-3 border-t border-white/5">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-gray-500">Game terbaik</span>
+                            <span id="dash-game-best" class="text-yellow-400 font-bold">–</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── ROW 2: Sparkline + Ring + Aktivitas ── -->
+            <div class="grid md:grid-cols-3 gap-3 md:gap-4 mb-4 slide-in">
+
+                <!-- Sparkline: Kunjungan 7 hari -->
+                <div class="dashboard-card md:col-span-1">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-sm font-semibold text-white">📈 Kunjungan 7 Hari</h4>
+                        <span id="dash-total-week" class="text-xs text-gray-400 bg-white/5 px-2 py-1 rounded-full">0 total</span>
+                    </div>
+                    <div id="sparkline-container" class="flex items-end gap-1 h-20">
+                        <!-- bars rendered by JS -->
+                    </div>
+                    <div id="sparkline-labels" class="flex justify-between text-[9px] text-gray-600 mt-1"></div>
+                </div>
+
+                <!-- Ring: Persentase Lulus Kuis -->
+                <div class="dashboard-card flex flex-col items-center justify-center">
+                    <h4 class="text-sm font-semibold text-white mb-4">🎯 Kelulusan Kuis</h4>
+                    <div class="ring-chart">
+                        <svg width="110" height="110" viewBox="0 0 110 110">
+                            <circle cx="55" cy="55" r="44" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="10"/>
+                            <circle id="ring-quiz" cx="55" cy="55" r="44" fill="none" stroke="url(#ringGrad)" stroke-width="10" stroke-linecap="round"
+                                stroke-dasharray="276.46" stroke-dashoffset="276.46" style="transition:stroke-dashoffset 1s ease;"/>
+                            <defs>
+                                <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#3b82f6"/>
+                                    <stop offset="100%" stop-color="#8b5cf6"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="ring-center">
+                            <p id="ring-quiz-pct" class="text-2xl font-bold text-white">0%</p>
+                            <p class="text-[10px] text-gray-500">lulus (≥50%)</p>
+                        </div>
+                    </div>
+                    <p id="ring-quiz-detail" class="text-xs text-gray-500 mt-2 text-center">0 dari 0 percobaan lulus</p>
+                </div>
+
+                <!-- Aktivitas Terbaru -->
+                <div class="dashboard-card">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-sm font-semibold text-white">⚡ Aktivitas Terbaru</h4>
+                        <button onclick="clearAllData()" class="text-[10px] text-gray-600 hover:text-red-400 transition border border-gray-700 hover:border-red-500 px-2 py-0.5 rounded">Reset</button>
+                    </div>
+                    <div id="activity-feed" class="space-y-2 max-h-48 overflow-y-auto pr-1">
+                        <p class="text-xs text-gray-600 text-center py-4">Belum ada aktivitas</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── ROW 3: Distribusi Skor Kuis ── -->
+            <div class="grid md:grid-cols-2 gap-3 md:gap-4 slide-in">
+                <div class="dashboard-card">
+                    <h4 class="text-sm font-semibold text-white mb-4">📊 Distribusi Nilai Kuis</h4>
+                    <div class="space-y-3" id="quiz-score-dist">
+                        <p class="text-xs text-gray-600 text-center py-2">Belum ada data kuis</p>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <h4 class="text-sm font-semibold text-white mb-4">🎮 Distribusi Skor Game</h4>
+                    <div class="space-y-3" id="game-score-dist">
+                        <p class="text-xs text-gray-600 text-center py-2">Belum ada data game</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -440,15 +523,9 @@
                 <p class="text-gray-400 text-sm md:text-base">Pilih jenis transport untuk melihat animasi 3D interaktif dengan label molekul langsung di dalam visualisasi</p>
             </div>
             <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-8 slide-in px-2">
-                <button onclick="setSimulation('diffusion')" id="btn-sim-diffusion" class="sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-blue-500/20 border border-blue-500/50 font-semibold text-blue-300 text-xs md:text-sm">
-                    🌊 Difusi
-                </button>
-                <button onclick="setSimulation('osmosis')" id="btn-sim-osmosis" class="sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-gray-700 border border-gray-600 hover:bg-green-500/20 hover:border-green-500/50 font-semibold text-gray-300 text-xs md:text-sm">
-                    💧 Osmosis
-                </button>
-                <button onclick="setSimulation('active')" id="btn-sim-active" class="sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-gray-700 border border-gray-600 hover:bg-purple-500/20 hover:border-purple-500/50 font-semibold text-gray-300 text-xs md:text-sm">
-                    ⚡ Transport Aktif
-                </button>
+                <button onclick="setSimulation('diffusion')" id="btn-sim-diffusion" class="sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-blue-500/20 border border-blue-500/50 font-semibold text-blue-300 text-xs md:text-sm">🌊 Difusi</button>
+                <button onclick="setSimulation('osmosis')" id="btn-sim-osmosis" class="sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-gray-700 border border-gray-600 hover:bg-green-500/20 hover:border-green-500/50 font-semibold text-gray-300 text-xs md:text-sm">💧 Osmosis</button>
+                <button onclick="setSimulation('active')" id="btn-sim-active" class="sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-gray-700 border border-gray-600 hover:bg-purple-500/20 hover:border-purple-500/50 font-semibold text-gray-300 text-xs md:text-sm">⚡ Transport Aktif</button>
             </div>
             <div class="relative bg-gray-800 rounded-2xl md:rounded-3xl overflow-hidden border border-gray-700 shadow-2xl slide-in">
                 <div id="canvas-container"></div>
@@ -638,45 +715,23 @@
                 </div>
             </div>
 
-            <!-- ── STATISTIK KUIS (BARU) ── -->
             <div id="quiz-stats-panel" class="mt-6 hidden slide-in">
                 <div class="bg-gray-800 rounded-2xl border border-gray-700 p-4 md:p-6">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="text-lg">📊</span>
-                        <h4 class="font-bold text-sm md:text-base text-white">Statistik Kuis</h4>
-                    </div>
+                    <div class="flex items-center gap-2 mb-4"><span class="text-lg">📊</span><h4 class="font-bold text-sm md:text-base text-white">Statistik Kuis</h4></div>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                        <div class="bg-gray-700/60 rounded-xl p-3 text-center">
-                            <p class="text-[10px] md:text-xs text-gray-400 mb-1">Total Percobaan</p>
-                            <p id="quiz-stat-attempts" class="text-xl md:text-2xl font-bold text-white stat-value">0×</p>
-                        </div>
-                        <div class="bg-gray-700/60 rounded-xl p-3 text-center">
-                            <p class="text-[10px] md:text-xs text-gray-400 mb-1">Rata-rata Nilai</p>
-                            <p id="quiz-stat-avg" class="text-xl md:text-2xl font-bold text-blue-400 stat-value">0%</p>
-                        </div>
-                        <div class="bg-gray-700/60 rounded-xl p-3 text-center">
-                            <p class="text-[10px] md:text-xs text-gray-400 mb-1">Nilai Tertinggi</p>
-                            <p id="quiz-stat-best" class="text-xl md:text-2xl font-bold text-yellow-400 stat-value">0%</p>
-                        </div>
-                        <div class="bg-gray-700/60 rounded-xl p-3 text-center">
-                            <p class="text-[10px] md:text-xs text-gray-400 mb-1">Nilai Terakhir</p>
-                            <p id="quiz-stat-last" class="text-xl md:text-2xl font-bold text-green-400 stat-value">–</p>
-                        </div>
+                        <div class="bg-gray-700/60 rounded-xl p-3 text-center"><p class="text-[10px] md:text-xs text-gray-400 mb-1">Total Percobaan</p><p id="quiz-stat-attempts" class="text-xl md:text-2xl font-bold text-white stat-value">0×</p></div>
+                        <div class="bg-gray-700/60 rounded-xl p-3 text-center"><p class="text-[10px] md:text-xs text-gray-400 mb-1">Rata-rata Nilai</p><p id="quiz-stat-avg" class="text-xl md:text-2xl font-bold text-blue-400 stat-value">0%</p></div>
+                        <div class="bg-gray-700/60 rounded-xl p-3 text-center"><p class="text-[10px] md:text-xs text-gray-400 mb-1">Nilai Tertinggi</p><p id="quiz-stat-best" class="text-xl md:text-2xl font-bold text-yellow-400 stat-value">0%</p></div>
+                        <div class="bg-gray-700/60 rounded-xl p-3 text-center"><p class="text-[10px] md:text-xs text-gray-400 mb-1">Nilai Terakhir</p><p id="quiz-stat-last" class="text-xl md:text-2xl font-bold text-green-400 stat-value">–</p></div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-xs text-gray-400 mb-1.5">
-                            <span>Rata-rata persentase benar</span>
-                            <span id="quiz-stat-avg-label" class="font-semibold text-blue-400">0%</span>
-                        </div>
-                        <div class="w-full bg-gray-700 rounded-full h-2.5">
-                            <div id="quiz-stat-bar" class="bg-gradient-to-r from-blue-500 to-purple-500 h-2.5 rounded-full stat-bar-fill" style="width:0%"></div>
-                        </div>
+                        <div class="flex justify-between text-xs text-gray-400 mb-1.5"><span>Rata-rata persentase benar</span><span id="quiz-stat-avg-label" class="font-semibold text-blue-400">0%</span></div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5"><div id="quiz-stat-bar" class="bg-gradient-to-r from-blue-500 to-purple-500 h-2.5 rounded-full stat-bar-fill" style="width:0%"></div></div>
                         <div id="quiz-stat-grade" class="mt-2 text-xs text-center text-gray-400"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Riwayat Kuis -->
             <div id="quiz-history-panel" class="mt-4 hidden">
                 <div class="bg-gray-800 rounded-2xl border border-gray-700 p-4 md:p-6">
                     <div class="flex items-center justify-between mb-4">
@@ -733,45 +788,23 @@
                 </div>
             </div>
 
-            <!-- ── STATISTIK GAME (BARU) ── -->
             <div id="game-stats-panel" class="mt-6 hidden slide-in">
                 <div class="bg-gray-800 rounded-2xl border border-gray-700 p-4 md:p-6">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="text-lg">📊</span>
-                        <h4 class="font-bold text-sm md:text-base text-white">Statistik Game</h4>
-                    </div>
+                    <div class="flex items-center gap-2 mb-4"><span class="text-lg">📊</span><h4 class="font-bold text-sm md:text-base text-white">Statistik Game</h4></div>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                        <div class="bg-gray-700/60 rounded-xl p-3 text-center">
-                            <p class="text-[10px] md:text-xs text-gray-400 mb-1">Total Percobaan</p>
-                            <p id="game-stat-attempts" class="text-xl md:text-2xl font-bold text-white stat-value">0×</p>
-                        </div>
-                        <div class="bg-gray-700/60 rounded-xl p-3 text-center">
-                            <p class="text-[10px] md:text-xs text-gray-400 mb-1">Rata-rata Skor</p>
-                            <p id="game-stat-avg" class="text-xl md:text-2xl font-bold text-purple-400 stat-value">0%</p>
-                        </div>
-                        <div class="bg-gray-700/60 rounded-xl p-3 text-center">
-                            <p class="text-[10px] md:text-xs text-gray-400 mb-1">Skor Tertinggi</p>
-                            <p id="game-stat-best" class="text-xl md:text-2xl font-bold text-yellow-400 stat-value">0%</p>
-                        </div>
-                        <div class="bg-gray-700/60 rounded-xl p-3 text-center">
-                            <p class="text-[10px] md:text-xs text-gray-400 mb-1">Skor Terakhir</p>
-                            <p id="game-stat-last" class="text-xl md:text-2xl font-bold text-green-400 stat-value">–</p>
-                        </div>
+                        <div class="bg-gray-700/60 rounded-xl p-3 text-center"><p class="text-[10px] md:text-xs text-gray-400 mb-1">Total Percobaan</p><p id="game-stat-attempts" class="text-xl md:text-2xl font-bold text-white stat-value">0×</p></div>
+                        <div class="bg-gray-700/60 rounded-xl p-3 text-center"><p class="text-[10px] md:text-xs text-gray-400 mb-1">Rata-rata Skor</p><p id="game-stat-avg" class="text-xl md:text-2xl font-bold text-purple-400 stat-value">0%</p></div>
+                        <div class="bg-gray-700/60 rounded-xl p-3 text-center"><p class="text-[10px] md:text-xs text-gray-400 mb-1">Skor Tertinggi</p><p id="game-stat-best" class="text-xl md:text-2xl font-bold text-yellow-400 stat-value">0%</p></div>
+                        <div class="bg-gray-700/60 rounded-xl p-3 text-center"><p class="text-[10px] md:text-xs text-gray-400 mb-1">Skor Terakhir</p><p id="game-stat-last" class="text-xl md:text-2xl font-bold text-green-400 stat-value">–</p></div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-xs text-gray-400 mb-1.5">
-                            <span>Rata-rata persentase benar</span>
-                            <span id="game-stat-avg-label" class="font-semibold text-purple-400">0%</span>
-                        </div>
-                        <div class="w-full bg-gray-700 rounded-full h-2.5">
-                            <div id="game-stat-bar" class="bg-gradient-to-r from-green-500 to-blue-500 h-2.5 rounded-full stat-bar-fill" style="width:0%"></div>
-                        </div>
+                        <div class="flex justify-between text-xs text-gray-400 mb-1.5"><span>Rata-rata persentase benar</span><span id="game-stat-avg-label" class="font-semibold text-purple-400">0%</span></div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5"><div id="game-stat-bar" class="bg-gradient-to-r from-green-500 to-blue-500 h-2.5 rounded-full stat-bar-fill" style="width:0%"></div></div>
                         <div id="game-stat-grade" class="mt-2 text-xs text-center text-gray-400"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Riwayat Game -->
             <div id="game-history-panel" class="mt-4 hidden">
                 <div class="bg-gray-800 rounded-2xl border border-gray-700 p-4 md:p-6">
                     <div class="flex items-center justify-between mb-4">
@@ -796,1355 +829,1022 @@
         </div>
     </footer>
 
-    <script>
-    // ============================================================
-    // Global state
-    // ============================================================
-    var osmosisType = 'hypotonic';
-    var animalCanvas, plantCanvas, animalCtx, plantCtx;
-    var waterParticles = [], soluteParticles = [];
-    var animationFrameId;
-    var isSpeaking = false, speechUtterance = null;
-    var scene, camera, renderer, animationId;
-    var molecules = [], membraneGroup, proteinMesh;
-    var currentSimulation = 'diffusion';
-    var osmDividerGroup = null;
-    var animalRadiusCurrent = 70, plantRadiusCurrent = 70;
+<script>
+// ============================================================
+// ██████╗  ██████╗  ███████╗ ████████╗
+// ██╔══██╗ ██╔══██╗ ██╔════╝ ╚══██╔══╝
+// ██████╔╝ ██████╔╝ ███████╗    ██║
+// ██╔═══╝  ██╔══██╗ ╚════██║    ██║
+// ██║      ██║  ██║ ███████║    ██║
+// ╚═╝      ╚═╝  ╚═╝ ╚══════╝    ╚═╝
+//  PERSISTENT STORAGE — localStorage
+//  Semua data survive refresh & session baru
+// ============================================================
 
-    // ============================================================
-    // MOBILE MENU
-    // ============================================================
-    function toggleMobileMenu() {
-        document.getElementById('mobile-menu').classList.toggle('hidden');
+var LS_KEYS = {
+    visitors:     'tmb_visitors',
+    visitorDays:  'tmb_visitor_days',
+    quizHistory:  'tmb_quiz_history',
+    gameHistory:  'tmb_game_history',
+    activityFeed: 'tmb_activity_feed'
+};
+
+// ── helpers ──
+function lsGet(key, fallback) {
+    try { var v = localStorage.getItem(key); return v !== null ? JSON.parse(v) : fallback; }
+    catch(e) { return fallback; }
+}
+function lsSet(key, val) {
+    try { localStorage.setItem(key, JSON.stringify(val)); } catch(e) {}
+}
+
+// ── visitor tracking ──
+function trackVisitor() {
+    var visitors = lsGet(LS_KEYS.visitors, 0) + 1;
+    lsSet(LS_KEYS.visitors, visitors);
+
+    var today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    var days  = lsGet(LS_KEYS.visitorDays, {});
+    days[today] = (days[today] || 0) + 1;
+    // keep only last 7 days
+    var allDays = Object.keys(days).sort();
+    if (allDays.length > 7) {
+        var toDelete = allDays.slice(0, allDays.length - 7);
+        toDelete.forEach(function(d) { delete days[d]; });
     }
+    lsSet(LS_KEYS.visitorDays, days);
 
-    // ============================================================
-    // SCROLL ANIMATIONS
-    // ============================================================
-    var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-            if (e.isIntersecting) e.target.classList.add('active');
-        });
-    }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
-    document.querySelectorAll('.slide-in').forEach(function(el) { observer.observe(el); });
+    // activity log
+    addActivity('👁️', 'Halaman dibuka', 'rgba(96,165,250,0.6)');
+}
 
-    // ============================================================
-    // BACKGROUND PARTICLES
-    // ============================================================
-    function createBgParticles() {
-        var container = document.getElementById('particles-bg');
-        var isMobile = window.innerWidth < 768;
-        for (var i = 0; i < (isMobile ? 20 : 40); i++) {
-            var p = document.createElement('div');
-            p.className = 'particle';
-            var size = Math.random() * (isMobile ? 3 : 4) + 2;
-            p.style.cssText = 'width:' + size + 'px;height:' + size + 'px;background:rgba(' + (100 + Math.random() * 155) + ',' + (150 + Math.random() * 105) + ',255,' + (Math.random() * 0.5) + ');left:' + (Math.random() * 100) + '%;top:' + (Math.random() * 100) + '%;animation:float ' + (3 + Math.random() * 4) + 's ease-in-out infinite;animation-delay:' + (Math.random() * 2) + 's;';
-            container.appendChild(p);
-        }
+function addActivity(icon, text, color) {
+    var feed = lsGet(LS_KEYS.activityFeed, []);
+    var now  = new Date();
+    feed.unshift({
+        icon: icon, text: text, color: color,
+        time: now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+    });
+    if (feed.length > 12) feed = feed.slice(0, 12);
+    lsSet(LS_KEYS.activityFeed, feed);
+    renderActivityFeed();
+}
+
+// ── quiz history (persistent) ──
+var quizHistory = [];
+
+function loadQuizHistory() {
+    quizHistory = lsGet(LS_KEYS.quizHistory, []);
+}
+
+function saveQuizHistory(score, total) {
+    loadQuizHistory();
+    var now = new Date();
+    var entry = {
+        score: score, total: total,
+        pct: Math.round(score / total * 100),
+        time: now.toLocaleString('id-ID', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
+    };
+    quizHistory.unshift(entry);
+    if (quizHistory.length > 10) quizHistory.pop();
+    lsSet(LS_KEYS.quizHistory, quizHistory);
+    renderQuizHistory();
+    renderQuizStats();
+    renderDashboard();
+    var medal = entry.pct >= 83 ? '🥇' : entry.pct >= 50 ? '🥈' : '🥉';
+    addActivity(medal, 'Kuis selesai — ' + entry.score + '/' + entry.total + ' (' + entry.pct + '%)', 'rgba(96,165,250,0.7)');
+}
+
+function renderQuizStats() {
+    var panel = document.getElementById('quiz-stats-panel');
+    if (!panel) return;
+    if (quizHistory.length === 0) { panel.classList.add('hidden'); return; }
+    panel.classList.remove('hidden');
+
+    var attempts = quizHistory.length;
+    var avg  = Math.round(quizHistory.reduce(function(s,e){return s+e.pct;},0) / attempts);
+    var best = Math.max.apply(null, quizHistory.map(function(e){return e.pct;}));
+    var last = quizHistory[0].pct;
+
+    document.getElementById('quiz-stat-attempts').textContent = attempts + '×';
+    document.getElementById('quiz-stat-avg').textContent      = avg  + '%';
+    document.getElementById('quiz-stat-best').textContent     = best + '%';
+    document.getElementById('quiz-stat-last').textContent     = last + '%';
+    document.getElementById('quiz-stat-avg-label').textContent = avg + '%';
+    document.getElementById('quiz-stat-bar').style.width      = avg + '%';
+
+    var gradeEl = document.getElementById('quiz-stat-grade');
+    if (avg >= 83)      gradeEl.textContent = '🥇 Sangat Baik — kuasai materi ini!';
+    else if (avg >= 50) gradeEl.textContent = '🥈 Cukup — terus tingkatkan pemahamanmu.';
+    else                gradeEl.textContent = '🥉 Perlu latihan lebih — baca ulang materi.';
+}
+
+function renderQuizHistory() {
+    var panel = document.getElementById('quiz-history-panel');
+    var list  = document.getElementById('quiz-history-list');
+    if (!panel || !list) return;
+    if (quizHistory.length === 0) { panel.classList.add('hidden'); return; }
+    panel.classList.remove('hidden');
+    list.innerHTML = quizHistory.map(function(e,i){
+        var medal = e.pct>=83?'🥇':e.pct>=50?'🥈':'🥉';
+        var color = e.pct>=83?'text-yellow-400':e.pct>=50?'text-blue-400':'text-gray-400';
+        return '<div class="flex items-center justify-between bg-gray-700/50 rounded-xl px-3 py-2 text-xs md:text-sm"><span class="text-gray-400">#'+(i+1)+'</span><span>'+medal+' <span class="font-bold '+color+'">'+e.score+'/'+e.total+'</span> <span class="text-gray-500">('+e.pct+'%)</span></span><span class="text-gray-500 text-[10px]">'+e.time+'</span></div>';
+    }).join('');
+}
+
+function clearQuizHistory() {
+    quizHistory = [];
+    lsSet(LS_KEYS.quizHistory, []);
+    document.getElementById('quiz-history-panel').classList.add('hidden');
+    document.getElementById('quiz-stats-panel').classList.add('hidden');
+    renderDashboard();
+}
+
+// ── game history (persistent) ──
+var gameHistory = [];
+
+function loadGameHistory() {
+    gameHistory = lsGet(LS_KEYS.gameHistory, []);
+}
+
+function saveGameHistory(score, total) {
+    loadGameHistory();
+    var now = new Date();
+    var entry = {
+        score: score, total: total,
+        pct: Math.round(score / total * 100),
+        time: now.toLocaleString('id-ID', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
+    };
+    gameHistory.unshift(entry);
+    if (gameHistory.length > 10) gameHistory.pop();
+    lsSet(LS_KEYS.gameHistory, gameHistory);
+    renderGameHistory();
+    renderGameStats();
+    renderDashboard();
+    var medal = entry.pct >= 87 ? '🥇' : entry.pct >= 62 ? '🥈' : '🥉';
+    addActivity(medal, 'Game selesai — ' + entry.score + '/' + entry.total + ' (' + entry.pct + '%)', 'rgba(167,139,250,0.7)');
+}
+
+function renderGameStats() {
+    var panel = document.getElementById('game-stats-panel');
+    if (!panel) return;
+    if (gameHistory.length === 0) { panel.classList.add('hidden'); return; }
+    panel.classList.remove('hidden');
+
+    var attempts = gameHistory.length;
+    var avg  = Math.round(gameHistory.reduce(function(s,e){return s+e.pct;},0) / attempts);
+    var best = Math.max.apply(null, gameHistory.map(function(e){return e.pct;}));
+    var last = gameHistory[0].pct;
+
+    document.getElementById('game-stat-attempts').textContent = attempts + '×';
+    document.getElementById('game-stat-avg').textContent      = avg  + '%';
+    document.getElementById('game-stat-best').textContent     = best + '%';
+    document.getElementById('game-stat-last').textContent     = last + '%';
+    document.getElementById('game-stat-avg-label').textContent = avg + '%';
+    document.getElementById('game-stat-bar').style.width      = avg + '%';
+
+    var gradeEl = document.getElementById('game-stat-grade');
+    if (avg >= 87)      gradeEl.textContent = '🥇 Sempurna — kamu ahli klasifikasi transport!';
+    else if (avg >= 62) gradeEl.textContent = '🥈 Bagus — sebagian besar konsep sudah dipahami.';
+    else                gradeEl.textContent = '🥉 Perlu latihan lagi — pelajari ulang materi.';
+}
+
+function renderGameHistory() {
+    var panel = document.getElementById('game-history-panel');
+    var list  = document.getElementById('game-history-list');
+    if (!panel || !list) return;
+    if (gameHistory.length === 0) { panel.classList.add('hidden'); return; }
+    panel.classList.remove('hidden');
+    list.innerHTML = gameHistory.map(function(e,i){
+        var medal = e.pct>=87?'🥇':e.pct>=62?'🥈':'🥉';
+        var color = e.pct>=87?'text-yellow-400':e.pct>=62?'text-green-400':'text-gray-400';
+        return '<div class="flex items-center justify-between bg-gray-700/50 rounded-xl px-3 py-2 text-xs md:text-sm"><span class="text-gray-400">#'+(i+1)+'</span><span>'+medal+' <span class="font-bold '+color+'">'+e.score+'/'+e.total+'</span> <span class="text-gray-500">('+e.pct+'%)</span></span><span class="text-gray-500 text-[10px]">'+e.time+'</span></div>';
+    }).join('');
+}
+
+function clearGameHistory() {
+    gameHistory = [];
+    lsSet(LS_KEYS.gameHistory, []);
+    document.getElementById('game-history-panel').classList.add('hidden');
+    document.getElementById('game-stats-panel').classList.add('hidden');
+    renderDashboard();
+}
+
+// ── clear ALL data ──
+function clearAllData() {
+    if (!confirm('Reset semua data statistik? Tindakan ini tidak bisa dibatalkan.')) return;
+    Object.values(LS_KEYS).forEach(function(k){ localStorage.removeItem(k); });
+    quizHistory = []; gameHistory = [];
+    document.getElementById('quiz-history-panel').classList.add('hidden');
+    document.getElementById('quiz-stats-panel').classList.add('hidden');
+    document.getElementById('game-history-panel').classList.add('hidden');
+    document.getElementById('game-stats-panel').classList.add('hidden');
+    renderDashboard();
+    renderActivityFeed();
+}
+
+// ============================================================
+// DASHBOARD RENDER
+// ============================================================
+function renderDashboard() {
+    var visitors   = lsGet(LS_KEYS.visitors, 0);
+    var days       = lsGet(LS_KEYS.visitorDays, {});
+    var today      = new Date().toISOString().slice(0,10);
+    var todayCount = days[today] || 0;
+
+    // card numbers
+    document.getElementById('dash-visitors').textContent     = visitors;
+    document.getElementById('dash-today-visitors').textContent = todayCount + ' hari ini';
+    document.getElementById('dash-quiz-plays').textContent   = quizHistory.length;
+    document.getElementById('dash-game-plays').textContent   = gameHistory.length;
+
+    // quiz avg
+    var qAvg = quizHistory.length
+        ? Math.round(quizHistory.reduce(function(s,e){return s+e.pct;},0)/quizHistory.length)
+        : 0;
+    document.getElementById('dash-quiz-avg').textContent = qAvg + '%';
+
+    // game avg
+    var gAvg = gameHistory.length
+        ? Math.round(gameHistory.reduce(function(s,e){return s+e.pct;},0)/gameHistory.length)
+        : 0;
+    document.getElementById('dash-game-avg').textContent = gAvg + '%';
+
+    // best scores
+    var qBest = quizHistory.length ? Math.max.apply(null, quizHistory.map(function(e){return e.pct;})) + '%' : '–';
+    var gBest = gameHistory.length ? Math.max.apply(null, gameHistory.map(function(e){return e.pct;})) + '%' : '–';
+    document.getElementById('dash-best-score').textContent = qBest;
+    document.getElementById('dash-game-best').textContent  = gBest;
+
+    // sparkline: last 7 days
+    renderSparkline(days);
+
+    // ring chart: quiz pass rate (pct >= 50)
+    var passed = quizHistory.filter(function(e){return e.pct>=50;}).length;
+    var total  = quizHistory.length;
+    var passPct = total ? Math.round(passed/total*100) : 0;
+    var circumference = 2 * Math.PI * 44; // r=44 → 276.46
+    var ring = document.getElementById('ring-quiz');
+    if (ring) {
+        var offset = circumference - (passPct/100) * circumference;
+        ring.style.strokeDashoffset = offset;
     }
+    document.getElementById('ring-quiz-pct').textContent    = passPct + '%';
+    document.getElementById('ring-quiz-detail').textContent = passed + ' dari ' + total + ' percobaan lulus';
 
-    // ============================================================
-    // THREE.JS 3D SIMULATION
-    // ============================================================
-    function initThreeJS() {
-        var container = document.getElementById('canvas-container');
-        if (!container) return;
+    // score distributions
+    renderScoreDist('quiz-score-dist',  quizHistory,  ['#3b82f6','#8b5cf6']);
+    renderScoreDist('game-score-dist',  gameHistory,  ['#22c55e','#3b82f6']);
 
-        scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x1f2937);
-        scene.fog = new THREE.Fog(0x1f2937, 10, 50);
+    // week total
+    var weekTotal = Object.values(days).reduce(function(s,v){return s+v;},0);
+    document.getElementById('dash-total-week').textContent = weekTotal + ' total';
+}
 
-        camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-        camera.position.set(0, 5, 15);
-        camera.lookAt(0, 0, 0);
+function renderSparkline(days) {
+    var container = document.getElementById('sparkline-container');
+    var labelsEl  = document.getElementById('sparkline-labels');
+    if (!container) return;
 
-        renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.shadowMap.enabled = true;
-        container.appendChild(renderer.domElement);
-
-        var ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-        scene.add(ambientLight);
-
-        var dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        dirLight.position.set(10, 10, 5);
-        dirLight.castShadow = true;
-        scene.add(dirLight);
-
-        var pointLight = new THREE.PointLight(0x3b82f6, 0.5);
-        pointLight.position.set(-10, 5, -5);
-        scene.add(pointLight);
-
-        createMembrane();
-        setSimulation('diffusion');
-
-        var isDragging = false;
-        var prev = { x: 0, y: 0 };
-
-        var startDrag = function(x, y) { isDragging = true; prev = { x: x, y: y }; };
-        var moveDrag = function(x, y) {
-            if (!isDragging) return;
-            var s = new THREE.Spherical();
-            s.setFromVector3(camera.position);
-            s.theta -= (x - prev.x) * 0.01;
-            s.phi = Math.max(0.1, Math.min(Math.PI - 0.1, s.phi - (y - prev.y) * 0.01));
-            camera.position.setFromSpherical(s);
-            camera.lookAt(0, 0, 0);
-            prev = { x: x, y: y };
-        };
-
-        renderer.domElement.addEventListener('mousedown', function(e) { startDrag(e.clientX, e.clientY); });
-        renderer.domElement.addEventListener('mousemove', function(e) { moveDrag(e.clientX, e.clientY); });
-        renderer.domElement.addEventListener('mouseup', function() { isDragging = false; });
-        renderer.domElement.addEventListener('mouseleave', function() { isDragging = false; });
-        renderer.domElement.addEventListener('touchstart', function(e) { if (e.touches.length === 1) startDrag(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
-        renderer.domElement.addEventListener('touchmove', function(e) { if (e.touches.length === 1) moveDrag(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
-        renderer.domElement.addEventListener('touchend', function() { isDragging = false; });
-        renderer.domElement.addEventListener('wheel', function(e) {
-            e.preventDefault();
-            camera.position.z = Math.max(5, Math.min(30, camera.position.z + e.deltaY * 0.01));
-        }, { passive: false });
-
-        animate();
+    // build last 7 days
+    var result = [];
+    for (var i = 6; i >= 0; i--) {
+        var d = new Date(); d.setDate(d.getDate() - i);
+        var key = d.toISOString().slice(0,10);
+        result.push({ key: key, count: days[key] || 0, label: d.toLocaleDateString('id-ID', {weekday:'narrow'}) });
     }
+    var max = Math.max.apply(null, result.map(function(r){return r.count;})) || 1;
 
-    function createMembrane() {
-        membraneGroup = new THREE.Group();
-        var isMob = window.innerWidth < 768;
-        var sp = isMob ? 1.5 : 1.2;
-        var rX = isMob ? 5 : 8;
-        var rZ = isMob ? 3 : 4;
+    container.innerHTML = result.map(function(r){
+        var h = Math.max(4, Math.round((r.count / max) * 72));
+        var isToday = r.key === new Date().toISOString().slice(0,10);
+        return '<div class="flex flex-col items-center flex-1 gap-1">'
+            + '<span class="text-[9px] text-gray-500">' + (r.count||'') + '</span>'
+            + '<div class="sparkline-bar w-full" style="height:' + h + 'px;'
+            + (isToday ? 'background:linear-gradient(180deg,#facc15,#f59e0b);box-shadow:0 0 6px rgba(250,204,21,0.4);' : '')
+            + '"></div></div>';
+    }).join('');
 
-        var hG = new THREE.SphereGeometry(0.4, 16, 16);
-        var tG = new THREE.CylinderGeometry(0.1, 0.1, 1.5, 8);
-        var hM1 = new THREE.MeshPhongMaterial({ color: 0x3b82f6, shininess: 100 });
-        var hM2 = new THREE.MeshPhongMaterial({ color: 0x60a5fa, shininess: 100 });
-        var tM = new THREE.MeshPhongMaterial({ color: 0x9ca3af });
+    if (labelsEl) {
+        labelsEl.innerHTML = result.map(function(r){
+            return '<span>' + r.label + '</span>';
+        }).join('');
+    }
+}
 
-        for (var x = -rX; x <= rX; x += sp) {
-            for (var z = -rZ; z <= rZ; z += sp) {
-                var h1 = new THREE.Mesh(hG, hM1);
-                h1.position.set(x, 1, z);
-                membraneGroup.add(h1);
+function renderScoreDist(elId, history, colors) {
+    var el = document.getElementById(elId);
+    if (!el) return;
+    if (history.length === 0) {
+        el.innerHTML = '<p class="text-xs text-gray-600 text-center py-2">Belum ada data</p>';
+        return;
+    }
+    var buckets = [
+        { label: 'A (83–100%)', min:83, max:100, color: colors[0] },
+        { label: 'B (67–82%)',  min:67, max:82,  color: '#22c55e' },
+        { label: 'C (50–66%)',  min:50, max:66,  color: '#facc15' },
+        { label: 'D (0–49%)',   min:0,  max:49,  color: '#f87171' }
+    ];
+    var total = history.length;
+    el.innerHTML = buckets.map(function(b){
+        var count = history.filter(function(e){return e.pct>=b.min && e.pct<=b.max;}).length;
+        var pct   = total ? Math.round(count/total*100) : 0;
+        return '<div>'
+            + '<div class="flex justify-between text-xs mb-1"><span class="text-gray-400">' + b.label + '</span><span style="color:' + b.color + '" class="font-semibold">' + count + '× (' + pct + '%)</span></div>'
+            + '<div class="w-full bg-gray-700/60 rounded-full h-2"><div class="h-2 rounded-full stat-bar-fill" style="width:' + pct + '%;background:' + b.color + ';"></div></div>'
+            + '</div>';
+    }).join('');
+}
 
-                var t1 = new THREE.Mesh(tG, tM);
-                t1.position.set(x, 0.3, z);
-                membraneGroup.add(t1);
+function renderActivityFeed() {
+    var feed = lsGet(LS_KEYS.activityFeed, []);
+    var el   = document.getElementById('activity-feed');
+    if (!el) return;
+    if (feed.length === 0) {
+        el.innerHTML = '<p class="text-xs text-gray-600 text-center py-4">Belum ada aktivitas</p>';
+        return;
+    }
+    el.innerHTML = feed.map(function(f){
+        return '<div class="activity-row" style="border-color:' + f.color + ';"><div class="flex items-center justify-between"><span class="text-xs text-white">' + f.icon + ' ' + f.text + '</span><span class="text-[10px] text-gray-500 flex-shrink-0 ml-2">' + f.time + '</span></div></div>';
+    }).join('');
+}
 
-                var h2 = new THREE.Mesh(hG, hM2);
-                h2.position.set(x, -1, z);
-                membraneGroup.add(h2);
+// ============================================================
+// Global state
+// ============================================================
+var osmosisType = 'hypotonic';
+var animalCanvas, plantCanvas, animalCtx, plantCtx;
+var waterParticles = [], soluteParticles = [];
+var animationFrameId;
+var isSpeaking = false, speechUtterance = null;
+var scene, camera, renderer, animationId;
+var molecules = [], membraneGroup, proteinMesh;
+var currentSimulation = 'diffusion';
+var osmDividerGroup = null;
+var animalRadiusCurrent = 70, plantRadiusCurrent = 70;
 
-                var t2 = new THREE.Mesh(tG, tM);
-                t2.position.set(x, -0.3, z);
-                membraneGroup.add(t2);
+function toggleMobileMenu() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+}
+
+var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('active'); });
+}, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+document.querySelectorAll('.slide-in').forEach(function(el) { observer.observe(el); });
+
+function createBgParticles() {
+    var container = document.getElementById('particles-bg');
+    var isMobile = window.innerWidth < 768;
+    for (var i = 0; i < (isMobile ? 20 : 40); i++) {
+        var p = document.createElement('div');
+        p.className = 'particle';
+        var size = Math.random() * (isMobile ? 3 : 4) + 2;
+        p.style.cssText = 'width:'+size+'px;height:'+size+'px;background:rgba('+(100+Math.random()*155)+','+(150+Math.random()*105)+',255,'+(Math.random()*0.5)+');left:'+(Math.random()*100)+'%;top:'+(Math.random()*100)+'%;animation:float '+(3+Math.random()*4)+'s ease-in-out infinite;animation-delay:'+(Math.random()*2)+'s;';
+        container.appendChild(p);
+    }
+}
+
+// ============================================================
+// THREE.JS 3D SIMULATION (unchanged from original)
+// ============================================================
+function initThreeJS() {
+    var container = document.getElementById('canvas-container');
+    if (!container) return;
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1f2937);
+    scene.fog = new THREE.Fog(0x1f2937, 10, 50);
+    camera = new THREE.PerspectiveCamera(45, container.clientWidth/container.clientHeight, 0.1, 1000);
+    camera.position.set(0, 5, 15);
+    camera.lookAt(0, 0, 0);
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    container.appendChild(renderer.domElement);
+    var ambientLight = new THREE.AmbientLight(0xffffff, 0.6); scene.add(ambientLight);
+    var dirLight = new THREE.DirectionalLight(0xffffff, 0.8); dirLight.position.set(10,10,5); dirLight.castShadow=true; scene.add(dirLight);
+    var pointLight = new THREE.PointLight(0x3b82f6, 0.5); pointLight.position.set(-10,5,-5); scene.add(pointLight);
+    createMembrane();
+    setSimulation('diffusion');
+    var isDragging=false, prev={x:0,y:0};
+    var startDrag=function(x,y){isDragging=true;prev={x:x,y:y};};
+    var moveDrag=function(x,y){
+        if(!isDragging)return;
+        var s=new THREE.Spherical(); s.setFromVector3(camera.position);
+        s.theta-=(x-prev.x)*0.01; s.phi=Math.max(0.1,Math.min(Math.PI-0.1,s.phi-(y-prev.y)*0.01));
+        camera.position.setFromSpherical(s); camera.lookAt(0,0,0); prev={x:x,y:y};
+    };
+    renderer.domElement.addEventListener('mousedown',function(e){startDrag(e.clientX,e.clientY);});
+    renderer.domElement.addEventListener('mousemove',function(e){moveDrag(e.clientX,e.clientY);});
+    renderer.domElement.addEventListener('mouseup',function(){isDragging=false;});
+    renderer.domElement.addEventListener('mouseleave',function(){isDragging=false;});
+    renderer.domElement.addEventListener('touchstart',function(e){if(e.touches.length===1)startDrag(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
+    renderer.domElement.addEventListener('touchmove',function(e){if(e.touches.length===1)moveDrag(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
+    renderer.domElement.addEventListener('touchend',function(){isDragging=false;});
+    renderer.domElement.addEventListener('wheel',function(e){e.preventDefault();camera.position.z=Math.max(5,Math.min(30,camera.position.z+e.deltaY*0.01));},{passive:false});
+    animate();
+}
+
+function createMembrane() {
+    membraneGroup=new THREE.Group();
+    var isMob=window.innerWidth<768, sp=isMob?1.5:1.2, rX=isMob?5:8, rZ=isMob?3:4;
+    var hG=new THREE.SphereGeometry(0.4,16,16), tG=new THREE.CylinderGeometry(0.1,0.1,1.5,8);
+    var hM1=new THREE.MeshPhongMaterial({color:0x3b82f6,shininess:100}), hM2=new THREE.MeshPhongMaterial({color:0x60a5fa,shininess:100}), tM=new THREE.MeshPhongMaterial({color:0x9ca3af});
+    for(var x=-rX;x<=rX;x+=sp){for(var z=-rZ;z<=rZ;z+=sp){
+        var h1=new THREE.Mesh(hG,hM1); h1.position.set(x,1,z); membraneGroup.add(h1);
+        var t1=new THREE.Mesh(tG,tM); t1.position.set(x,0.3,z); membraneGroup.add(t1);
+        var h2=new THREE.Mesh(hG,hM2); h2.position.set(x,-1,z); membraneGroup.add(h2);
+        var t2=new THREE.Mesh(tG,tM); t2.position.set(x,-0.3,z); membraneGroup.add(t2);
+    }}
+    scene.add(membraneGroup);
+}
+
+function createProtein() {
+    if(proteinMesh)membraneGroup.remove(proteinMesh);
+    proteinMesh=new THREE.Mesh(new THREE.BoxGeometry(1.5,3,1.5),new THREE.MeshPhongMaterial({color:0x22c55e,transparent:true,opacity:0.8,shininess:100}));
+    proteinMesh.position.set(0,0,0); membraneGroup.add(proteinMesh);
+    var channelMesh=new THREE.Mesh(new THREE.CylinderGeometry(0.3,0.3,3.5,16),new THREE.MeshPhongMaterial({color:0x14532d}));
+    channelMesh.position.set(0,0,0); membraneGroup.add(channelMesh);
+}
+
+function createMolecule(x,y,z,color,size){
+    size=size||0.3;
+    var m=new THREE.Mesh(new THREE.SphereGeometry(size,16,16),new THREE.MeshPhongMaterial({color:color,emissive:color,emissiveIntensity:0.3,shininess:100}));
+    m.position.set(x,y,z); m.castShadow=true;
+    m.userData={velocity:new THREE.Vector3((Math.random()-0.5)*0.05,(Math.random()-0.5)*0.05,(Math.random()-0.5)*0.05),originalY:y,phase:Math.random()*Math.PI*2};
+    return m;
+}
+
+function clearMolecules(){
+    molecules.forEach(function(m){scene.remove(m);}); molecules=[];
+    if(proteinMesh){membraneGroup.remove(proteinMesh);proteinMesh=null;}
+}
+
+var SIM_LABELS={
+    diffusion:[
+        {anchor:{x:62,y:20},label:{x:72,y:8},color:'#facc15',markerKey:'yellow',title:'Molekul O₂ / CO₂',sub:'Bergerak konsentrasi tinggi → rendah'},
+        {anchor:{x:38,y:22},label:{x:18,y:8},color:'#86efac',markerKey:'lime',title:'Zona Konsentrasi Tinggi',sub:'Molekul padat di atas membran'},
+        {anchor:{x:50,y:50},label:{x:3,y:40},color:'#60a5fa',markerKey:'blue',title:'Kepala Fosfolipid',sub:'Hidrofilik — suka air'},
+        {anchor:{x:50,y:57},label:{x:3,y:62},color:'#9ca3af',markerKey:'gray',title:'Ekor Fosfolipid',sub:'Hidrofobik — tolak air'},
+        {anchor:{x:55,y:78},label:{x:62,y:86},color:'#facc15',markerKey:'yellow',title:'Zona Konsentrasi Rendah',sub:'Sisi tujuan difusi (tanpa ATP)'}
+    ],
+    osmosis:[
+        {anchor:{x:30,y:20},label:{x:3,y:8},color:'#60a5fa',markerKey:'blue',title:'Molekul Air (H₂O)',sub:'Bergerak menuju konsentrasi air rendah'},
+        {anchor:{x:72,y:30},label:{x:68,y:8},color:'#f87171',markerKey:'red',title:'Zat Terlarut (Garam)',sub:'Tidak bisa melewati membran'},
+        {anchor:{x:50,y:48},label:{x:3,y:40},color:'#60a5fa',markerKey:'blue',title:'Kepala Fosfolipid',sub:'Membentuk bilayer membran'},
+        {anchor:{x:50,y:53},label:{x:3,y:60},color:'#22c55e',markerKey:'green',title:'Aquaporin (Protein Air)',sub:'Kanal air — memfasilitasi osmosis'},
+        {anchor:{x:50,y:50},label:{x:62,y:75},color:'#fbbf24',markerKey:'amber',title:'Membran Semipermeabel',sub:'Selektif: hanya air yang lewat'}
+    ],
+    active:[
+        {anchor:{x:48,y:20},label:{x:60,y:7},color:'#facc15',markerKey:'yellow',title:'Ion Na⁺ (Natrium)',sub:'Dipompa keluar — melawan gradien'},
+        {anchor:{x:48,y:78},label:{x:60,y:87},color:'#a78bfa',markerKey:'purple',title:'Ion K⁺ (Kalium)',sub:'Dipompa masuk — melawan gradien'},
+        {anchor:{x:50,y:50},label:{x:3,y:40},color:'#22c55e',markerKey:'green',title:'Protein Pompa Na⁺/K⁺',sub:'ATPase — menggunakan energi ATP'},
+        {anchor:{x:38,y:50},label:{x:3,y:62},color:'#f472b6',markerKey:'pink',title:'ATP (Energi)',sub:'Adenosin Trifosfat — bahan bakar pompa'},
+        {anchor:{x:52,y:50},label:{x:60,y:52},color:'#fb923c',markerKey:'orange',title:'Gradien Dilawan',sub:'Dari konsentrasi rendah → tinggi'}
+    ]
+};
+
+var SIM_STEPS={
+    diffusion:[{dot:'#facc15',text:'① Molekul bergerak acak'},{dot:'#86efac',text:'② Melewati bilayer tanpa energi'},{dot:'#60a5fa',text:'③ Mencapai keseimbangan'}],
+    osmosis:[{dot:'#60a5fa',text:'① Air masuk lewat aquaporin'},{dot:'#f87171',text:'② Zat terlarut tetap di tempat'},{dot:'#22c55e',text:'③ Tekanan osmotik meningkat'}],
+    active:[{dot:'#f472b6',text:'① ATP dipecah → ADP + Pᵢ'},{dot:'#22c55e',text:'② Pompa berubah bentuk'},{dot:'#facc15',text:'③ 3 Na⁺ keluar, 2 K⁺ masuk'}]
+};
+
+function renderMolLabels(type){
+    var overlay=document.getElementById('mol-labels-overlay');
+    var svg=document.getElementById('callout-svg');
+    var stepsEl=document.getElementById('sim-steps-overlay');
+    Array.from(svg.children).forEach(function(child){if(child.tagName!=='defs')svg.removeChild(child);});
+    Array.from(overlay.children).forEach(function(child){if(child.id!=='callout-svg')overlay.removeChild(child);});
+    stepsEl.innerHTML='';
+    var container=document.getElementById('canvas-container');
+    var W=container.clientWidth, H=container.clientHeight;
+    (SIM_LABELS[type]||[]).forEach(function(lbl,idx){
+        var delay=idx*0.12, ax=lbl.anchor.x/100*W, ay=lbl.anchor.y/100*H;
+        var anchor=document.createElement('div');
+        anchor.className='callout-anchor';
+        anchor.style.cssText='left:'+ax+'px;top:'+ay+'px;background:'+lbl.color+';--accent:'+lbl.color+';--accent-fade:'+lbl.color+'66;animation-delay:'+delay+'s;box-shadow:0 0 0 2px '+lbl.color+',0 0 8px '+lbl.color+'88;';
+        overlay.appendChild(anchor);
+        var lx=lbl.label.x/100*W, ly=lbl.label.y/100*H;
+        var card=document.createElement('div');
+        card.className='mol-label';
+        card.style.cssText='left:'+lx+'px;top:'+ly+'px;animation-delay:'+delay+'s;--accent:'+lbl.color+';';
+        card.innerHTML='<div class="mol-label-card" style="--accent:'+lbl.color+';border-left-color:'+lbl.color+'"><div class="mol-label-title"><div class="mol-label-dot" style="background:'+lbl.color+';box-shadow:0 0 5px '+lbl.color+'"></div>'+lbl.title+'</div><div class="mol-label-sub">'+lbl.sub+'</div></div>';
+        overlay.appendChild(card);
+        (function(c,aXi,aYi,color,key,d){
+            requestAnimationFrame(function(){
+                var rect=c.getBoundingClientRect(), overlayRect=overlay.getBoundingClientRect();
+                var cardLeft=rect.left-overlayRect.left, cardTop=rect.top-overlayRect.top, cw=rect.width, ch=rect.height;
+                var candidates=[{x:cardLeft,y:cardTop+ch/2},{x:cardLeft+cw,y:cardTop+ch/2},{x:cardLeft+cw/2,y:cardTop},{x:cardLeft+cw/2,y:cardTop+ch}];
+                var best=candidates.reduce(function(prev,cur){return Math.hypot(cur.x-aXi,cur.y-aYi)<Math.hypot(prev.x-aXi,prev.y-aYi)?cur:prev;});
+                var mx=Math.abs(best.x-(cardLeft+cw/2))>Math.abs(best.y-(cardTop+ch/2))?best.x:aXi;
+                var my=Math.abs(best.x-(cardLeft+cw/2))>Math.abs(best.y-(cardTop+ch/2))?aYi:best.y;
+                var path=document.createElementNS('http://www.w3.org/2000/svg','path');
+                path.setAttribute('d','M '+aXi+' '+aYi+' L '+mx+' '+my+' L '+best.x+' '+best.y);
+                path.setAttribute('stroke',color); path.setAttribute('stroke-width','1.5'); path.setAttribute('fill','none'); path.setAttribute('opacity','0.85'); path.setAttribute('stroke-linecap','round'); path.setAttribute('stroke-linejoin','round'); path.setAttribute('marker-end','url(#arr-'+key+')');
+                path.style.strokeDasharray=150; path.style.strokeDashoffset=150; path.style.animation='drawLine 0.45s '+d+'s ease forwards';
+                svg.appendChild(path);
+            });
+        })(card,ax,ay,lbl.color,lbl.markerKey,delay);
+    });
+    (SIM_STEPS[type]||[]).forEach(function(step){
+        var badge=document.createElement('div'); badge.className='step-badge';
+        badge.innerHTML='<div class="step-badge-dot" style="background:'+step.dot+';"></div>'+step.text;
+        stepsEl.appendChild(badge);
+    });
+}
+
+function addOsmosisDivider(){
+    if(osmDividerGroup){scene.remove(osmDividerGroup);osmDividerGroup=null;}
+    osmDividerGroup=new THREE.Group();
+    var planeGeo=new THREE.PlaneGeometry(0.15,14,1,1);
+    var planeMat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0.08,side:THREE.DoubleSide});
+    var plane=new THREE.Mesh(planeGeo,planeMat); plane.rotation.y=Math.PI/2; osmDividerGroup.add(plane);
+    var lineMat=new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0.3});
+    [-7,7].forEach(function(y){var pts=[new THREE.Vector3(0,y,-4),new THREE.Vector3(0,y,4)];osmDividerGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),lineMat));});
+    addTextSprite(osmDividerGroup,'💧 Air Murni',-5,6,0,0x93c5fd);
+    addTextSprite(osmDividerGroup,'🧂 Larutan Garam',5,6,0,0xfca5a5);
+    scene.add(osmDividerGroup);
+}
+
+function addTextSprite(group,text,x,y,z,color){
+    var cv=document.createElement('canvas'); cv.width=256; cv.height=64;
+    var ctx=cv.getContext('2d'); ctx.clearRect(0,0,256,64);
+    ctx.fillStyle='rgba(0,0,0,0.55)'; ctx.beginPath();
+    if(ctx.roundRect)ctx.roundRect(4,8,248,48,12);else ctx.rect(4,8,248,48); ctx.fill();
+    ctx.strokeStyle='rgba('+((color>>16)&255)+','+((color>>8)&255)+','+(color&255)+',0.7)'; ctx.lineWidth=2; ctx.stroke();
+    ctx.fillStyle='rgba('+((color>>16)&255)+','+((color>>8)&255)+','+(color&255)+',1)';
+    ctx.font='bold 22px Arial'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(text,128,34);
+    var texture=new THREE.CanvasTexture(cv);
+    var mat=new THREE.SpriteMaterial({map:texture,transparent:true,opacity:0.92});
+    var sprite=new THREE.Sprite(mat); sprite.position.set(x,y,z); sprite.scale.set(4,1,1); group.add(sprite);
+}
+
+function removeOsmosisDivider(){if(osmDividerGroup){scene.remove(osmDividerGroup);osmDividerGroup=null;}}
+
+function setSimulation(type){
+    currentSimulation=type; clearMolecules();
+    ['btn-sim-diffusion','btn-sim-osmosis','btn-sim-active'].forEach(function(id){
+        var b=document.getElementById(id); if(!b)return;
+        b.className='sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-gray-700 border border-gray-600 hover:opacity-80 font-semibold text-gray-300 text-xs md:text-sm';
+    });
+    var title=document.getElementById('sim-title'), desc=document.getElementById('sim-desc'), icon=document.getElementById('sim-info-icon'), lp=document.getElementById('legend-protein');
+    if(type==='diffusion'){
+        removeOsmosisDivider();
+        document.getElementById('btn-sim-diffusion').className='sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-blue-500/20 border border-blue-500/50 font-semibold text-blue-300 text-xs md:text-sm';
+        title.textContent='Difusi Sederhana'; title.className='font-bold text-base md:text-lg mb-1 text-blue-400';
+        desc.textContent='Molekul kecil seperti O₂ dan CO₂ bergerak secara acak melintasi bilayer fosfolipid dari konsentrasi tinggi (atas) ke rendah (bawah) tanpa energi dan tanpa protein.';
+        if(icon)icon.textContent='🌊'; lp.classList.add('hidden');
+        for(var i=0;i<30;i++){var m=createMolecule((Math.random()-0.5)*12,3+Math.random()*4,(Math.random()-0.5)*6,0xfacc15,0.25);molecules.push(m);scene.add(m);}
+        for(var i=0;i<5;i++){var m=createMolecule((Math.random()-0.5)*12,-3-Math.random()*2,(Math.random()-0.5)*6,0xfacc15,0.25);molecules.push(m);scene.add(m);}
+    }else if(type==='osmosis'){
+        addOsmosisDivider();
+        document.getElementById('btn-sim-osmosis').className='sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-green-500/20 border border-green-500/50 font-semibold text-green-300 text-xs md:text-sm';
+        title.textContent='Osmosis'; title.className='font-bold text-base md:text-lg mb-1 text-green-400';
+        desc.textContent='Air (molekul biru kecil) bergerak melintasi membran semi-permeabel dari daerah konsentrasi air tinggi ke konsentrasi air rendah.';
+        if(icon)icon.textContent='💧'; lp.classList.remove('hidden');
+        for(var i=0;i<40;i++){var m=createMolecule((Math.random()-0.5)*14,(Math.random()-0.5)*10,(Math.random()-0.5)*8,0x60a5fa,0.2);molecules.push(m);scene.add(m);}
+        for(var i=0;i<15;i++){var m=createMolecule(4+Math.random()*4,(Math.random()-0.5)*8,(Math.random()-0.5)*6,0xf87171,0.4);m.userData.isSolute=true;molecules.push(m);scene.add(m);}
+    }else if(type==='active'){
+        removeOsmosisDivider();
+        document.getElementById('btn-sim-active').className='sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300 text-xs md:text-sm';
+        title.textContent='Transport Aktif (Na⁺/K⁺ Pump)'; title.className='font-bold text-base md:text-lg mb-1 text-purple-400';
+        desc.textContent='Pompa Na⁺/K⁺-ATPase menggunakan energi ATP untuk memompa 3 ion Na⁺ keluar dan 2 ion K⁺ masuk melawan gradien konsentrasi.';
+        if(icon)icon.textContent='⚡'; lp.classList.remove('hidden');
+        createProtein();
+        for(var i=0;i<8;i++){var m=createMolecule((Math.random()-0.5)*4,-2-Math.random()*3,(Math.random()-0.5)*4,0xfacc15,0.3);m.userData.ionType='Na';m.userData.targetY=3+Math.random()*2;molecules.push(m);scene.add(m);}
+        for(var i=0;i<6;i++){var m=createMolecule((Math.random()-0.5)*4,3+Math.random()*3,(Math.random()-0.5)*4,0xa78bfa,0.3);m.userData.ionType='K';m.userData.targetY=-3-Math.random()*2;molecules.push(m);scene.add(m);}
+        var atp=createMolecule(-3,0,2,0xf472b6,0.5);atp.userData.isATP=true;molecules.push(atp);scene.add(atp);
+    }
+    renderMolLabels(type);
+}
+
+function animate(){
+    animationId=requestAnimationFrame(animate);
+    var time=Date.now()*0.001;
+    molecules.forEach(function(mol,i){
+        if(currentSimulation==='diffusion'){
+            mol.position.x+=mol.userData.velocity.x+(Math.random()-0.5)*0.02; mol.position.z+=mol.userData.velocity.z+(Math.random()-0.5)*0.02;
+            if(mol.position.y>1.5)mol.position.y-=0.01; else if(mol.position.y<-1.5)mol.position.y+=0.005;
+            if(Math.abs(mol.position.x)>8)mol.userData.velocity.x*=-1; if(Math.abs(mol.position.z)>4)mol.userData.velocity.z*=-1;
+            if(Math.abs(mol.position.x)>9)mol.position.x=Math.sign(mol.position.x)*8; if(Math.abs(mol.position.z)>5)mol.position.z=Math.sign(mol.position.z)*4;
+        }else if(currentSimulation==='osmosis'){
+            if(mol.userData.isSolute){mol.position.x=Math.max(2,mol.position.x);mol.position.y+=Math.sin(time+mol.userData.phase)*0.005;}
+            else{if(mol.position.x<2)mol.position.x+=0.01;mol.position.y+=Math.sin(time*2+i)*0.003;if(Math.abs(mol.position.y)<1.5&&Math.abs(mol.position.x)<1){mol.position.y+=mol.position.y>0?-0.02:0.02;}if(mol.position.x>8)mol.position.x=-8;}
+        }else if(currentSimulation==='active'){
+            if(mol.userData.isATP){mol.position.y=Math.sin(time*3)*0.5;mol.rotation.y+=0.02;mol.material.emissiveIntensity=Math.sin(time*3)>0.9?1:0.3;}
+            else if(mol.userData.ionType){
+                var dy=mol.userData.targetY-mol.position.y;
+                if(Math.abs(mol.position.x)<1&&Math.abs(mol.position.y)<2){mol.position.y+=dy*0.02;mol.position.x*=0.95;mol.position.z*=0.95;}
+                else{mol.position.x+=(-mol.position.x*0.1)*0.05;mol.position.y+=dy*0.01;}
+                if(Math.abs(dy)<0.5&&Math.abs(mol.position.x)<0.5){mol.position.y=mol.userData.ionType==='Na'?-3:3;mol.position.x=(Math.random()-0.5)*4;mol.position.z=(Math.random()-0.5)*4;}
             }
         }
-        scene.add(membraneGroup);
-    }
+        mol.rotation.x+=0.01; mol.rotation.y+=0.01;
+    });
+    if(membraneGroup)membraneGroup.rotation.y=Math.sin(time*0.2)*0.1;
+    renderer.render(scene,camera);
+}
 
-    function createProtein() {
-        if (proteinMesh) membraneGroup.remove(proteinMesh);
+window.addEventListener('resize',function(){
+    var c=document.getElementById('canvas-container');
+    if(c&&camera&&renderer){camera.aspect=c.clientWidth/c.clientHeight;camera.updateProjectionMatrix();renderer.setSize(c.clientWidth,c.clientHeight);}
+    if(currentSimulation)renderMolLabels(currentSimulation);
+});
 
-        proteinMesh = new THREE.Mesh(
-            new THREE.BoxGeometry(1.5, 3, 1.5),
-            new THREE.MeshPhongMaterial({ color: 0x22c55e, transparent: true, opacity: 0.8, shininess: 100 })
-        );
-        proteinMesh.position.set(0, 0, 0);
-        membraneGroup.add(proteinMesh);
-
-        var channelMesh = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.3, 0.3, 3.5, 16),
-            new THREE.MeshPhongMaterial({ color: 0x14532d })
-        );
-        channelMesh.position.set(0, 0, 0);
-        membraneGroup.add(channelMesh);
-    }
-
-    function createMolecule(x, y, z, color, size) {
-        size = size || 0.3;
-        var m = new THREE.Mesh(
-            new THREE.SphereGeometry(size, 16, 16),
-            new THREE.MeshPhongMaterial({ color: color, emissive: color, emissiveIntensity: 0.3, shininess: 100 })
-        );
-        m.position.set(x, y, z);
-        m.castShadow = true;
-        m.userData = {
-            velocity: new THREE.Vector3((Math.random() - 0.5) * 0.05, (Math.random() - 0.5) * 0.05, (Math.random() - 0.5) * 0.05),
-            originalY: y,
-            phase: Math.random() * Math.PI * 2
-        };
-        return m;
-    }
-
-    function clearMolecules() {
-        molecules.forEach(function(m) { scene.remove(m); });
-        molecules = [];
-        if (proteinMesh) {
-            membraneGroup.remove(proteinMesh);
-            proteinMesh = null;
-        }
-    }
-
-    var SIM_LABELS = {
-        diffusion: [
-            { anchor: { x: 62, y: 20 }, label: { x: 72, y: 8 },  color: '#facc15', markerKey: 'yellow', title: 'Molekul O₂ / CO₂',        sub: 'Bergerak konsentrasi tinggi → rendah' },
-            { anchor: { x: 38, y: 22 }, label: { x: 18, y: 8 },  color: '#86efac', markerKey: 'lime',   title: 'Zona Konsentrasi Tinggi',  sub: 'Molekul padat di atas membran' },
-            { anchor: { x: 50, y: 50 }, label: { x: 3,  y: 40 }, color: '#60a5fa', markerKey: 'blue',   title: 'Kepala Fosfolipid',         sub: 'Hidrofilik — suka air' },
-            { anchor: { x: 50, y: 57 }, label: { x: 3,  y: 62 }, color: '#9ca3af', markerKey: 'gray',   title: 'Ekor Fosfolipid',           sub: 'Hidrofobik — tolak air' },
-            { anchor: { x: 55, y: 78 }, label: { x: 62, y: 86 }, color: '#facc15', markerKey: 'yellow', title: 'Zona Konsentrasi Rendah',   sub: 'Sisi tujuan difusi (tanpa ATP)' }
+// ============================================================
+// OSMOSIS CALLOUT LABELS
+// ============================================================
+var OSMOSIS_LABELS={
+    animal:{
+        hypotonic:[
+            {anchor:{x:50,y:50},label:{x:62,y:20},color:'#f472b6',marker:'osm-arr-pink',title:'Membran Sel',sub:'Membungkus & melindungi sel hewan'},
+            {anchor:{x:50,y:50},label:{x:5,y:50},color:'#a78bfa',marker:'osm-arr-purple',title:'Nukleus',sub:'Inti sel tetap stabil'},
+            {anchor:{x:25,y:35},label:{x:3,y:15},color:'#60a5fa',marker:'osm-arr-blue',title:'Molekul Air (H₂O)',sub:'Masuk ke dalam sel (hipotonik)'},
+            {anchor:{x:50,y:80},label:{x:30,y:88},color:'#f87171',marker:'osm-arr-red',title:'Sel Membesar → Lisis',sub:'Terlalu banyak air masuk → pecah'}
         ],
-        osmosis: [
-            { anchor: { x: 30, y: 20 }, label: { x: 3,  y: 8 },  color: '#60a5fa', markerKey: 'blue',   title: 'Molekul Air (H₂O)',         sub: 'Bergerak menuju konsentrasi air rendah' },
-            { anchor: { x: 72, y: 30 }, label: { x: 68, y: 8 },  color: '#f87171', markerKey: 'red',    title: 'Zat Terlarut (Garam)',      sub: 'Tidak bisa melewati membran' },
-            { anchor: { x: 50, y: 48 }, label: { x: 3,  y: 40 }, color: '#60a5fa', markerKey: 'blue',   title: 'Kepala Fosfolipid',         sub: 'Membentuk bilayer membran' },
-            { anchor: { x: 50, y: 53 }, label: { x: 3,  y: 60 }, color: '#22c55e', markerKey: 'green',  title: 'Aquaporin (Protein Air)',   sub: 'Kanal air — memfasilitasi osmosis' },
-            { anchor: { x: 50, y: 50 }, label: { x: 62, y: 75 }, color: '#fbbf24', markerKey: 'amber',  title: 'Membran Semipermeabel',     sub: 'Selektif: hanya air yang lewat' }
+        isotonic:[
+            {anchor:{x:50,y:50},label:{x:62,y:20},color:'#f472b6',marker:'osm-arr-pink',title:'Membran Sel',sub:'Kondisi normal & stabil'},
+            {anchor:{x:50,y:50},label:{x:5,y:50},color:'#a78bfa',marker:'osm-arr-purple',title:'Nukleus',sub:'Inti sel aktif & normal'},
+            {anchor:{x:20,y:40},label:{x:3,y:18},color:'#60a5fa',marker:'osm-arr-blue',title:'Molekul Air',sub:'Keluar-masuk seimbang (isotonik)'},
+            {anchor:{x:50,y:78},label:{x:30,y:88},color:'#22c55e',marker:'osm-arr-green',title:'Sel Normal',sub:'Tidak ada perubahan ukuran'}
         ],
-        active: [
-            { anchor: { x: 48, y: 20 }, label: { x: 60, y: 7 },  color: '#facc15', markerKey: 'yellow', title: 'Ion Na⁺ (Natrium)',         sub: 'Dipompa keluar — melawan gradien' },
-            { anchor: { x: 48, y: 78 }, label: { x: 60, y: 87 }, color: '#a78bfa', markerKey: 'purple', title: 'Ion K⁺ (Kalium)',           sub: 'Dipompa masuk — melawan gradien' },
-            { anchor: { x: 50, y: 50 }, label: { x: 3,  y: 40 }, color: '#22c55e', markerKey: 'green',  title: 'Protein Pompa Na⁺/K⁺',     sub: 'ATPase — menggunakan energi ATP' },
-            { anchor: { x: 38, y: 50 }, label: { x: 3,  y: 62 }, color: '#f472b6', markerKey: 'pink',   title: 'ATP (Energi)',              sub: 'Adenosin Trifosfat — bahan bakar pompa' },
-            { anchor: { x: 52, y: 50 }, label: { x: 60, y: 52 }, color: '#fb923c', markerKey: 'orange', title: 'Gradien Dilawan',           sub: 'Dari konsentrasi rendah → tinggi' }
+        hypertonic:[
+            {anchor:{x:50,y:50},label:{x:62,y:20},color:'#f472b6',marker:'osm-arr-pink',title:'Membran Sel',sub:'Mengerut mengikuti kehilangan air'},
+            {anchor:{x:50,y:50},label:{x:5,y:50},color:'#a78bfa',marker:'osm-arr-purple',title:'Nukleus',sub:'Inti sel terkompresi'},
+            {anchor:{x:75,y:35},label:{x:58,y:12},color:'#60a5fa',marker:'osm-arr-blue',title:'Molekul Air (H₂O)',sub:'Keluar dari sel (hipertonik)'},
+            {anchor:{x:50,y:78},label:{x:28,y:88},color:'#f87171',marker:'osm-arr-red',title:'Krenasi',sub:'Sel mengkerut karena kehilangan air'}
         ]
-    };
-
-    var SIM_STEPS = {
-        diffusion: [
-            { dot: '#facc15', text: '① Molekul bergerak acak' },
-            { dot: '#86efac', text: '② Melewati bilayer tanpa energi' },
-            { dot: '#60a5fa', text: '③ Mencapai keseimbangan' }
+    },
+    plant:{
+        hypotonic:[
+            {anchor:{x:50,y:12},label:{x:55,y:3},color:'#22c55e',marker:'osm-arr-green2',title:'Dinding Sel',sub:'Mencegah sel pecah saat turgid'},
+            {anchor:{x:50,y:50},label:{x:5,y:30},color:'#60a5fa',marker:'osm-arr-blue2',title:'Membran Sel',sub:'Di dalam dinding sel'},
+            {anchor:{x:50,y:50},label:{x:55,y:55},color:'#facc15',marker:'osm-arr-yellow2',title:'Vakuola Besar',sub:'Terisi penuh air → sel turgid'},
+            {anchor:{x:20,y:35},label:{x:3,y:15},color:'#60a5fa',marker:'osm-arr-blue2',title:'Air Masuk',sub:'Osmosis: luar → dalam sel'},
+            {anchor:{x:50,y:83},label:{x:28,y:90},color:'#22c55e',marker:'osm-arr-green2',title:'Sel Turgid',sub:'Kaku & tegang — kondisi ideal'}
         ],
-        osmosis: [
-            { dot: '#60a5fa', text: '① Air masuk lewat aquaporin' },
-            { dot: '#f87171', text: '② Zat terlarut tetap di tempat' },
-            { dot: '#22c55e', text: '③ Tekanan osmotik meningkat' }
+        isotonic:[
+            {anchor:{x:50,y:12},label:{x:55,y:3},color:'#22c55e',marker:'osm-arr-green2',title:'Dinding Sel',sub:'Memberikan bentuk tetap'},
+            {anchor:{x:50,y:50},label:{x:5,y:30},color:'#60a5fa',marker:'osm-arr-blue2',title:'Membran Sel',sub:'Menempel pada dinding sel'},
+            {anchor:{x:50,y:50},label:{x:55,y:55},color:'#facc15',marker:'osm-arr-yellow2',title:'Vakuola Sedang',sub:'Air setimbang — kondisi flasid'},
+            {anchor:{x:20,y:35},label:{x:3,y:15},color:'#60a5fa',marker:'osm-arr-blue2',title:'Air Seimbang',sub:'Tidak ada aliran bersih'},
+            {anchor:{x:50,y:83},label:{x:28,y:90},color:'#facc15',marker:'osm-arr-yellow2',title:'Sel Flasid',sub:'Sedikit layu, tidak ada turgor'}
         ],
-        active: [
-            { dot: '#f472b6', text: '① ATP dipecah → ADP + Pᵢ' },
-            { dot: '#22c55e', text: '② Pompa berubah bentuk' },
-            { dot: '#facc15', text: '③ 3 Na⁺ keluar, 2 K⁺ masuk' }
+        hypertonic:[
+            {anchor:{x:50,y:12},label:{x:55,y:3},color:'#22c55e',marker:'osm-arr-green2',title:'Dinding Sel',sub:'Tetap kaku, tidak ikut mengkerut'},
+            {anchor:{x:50,y:50},label:{x:5,y:30},color:'#fb923c',marker:'osm-arr-orange2',title:'Membran Sel',sub:'Menjauh dari dinding → plasmolisis'},
+            {anchor:{x:50,y:50},label:{x:55,y:55},color:'#facc15',marker:'osm-arr-yellow2',title:'Vakuola Mengecil',sub:'Air keluar dari vakuola'},
+            {anchor:{x:75,y:35},label:{x:57,y:12},color:'#60a5fa',marker:'osm-arr-blue2',title:'Air Keluar',sub:'Osmosis: dalam → luar sel'},
+            {anchor:{x:50,y:83},label:{x:28,y:90},color:'#f87171',marker:'osm-arr-red2',title:'Plasmolisis',sub:'Membran terlepas dari dinding sel'}
         ]
-    };
+    }
+};
 
-    function renderMolLabels(type) {
-        var overlay = document.getElementById('mol-labels-overlay');
-        var svg     = document.getElementById('callout-svg');
-        var stepsEl = document.getElementById('sim-steps-overlay');
-
-        Array.from(svg.children).forEach(function(child) {
-            if (child.tagName !== 'defs') svg.removeChild(child);
-        });
-        Array.from(overlay.children).forEach(function(child) {
-            if (child.id !== 'callout-svg') overlay.removeChild(child);
-        });
-        stepsEl.innerHTML = '';
-
-        var container = document.getElementById('canvas-container');
-        var W = container.clientWidth;
-        var H = container.clientHeight;
-
-        (SIM_LABELS[type] || []).forEach(function(lbl, idx) {
-            var delay = idx * 0.12;
-            var ax = lbl.anchor.x / 100 * W;
-            var ay = lbl.anchor.y / 100 * H;
-
-            var anchor = document.createElement('div');
-            anchor.className = 'callout-anchor';
-            anchor.style.cssText = 'left:' + ax + 'px;top:' + ay + 'px;background:' + lbl.color + ';--accent:' + lbl.color + ';--accent-fade:' + lbl.color + '66;animation-delay:' + delay + 's;box-shadow:0 0 0 2px ' + lbl.color + ',0 0 8px ' + lbl.color + '88;';
-            overlay.appendChild(anchor);
-
-            var lx = lbl.label.x / 100 * W;
-            var ly = lbl.label.y / 100 * H;
-            var card = document.createElement('div');
-            card.className = 'mol-label';
-            card.style.cssText = 'left:' + lx + 'px;top:' + ly + 'px;animation-delay:' + delay + 's;--accent:' + lbl.color + ';';
-            card.innerHTML = '<div class="mol-label-card" style="--accent:' + lbl.color + ';border-left-color:' + lbl.color + '"><div class="mol-label-title"><div class="mol-label-dot" style="background:' + lbl.color + ';box-shadow:0 0 5px ' + lbl.color + '"></div>' + lbl.title + '</div><div class="mol-label-sub">' + lbl.sub + '</div></div>';
+function renderOsmosisCallouts(type){
+    ['animal','plant'].forEach(function(cellType){
+        var overlayId=cellType+'-callout-overlay', svgId=cellType+'-callout-svg', canvasId=cellType+'-canvas';
+        var overlay=document.getElementById(overlayId), svg=document.getElementById(svgId), canvas=document.getElementById(canvasId);
+        if(!overlay||!svg||!canvas)return;
+        Array.from(svg.children).forEach(function(child){if(child.tagName!=='defs')svg.removeChild(child);});
+        Array.from(overlay.children).forEach(function(child){if(child.id!==svgId)overlay.removeChild(child);});
+        var W=canvas.clientWidth, H=canvas.clientHeight||350;
+        var labels=((OSMOSIS_LABELS[cellType]||{})[type])||[];
+        labels.forEach(function(lbl,idx){
+            var delay=idx*0.1, ax=lbl.anchor.x/100*W, ay=lbl.anchor.y/100*H;
+            var anchorEl=document.createElement('div');
+            anchorEl.style.cssText='position:absolute;width:10px;height:10px;border-radius:50%;background:'+lbl.color+';box-shadow:0 0 0 2px '+lbl.color+',0 0 8px '+lbl.color+'88;left:'+ax+'px;top:'+ay+'px;transform:translate(-50%,-50%);animation:anchorPulse 1.8s ease-in-out '+delay+'s infinite;--accent:'+lbl.color+';--accent-fade:'+lbl.color+'66;pointer-events:none;';
+            overlay.appendChild(anchorEl);
+            var lx=lbl.label.x/100*W, ly=lbl.label.y/100*H;
+            var card=document.createElement('div');
+            card.style.cssText='position:absolute;left:'+lx+'px;top:'+ly+'px;pointer-events:none;animation:labelFadeIn 0.45s '+delay+'s ease forwards;opacity:0;';
+            card.innerHTML='<div style="background:rgba(10,14,26,0.88);border-radius:8px;padding:5px 9px;border-left:3px solid '+lbl.color+';box-shadow:0 2px 12px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.07);white-space:nowrap;"><div style="font-size:10px;font-weight:700;color:#fff;display:flex;align-items:center;gap:5px;"><div style="width:7px;height:7px;border-radius:50%;background:'+lbl.color+';box-shadow:0 0 5px '+lbl.color+';flex-shrink:0;"></div>'+lbl.title+'</div><div style="font-size:8.5px;color:rgba(255,255,255,0.55);margin-top:2px;line-height:1.3;">'+lbl.sub+'</div></div>';
             overlay.appendChild(card);
-
-            (function(c, aXi, aYi, color, key, d) {
-                requestAnimationFrame(function() {
-                    var rect = c.getBoundingClientRect();
-                    var overlayRect = overlay.getBoundingClientRect();
-                    var cardLeft = rect.left - overlayRect.left;
-                    var cardTop  = rect.top  - overlayRect.top;
-                    var cw = rect.width, ch = rect.height;
-
-                    var candidates = [
-                        { x: cardLeft,           y: cardTop + ch / 2 },
-                        { x: cardLeft + cw,      y: cardTop + ch / 2 },
-                        { x: cardLeft + cw / 2,  y: cardTop           },
-                        { x: cardLeft + cw / 2,  y: cardTop + ch      }
-                    ];
-                    var best = candidates.reduce(function(prev, cur) {
-                        return Math.hypot(cur.x - aXi, cur.y - aYi) < Math.hypot(prev.x - aXi, prev.y - aYi) ? cur : prev;
-                    });
-
-                    var mx = Math.abs(best.x - (cardLeft + cw/2)) > Math.abs(best.y - (cardTop + ch/2)) ? best.x : aXi;
-                    var my = Math.abs(best.x - (cardLeft + cw/2)) > Math.abs(best.y - (cardTop + ch/2)) ? aYi  : best.y;
-
-                    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                    path.setAttribute('d', 'M ' + aXi + ' ' + aYi + ' L ' + mx + ' ' + my + ' L ' + best.x + ' ' + best.y);
-                    path.setAttribute('stroke', color);
-                    path.setAttribute('stroke-width', '1.5');
-                    path.setAttribute('fill', 'none');
-                    path.setAttribute('opacity', '0.85');
-                    path.setAttribute('stroke-linecap', 'round');
-                    path.setAttribute('stroke-linejoin', 'round');
-                    path.setAttribute('marker-end', 'url(#arr-' + key + ')');
-                    var len = 150;
-                    path.style.strokeDasharray  = len;
-                    path.style.strokeDashoffset = len;
-                    path.style.animation = 'drawLine 0.45s ' + d + 's ease forwards';
+            (function(c,aX,aY,color,marker,d){
+                requestAnimationFrame(function(){
+                    var rect=c.getBoundingClientRect(), overlayRect=overlay.getBoundingClientRect();
+                    var cardLeft=rect.left-overlayRect.left, cardTop=rect.top-overlayRect.top, cw=rect.width, ch=rect.height;
+                    var candidates=[{x:cardLeft,y:cardTop+ch/2},{x:cardLeft+cw,y:cardTop+ch/2},{x:cardLeft+cw/2,y:cardTop},{x:cardLeft+cw/2,y:cardTop+ch}];
+                    var best=candidates.reduce(function(p,cur){return Math.hypot(cur.x-aX,cur.y-aY)<Math.hypot(p.x-aX,p.y-aY)?cur:p;});
+                    var horiz=Math.abs(best.x-(cardLeft+cw/2))>Math.abs(best.y-(cardTop+ch/2));
+                    var mx=horiz?best.x:aX, my=horiz?aY:best.y;
+                    var path=document.createElementNS('http://www.w3.org/2000/svg','path');
+                    path.setAttribute('d','M '+aX+' '+aY+' L '+mx+' '+my+' L '+best.x+' '+best.y);
+                    path.setAttribute('stroke',color); path.setAttribute('stroke-width','1.5'); path.setAttribute('fill','none'); path.setAttribute('opacity','0.85'); path.setAttribute('stroke-linecap','round'); path.setAttribute('stroke-linejoin','round'); path.setAttribute('marker-end','url(#'+marker+')');
+                    path.style.strokeDasharray=150; path.style.strokeDashoffset=150; path.style.animation='drawLine 0.45s '+d+'s ease forwards';
                     svg.appendChild(path);
                 });
-            })(card, ax, ay, lbl.color, lbl.markerKey, delay);
-        });
-
-        (SIM_STEPS[type] || []).forEach(function(step) {
-            var badge = document.createElement('div');
-            badge.className = 'step-badge';
-            badge.innerHTML = '<div class="step-badge-dot" style="background:' + step.dot + ';"></div>' + step.text;
-            stepsEl.appendChild(badge);
-        });
-    }
-
-    function addOsmosisDivider() {
-        if (osmDividerGroup) { scene.remove(osmDividerGroup); osmDividerGroup = null; }
-        osmDividerGroup = new THREE.Group();
-
-        var planeGeo = new THREE.PlaneGeometry(0.15, 14, 1, 1);
-        var planeMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.08, side: THREE.DoubleSide });
-        var plane = new THREE.Mesh(planeGeo, planeMat);
-        plane.rotation.y = Math.PI / 2;
-        osmDividerGroup.add(plane);
-
-        var lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.3 });
-        [-7, 7].forEach(function(y) {
-            var pts = [new THREE.Vector3(0, y, -4), new THREE.Vector3(0, y, 4)];
-            var lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
-            osmDividerGroup.add(new THREE.Line(lineGeo, lineMat));
-        });
-
-        addTextSprite(osmDividerGroup, '💧 Air Murni', -5, 6, 0, 0x93c5fd);
-        addTextSprite(osmDividerGroup, '🧂 Larutan Garam', 5, 6, 0, 0xfca5a5);
-        scene.add(osmDividerGroup);
-    }
-
-    function addTextSprite(group, text, x, y, z, color) {
-        var cv = document.createElement('canvas');
-        cv.width = 256; cv.height = 64;
-        var ctx = cv.getContext('2d');
-        ctx.clearRect(0, 0, 256, 64);
-        ctx.fillStyle = 'rgba(0,0,0,0.55)';
-        ctx.beginPath();
-        if (ctx.roundRect) ctx.roundRect(4, 8, 248, 48, 12); else ctx.rect(4, 8, 248, 48);
-        ctx.fill();
-        ctx.strokeStyle = 'rgba(' + ((color >> 16) & 255) + ',' + ((color >> 8) & 255) + ',' + (color & 255) + ',0.7)';
-        ctx.lineWidth = 2; ctx.stroke();
-        ctx.fillStyle = 'rgba(' + ((color >> 16) & 255) + ',' + ((color >> 8) & 255) + ',' + (color & 255) + ',1)';
-        ctx.font = 'bold 22px Arial';
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText(text, 128, 34);
-        var texture = new THREE.CanvasTexture(cv);
-        var mat = new THREE.SpriteMaterial({ map: texture, transparent: true, opacity: 0.92 });
-        var sprite = new THREE.Sprite(mat);
-        sprite.position.set(x, y, z);
-        sprite.scale.set(4, 1, 1);
-        group.add(sprite);
-    }
-
-    function removeOsmosisDivider() {
-        if (osmDividerGroup) { scene.remove(osmDividerGroup); osmDividerGroup = null; }
-    }
-
-    function setSimulation(type) {
-        currentSimulation = type;
-        clearMolecules();
-
-        ['btn-sim-diffusion', 'btn-sim-osmosis', 'btn-sim-active'].forEach(function(id) {
-            var b = document.getElementById(id);
-            if (!b) return;
-            b.className = 'sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-gray-700 border border-gray-600 hover:opacity-80 font-semibold text-gray-300 text-xs md:text-sm';
-        });
-
-        var title = document.getElementById('sim-title');
-        var desc  = document.getElementById('sim-desc');
-        var icon  = document.getElementById('sim-info-icon');
-        var lp    = document.getElementById('legend-protein');
-
-        if (type === 'diffusion') {
-            removeOsmosisDivider();
-            var b = document.getElementById('btn-sim-diffusion');
-            b.className = 'sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-blue-500/20 border border-blue-500/50 font-semibold text-blue-300 text-xs md:text-sm';
-            title.textContent = 'Difusi Sederhana';
-            title.className = 'font-bold text-base md:text-lg mb-1 text-blue-400';
-            desc.textContent = 'Molekul kecil seperti O₂ dan CO₂ bergerak secara acak melintasi bilayer fosfolipid dari konsentrasi tinggi (atas) ke rendah (bawah) tanpa energi dan tanpa protein.';
-            if (icon) icon.textContent = '🌊';
-            lp.classList.add('hidden');
-
-            for (var i = 0; i < 30; i++) {
-                var m = createMolecule((Math.random() - 0.5) * 12, 3 + Math.random() * 4, (Math.random() - 0.5) * 6, 0xfacc15, 0.25);
-                molecules.push(m); scene.add(m);
-            }
-            for (var i = 0; i < 5; i++) {
-                var m = createMolecule((Math.random() - 0.5) * 12, -3 - Math.random() * 2, (Math.random() - 0.5) * 6, 0xfacc15, 0.25);
-                molecules.push(m); scene.add(m);
-            }
-
-        } else if (type === 'osmosis') {
-            addOsmosisDivider();
-            var b = document.getElementById('btn-sim-osmosis');
-            b.className = 'sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-green-500/20 border border-green-500/50 font-semibold text-green-300 text-xs md:text-sm';
-            title.textContent = 'Osmosis';
-            title.className = 'font-bold text-base md:text-lg mb-1 text-green-400';
-            desc.textContent = 'Air (molekul biru kecil) bergerak melintasi membran semi-permeabel dari daerah konsentrasi air tinggi ke konsentrasi air rendah.';
-            if (icon) icon.textContent = '💧';
-            lp.classList.remove('hidden');
-
-            for (var i = 0; i < 40; i++) {
-                var m = createMolecule((Math.random() - 0.5) * 14, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 8, 0x60a5fa, 0.2);
-                molecules.push(m); scene.add(m);
-            }
-            for (var i = 0; i < 15; i++) {
-                var m = createMolecule(4 + Math.random() * 4, (Math.random() - 0.5) * 8, (Math.random() - 0.5) * 6, 0xf87171, 0.4);
-                m.userData.isSolute = true;
-                molecules.push(m); scene.add(m);
-            }
-
-        } else if (type === 'active') {
-            removeOsmosisDivider();
-            var b = document.getElementById('btn-sim-active');
-            b.className = 'sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300 text-xs md:text-sm';
-            title.textContent = 'Transport Aktif (Na⁺/K⁺ Pump)';
-            title.className = 'font-bold text-base md:text-lg mb-1 text-purple-400';
-            desc.textContent = 'Pompa Na⁺/K⁺-ATPase menggunakan energi ATP untuk memompa 3 ion Na⁺ keluar dan 2 ion K⁺ masuk melawan gradien konsentrasi.';
-            if (icon) icon.textContent = '⚡';
-            lp.classList.remove('hidden');
-
-            createProtein();
-
-            for (var i = 0; i < 8; i++) {
-                var m = createMolecule((Math.random() - 0.5) * 4, -2 - Math.random() * 3, (Math.random() - 0.5) * 4, 0xfacc15, 0.3);
-                m.userData.ionType = 'Na';
-                m.userData.targetY = 3 + Math.random() * 2;
-                molecules.push(m); scene.add(m);
-            }
-            for (var i = 0; i < 6; i++) {
-                var m = createMolecule((Math.random() - 0.5) * 4, 3 + Math.random() * 3, (Math.random() - 0.5) * 4, 0xa78bfa, 0.3);
-                m.userData.ionType = 'K';
-                m.userData.targetY = -3 - Math.random() * 2;
-                molecules.push(m); scene.add(m);
-            }
-            var atp = createMolecule(-3, 0, 2, 0xf472b6, 0.5);
-            atp.userData.isATP = true;
-            molecules.push(atp); scene.add(atp);
-        }
-
-        renderMolLabels(type);
-    }
-
-    function animate() {
-        animationId = requestAnimationFrame(animate);
-        var time = Date.now() * 0.001;
-
-        molecules.forEach(function(mol, i) {
-            if (currentSimulation === 'diffusion') {
-                mol.position.x += mol.userData.velocity.x + (Math.random() - 0.5) * 0.02;
-                mol.position.z += mol.userData.velocity.z + (Math.random() - 0.5) * 0.02;
-                if (mol.position.y > 1.5) mol.position.y -= 0.01;
-                else if (mol.position.y < -1.5) mol.position.y += 0.005;
-                if (Math.abs(mol.position.x) > 8) mol.userData.velocity.x *= -1;
-                if (Math.abs(mol.position.z) > 4) mol.userData.velocity.z *= -1;
-                if (Math.abs(mol.position.x) > 9) mol.position.x = Math.sign(mol.position.x) * 8;
-                if (Math.abs(mol.position.z) > 5) mol.position.z = Math.sign(mol.position.z) * 4;
-
-            } else if (currentSimulation === 'osmosis') {
-                if (mol.userData.isSolute) {
-                    mol.position.x = Math.max(2, mol.position.x);
-                    mol.position.y += Math.sin(time + mol.userData.phase) * 0.005;
-                } else {
-                    if (mol.position.x < 2) mol.position.x += 0.01;
-                    mol.position.y += Math.sin(time * 2 + i) * 0.003;
-                    if (Math.abs(mol.position.y) < 1.5 && Math.abs(mol.position.x) < 1) {
-                        mol.position.y += mol.position.y > 0 ? -0.02 : 0.02;
-                    }
-                    if (mol.position.x > 8) mol.position.x = -8;
-                }
-
-            } else if (currentSimulation === 'active') {
-                if (mol.userData.isATP) {
-                    mol.position.y = Math.sin(time * 3) * 0.5;
-                    mol.rotation.y += 0.02;
-                    mol.material.emissiveIntensity = Math.sin(time * 3) > 0.9 ? 1 : 0.3;
-                } else if (mol.userData.ionType) {
-                    var dy = mol.userData.targetY - mol.position.y;
-                    if (Math.abs(mol.position.x) < 1 && Math.abs(mol.position.y) < 2) {
-                        mol.position.y += dy * 0.02;
-                        mol.position.x *= 0.95;
-                        mol.position.z *= 0.95;
-                    } else {
-                        mol.position.x += (-mol.position.x * 0.1) * 0.05;
-                        mol.position.y += dy * 0.01;
-                    }
-                    if (Math.abs(dy) < 0.5 && Math.abs(mol.position.x) < 0.5) {
-                        mol.position.y = mol.userData.ionType === 'Na' ? -3 : 3;
-                        mol.position.x = (Math.random() - 0.5) * 4;
-                        mol.position.z = (Math.random() - 0.5) * 4;
-                    }
-                }
-            }
-            mol.rotation.x += 0.01;
-            mol.rotation.y += 0.01;
-        });
-
-        if (membraneGroup) membraneGroup.rotation.y = Math.sin(time * 0.2) * 0.1;
-        renderer.render(scene, camera);
-    }
-
-    window.addEventListener('resize', function() {
-        var c = document.getElementById('canvas-container');
-        if (c && camera && renderer) {
-            camera.aspect = c.clientWidth / c.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(c.clientWidth, c.clientHeight);
-        }
-        if (currentSimulation) renderMolLabels(currentSimulation);
-    });
-
-    // ============================================================
-    // HISTORY & STATISTIK — Quiz
-    // ============================================================
-    var quizHistory = [];
-
-    function saveQuizHistory(score, total) {
-        var now = new Date();
-        var entry = {
-            score: score, total: total,
-            pct: Math.round(score / total * 100),
-            time: now.toLocaleString('id-ID', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
-        };
-        quizHistory.unshift(entry);
-        if (quizHistory.length > 10) quizHistory.pop();
-        renderQuizHistory();
-        renderQuizStats();
-    }
-
-    function renderQuizStats() {
-        var panel = document.getElementById('quiz-stats-panel');
-        if (!panel) return;
-        if (quizHistory.length === 0) { panel.classList.add('hidden'); return; }
-        panel.classList.remove('hidden');
-
-        var attempts = quizHistory.length;
-        var avg  = Math.round(quizHistory.reduce(function(s, e) { return s + e.pct; }, 0) / attempts);
-        var best = Math.max.apply(null, quizHistory.map(function(e) { return e.pct; }));
-        var last = quizHistory[0].pct;
-
-        document.getElementById('quiz-stat-attempts').textContent = attempts + '×';
-        document.getElementById('quiz-stat-avg').textContent      = avg  + '%';
-        document.getElementById('quiz-stat-best').textContent     = best + '%';
-        document.getElementById('quiz-stat-last').textContent     = last + '%';
-        document.getElementById('quiz-stat-avg-label').textContent = avg + '%';
-
-        var bar = document.getElementById('quiz-stat-bar');
-        bar.style.width = avg + '%';
-
-        var gradeEl = document.getElementById('quiz-stat-grade');
-        if (avg >= 83)      gradeEl.textContent = '🥇 Sangat Baik — kuasai materi ini!';
-        else if (avg >= 50) gradeEl.textContent = '🥈 Cukup — terus tingkatkan pemahamanmu.';
-        else                gradeEl.textContent = '🥉 Perlu latihan lebih — baca ulang materi.';
-    }
-
-    function renderQuizHistory() {
-        var panel = document.getElementById('quiz-history-panel');
-        var list  = document.getElementById('quiz-history-list');
-        if (!panel || !list) return;
-        if (quizHistory.length === 0) { panel.classList.add('hidden'); return; }
-        panel.classList.remove('hidden');
-        list.innerHTML = quizHistory.map(function(e, i) {
-            var medal = e.pct >= 83 ? '🥇' : e.pct >= 50 ? '🥈' : '🥉';
-            var color = e.pct >= 83 ? 'text-yellow-400' : e.pct >= 50 ? 'text-blue-400' : 'text-gray-400';
-            return '<div class="flex items-center justify-between bg-gray-700/50 rounded-xl px-3 py-2 text-xs md:text-sm"><span class="text-gray-400">#' + (i + 1) + '</span><span>' + medal + ' <span class="font-bold ' + color + '">' + e.score + '/' + e.total + '</span> <span class="text-gray-500">(' + e.pct + '%)</span></span><span class="text-gray-500 text-[10px]">' + e.time + '</span></div>';
-        }).join('');
-    }
-
-    function clearQuizHistory() {
-        quizHistory = [];
-        document.getElementById('quiz-history-panel').classList.add('hidden');
-        document.getElementById('quiz-stats-panel').classList.add('hidden');
-    }
-
-    // ============================================================
-    // HISTORY & STATISTIK — Game
-    // ============================================================
-    var gameHistory = [];
-
-    function saveGameHistory(score, total) {
-        var now = new Date();
-        var entry = {
-            score: score, total: total,
-            pct: Math.round(score / total * 100),
-            time: now.toLocaleString('id-ID', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
-        };
-        gameHistory.unshift(entry);
-        if (gameHistory.length > 10) gameHistory.pop();
-        renderGameHistory();
-        renderGameStats();
-    }
-
-    function renderGameStats() {
-        var panel = document.getElementById('game-stats-panel');
-        if (!panel) return;
-        if (gameHistory.length === 0) { panel.classList.add('hidden'); return; }
-        panel.classList.remove('hidden');
-
-        var attempts = gameHistory.length;
-        var avg  = Math.round(gameHistory.reduce(function(s, e) { return s + e.pct; }, 0) / attempts);
-        var best = Math.max.apply(null, gameHistory.map(function(e) { return e.pct; }));
-        var last = gameHistory[0].pct;
-
-        document.getElementById('game-stat-attempts').textContent = attempts + '×';
-        document.getElementById('game-stat-avg').textContent      = avg  + '%';
-        document.getElementById('game-stat-best').textContent     = best + '%';
-        document.getElementById('game-stat-last').textContent     = last + '%';
-        document.getElementById('game-stat-avg-label').textContent = avg + '%';
-
-        var bar = document.getElementById('game-stat-bar');
-        bar.style.width = avg + '%';
-
-        var gradeEl = document.getElementById('game-stat-grade');
-        if (avg >= 87)      gradeEl.textContent = '🥇 Sempurna — kamu ahli klasifikasi transport!';
-        else if (avg >= 62) gradeEl.textContent = '🥈 Bagus — sebagian besar konsep sudah dipahami.';
-        else                gradeEl.textContent = '🥉 Perlu latihan lagi — pelajari ulang materi.';
-    }
-
-    function renderGameHistory() {
-        var panel = document.getElementById('game-history-panel');
-        var list  = document.getElementById('game-history-list');
-        if (!panel || !list) return;
-        if (gameHistory.length === 0) { panel.classList.add('hidden'); return; }
-        panel.classList.remove('hidden');
-        list.innerHTML = gameHistory.map(function(e, i) {
-            var medal = e.pct >= 87 ? '🥇' : e.pct >= 62 ? '🥈' : '🥉';
-            var color = e.pct >= 87 ? 'text-yellow-400' : e.pct >= 62 ? 'text-green-400' : 'text-gray-400';
-            return '<div class="flex items-center justify-between bg-gray-700/50 rounded-xl px-3 py-2 text-xs md:text-sm"><span class="text-gray-400">#' + (i + 1) + '</span><span>' + medal + ' <span class="font-bold ' + color + '">' + e.score + '/' + e.total + '</span> <span class="text-gray-500">(' + e.pct + '%)</span></span><span class="text-gray-500 text-[10px]">' + e.time + '</span></div>';
-        }).join('');
-    }
-
-    function clearGameHistory() {
-        gameHistory = [];
-        document.getElementById('game-history-panel').classList.add('hidden');
-        document.getElementById('game-stats-panel').classList.add('hidden');
-    }
-
-    // ============================================================
-    // OSMOSIS CALLOUT LABELS
-    // ============================================================
-    var OSMOSIS_LABELS = {
-        animal: {
-            hypotonic: [
-                { anchor:{x:50,y:50}, label:{x:62,y:20}, color:'#f472b6', marker:'osm-arr-pink',   title:'Membran Sel',      sub:'Membungkus & melindungi sel hewan' },
-                { anchor:{x:50,y:50}, label:{x:5, y:50}, color:'#a78bfa', marker:'osm-arr-purple', title:'Nukleus',           sub:'Inti sel tetap stabil' },
-                { anchor:{x:25,y:35}, label:{x:3, y:15}, color:'#60a5fa', marker:'osm-arr-blue',   title:'Molekul Air (H₂O)', sub:'Masuk ke dalam sel (hipotonik)' },
-                { anchor:{x:50,y:80}, label:{x:30,y:88}, color:'#f87171', marker:'osm-arr-red',    title:'Sel Membesar → Lisis', sub:'Terlalu banyak air masuk → pecah' }
-            ],
-            isotonic: [
-                { anchor:{x:50,y:50}, label:{x:62,y:20}, color:'#f472b6', marker:'osm-arr-pink',   title:'Membran Sel',   sub:'Kondisi normal & stabil' },
-                { anchor:{x:50,y:50}, label:{x:5, y:50}, color:'#a78bfa', marker:'osm-arr-purple', title:'Nukleus',       sub:'Inti sel aktif & normal' },
-                { anchor:{x:20,y:40}, label:{x:3, y:18}, color:'#60a5fa', marker:'osm-arr-blue',   title:'Molekul Air',   sub:'Keluar-masuk seimbang (isotonik)' },
-                { anchor:{x:50,y:78}, label:{x:30,y:88}, color:'#22c55e', marker:'osm-arr-green',  title:'Sel Normal',    sub:'Tidak ada perubahan ukuran' }
-            ],
-            hypertonic: [
-                { anchor:{x:50,y:50}, label:{x:62,y:20}, color:'#f472b6', marker:'osm-arr-pink',   title:'Membran Sel',       sub:'Mengerut mengikuti kehilangan air' },
-                { anchor:{x:50,y:50}, label:{x:5, y:50}, color:'#a78bfa', marker:'osm-arr-purple', title:'Nukleus',            sub:'Inti sel terkompresi' },
-                { anchor:{x:75,y:35}, label:{x:58,y:12}, color:'#60a5fa', marker:'osm-arr-blue',   title:'Molekul Air (H₂O)', sub:'Keluar dari sel (hipertonik)' },
-                { anchor:{x:50,y:78}, label:{x:28,y:88}, color:'#f87171', marker:'osm-arr-red',    title:'Krenasi',            sub:'Sel mengkerut karena kehilangan air' }
-            ]
-        },
-        plant: {
-            hypotonic: [
-                { anchor:{x:50,y:12}, label:{x:55,y:3},  color:'#22c55e', marker:'osm-arr-green2',  title:'Dinding Sel',   sub:'Mencegah sel pecah saat turgid' },
-                { anchor:{x:50,y:50}, label:{x:5, y:30}, color:'#60a5fa', marker:'osm-arr-blue2',   title:'Membran Sel',   sub:'Di dalam dinding sel' },
-                { anchor:{x:50,y:50}, label:{x:55,y:55}, color:'#facc15', marker:'osm-arr-yellow2', title:'Vakuola Besar', sub:'Terisi penuh air → sel turgid' },
-                { anchor:{x:20,y:35}, label:{x:3, y:15}, color:'#60a5fa', marker:'osm-arr-blue2',   title:'Air Masuk',     sub:'Osmosis: luar → dalam sel' },
-                { anchor:{x:50,y:83}, label:{x:28,y:90}, color:'#22c55e', marker:'osm-arr-green2',  title:'Sel Turgid',    sub:'Kaku & tegang — kondisi ideal' }
-            ],
-            isotonic: [
-                { anchor:{x:50,y:12}, label:{x:55,y:3},  color:'#22c55e', marker:'osm-arr-green2',  title:'Dinding Sel',     sub:'Memberikan bentuk tetap' },
-                { anchor:{x:50,y:50}, label:{x:5, y:30}, color:'#60a5fa', marker:'osm-arr-blue2',   title:'Membran Sel',     sub:'Menempel pada dinding sel' },
-                { anchor:{x:50,y:50}, label:{x:55,y:55}, color:'#facc15', marker:'osm-arr-yellow2', title:'Vakuola Sedang',  sub:'Air setimbang — kondisi flasid' },
-                { anchor:{x:20,y:35}, label:{x:3, y:15}, color:'#60a5fa', marker:'osm-arr-blue2',   title:'Air Seimbang',    sub:'Tidak ada aliran bersih' },
-                { anchor:{x:50,y:83}, label:{x:28,y:90}, color:'#facc15', marker:'osm-arr-yellow2', title:'Sel Flasid',      sub:'Sedikit layu, tidak ada turgor' }
-            ],
-            hypertonic: [
-                { anchor:{x:50,y:12}, label:{x:55,y:3},  color:'#22c55e', marker:'osm-arr-green2',  title:'Dinding Sel',       sub:'Tetap kaku, tidak ikut mengkerut' },
-                { anchor:{x:50,y:50}, label:{x:5, y:30}, color:'#fb923c', marker:'osm-arr-orange2', title:'Membran Sel',       sub:'Menjauh dari dinding → plasmolisis' },
-                { anchor:{x:50,y:50}, label:{x:55,y:55}, color:'#facc15', marker:'osm-arr-yellow2', title:'Vakuola Mengecil',  sub:'Air keluar dari vakuola' },
-                { anchor:{x:75,y:35}, label:{x:57,y:12}, color:'#60a5fa', marker:'osm-arr-blue2',   title:'Air Keluar',        sub:'Osmosis: dalam → luar sel' },
-                { anchor:{x:50,y:83}, label:{x:28,y:90}, color:'#f87171', marker:'osm-arr-red2',    title:'Plasmolisis',       sub:'Membran terlepas dari dinding sel' }
-            ]
-        }
-    };
-
-    function renderOsmosisCallouts(type) {
-        ['animal', 'plant'].forEach(function(cellType) {
-            var overlayId = cellType + '-callout-overlay';
-            var svgId     = cellType + '-callout-svg';
-            var canvasId  = cellType + '-canvas';
-
-            var overlay = document.getElementById(overlayId);
-            var svg     = document.getElementById(svgId);
-            var canvas  = document.getElementById(canvasId);
-            if (!overlay || !svg || !canvas) return;
-
-            Array.from(svg.children).forEach(function(child) {
-                if (child.tagName !== 'defs') svg.removeChild(child);
-            });
-            Array.from(overlay.children).forEach(function(child) {
-                if (child.id !== svgId) overlay.removeChild(child);
-            });
-
-            var W = canvas.clientWidth;
-            var H = canvas.clientHeight || 350;
-            var labels = ((OSMOSIS_LABELS[cellType] || {})[type]) || [];
-
-            labels.forEach(function(lbl, idx) {
-                var delay = idx * 0.1;
-                var ax = lbl.anchor.x / 100 * W;
-                var ay = lbl.anchor.y / 100 * H;
-
-                var anchorEl = document.createElement('div');
-                anchorEl.style.cssText = 'position:absolute;width:10px;height:10px;border-radius:50%;background:' + lbl.color + ';box-shadow:0 0 0 2px ' + lbl.color + ',0 0 8px ' + lbl.color + '88;left:' + ax + 'px;top:' + ay + 'px;transform:translate(-50%,-50%);animation:anchorPulse 1.8s ease-in-out ' + delay + 's infinite;--accent:' + lbl.color + ';--accent-fade:' + lbl.color + '66;pointer-events:none;';
-                overlay.appendChild(anchorEl);
-
-                var lx = lbl.label.x / 100 * W;
-                var ly = lbl.label.y / 100 * H;
-                var card = document.createElement('div');
-                card.style.cssText = 'position:absolute;left:' + lx + 'px;top:' + ly + 'px;pointer-events:none;animation:labelFadeIn 0.45s ' + delay + 's ease forwards;opacity:0;';
-                card.innerHTML = '<div style="background:rgba(10,14,26,0.88);border-radius:8px;padding:5px 9px;border-left:3px solid ' + lbl.color + ';box-shadow:0 2px 12px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.07);white-space:nowrap;"><div style="font-size:10px;font-weight:700;color:#fff;display:flex;align-items:center;gap:5px;"><div style="width:7px;height:7px;border-radius:50%;background:' + lbl.color + ';box-shadow:0 0 5px ' + lbl.color + ';flex-shrink:0;"></div>' + lbl.title + '</div><div style="font-size:8.5px;color:rgba(255,255,255,0.55);margin-top:2px;line-height:1.3;">' + lbl.sub + '</div></div>';
-                overlay.appendChild(card);
-
-                (function(c, aX, aY, color, marker, d) {
-                    requestAnimationFrame(function() {
-                        var rect        = c.getBoundingClientRect();
-                        var overlayRect = overlay.getBoundingClientRect();
-                        var cardLeft = rect.left - overlayRect.left;
-                        var cardTop  = rect.top  - overlayRect.top;
-                        var cw = rect.width, ch = rect.height;
-
-                        var candidates = [
-                            { x: cardLeft,          y: cardTop + ch / 2 },
-                            { x: cardLeft + cw,     y: cardTop + ch / 2 },
-                            { x: cardLeft + cw / 2, y: cardTop           },
-                            { x: cardLeft + cw / 2, y: cardTop + ch      }
-                        ];
-                        var best = candidates.reduce(function(p, cur) {
-                            return Math.hypot(cur.x - aX, cur.y - aY) < Math.hypot(p.x - aX, p.y - aY) ? cur : p;
-                        });
-
-                        var horiz = Math.abs(best.x - (cardLeft + cw/2)) > Math.abs(best.y - (cardTop + ch/2));
-                        var mx = horiz ? best.x : aX;
-                        var my = horiz ? aY     : best.y;
-
-                        var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                        path.setAttribute('d', 'M ' + aX + ' ' + aY + ' L ' + mx + ' ' + my + ' L ' + best.x + ' ' + best.y);
-                        path.setAttribute('stroke', color);
-                        path.setAttribute('stroke-width', '1.5');
-                        path.setAttribute('fill', 'none');
-                        path.setAttribute('opacity', '0.85');
-                        path.setAttribute('stroke-linecap', 'round');
-                        path.setAttribute('stroke-linejoin', 'round');
-                        path.setAttribute('marker-end', 'url(#' + marker + ')');
-                        var len = 150;
-                        path.style.strokeDasharray  = len;
-                        path.style.strokeDashoffset = len;
-                        path.style.animation = 'drawLine 0.45s ' + d + 's ease forwards';
-                        svg.appendChild(path);
-                    });
-                })(card, ax, ay, lbl.color, lbl.marker, delay);
-            });
-        });
-    }
-
-    // ============================================================
-    // VOICE
-    // ============================================================
-    var voiceExplanations = {
-        hypotonic: { title: "Osmosis Hipotonik", text: "Osmosis hipotonik. Dalam larutan hipotonik, konsentrasi zat terlarut di luar sel lebih rendah dibandingkan di dalam sel. Akibatnya, air bergerak masuk ke dalam sel melalui membran semipermeabel. Pada sel hewan, air masuk menyebabkan sel membesar dan bisa pecah, yang disebut lisis. Namun, pada sel tumbuhan, meskipun air juga masuk, sel tidak pecah karena dilindungi oleh dinding sel yang kaku. Sel tumbuhan justru menjadi turgid, yaitu kaku dan tegang." },
-        isotonic:  { title: "Osmosis Isotonik",  text: "Osmosis isotonik. Dalam larutan isotonik, konsentrasi zat terlarut di luar dan di dalam sel adalah sama. Karena tidak ada perbedaan gradien konsentrasi, tidak ada pergerakan air bersih yang signifikan melintasi membran sel. Pada sel hewan, sel tetap dalam kondisi normal dan stabil. Sedangkan pada sel tumbuhan, sel berada dalam kondisi flasid, yaitu sedikit layu karena tidak ada tekanan turgor." },
-        hypertonic:{ title: "Osmosis Hipertonik", text: "Osmosis hipertonik. Dalam larutan hipertonik, konsentrasi zat terlarut di luar sel lebih tinggi dibandingkan di dalam sel. Akibatnya, air keluar dari sel menuju ke luar melalui membran semipermeabel. Pada sel hewan, air keluar menyebabkan sel mengkerut, yang disebut krenasi. Pada sel tumbuhan, air keluar menyebabkan membran sel menjauh dari dinding sel, yang disebut plasmolisis, dan tanaman menjadi layu." }
-    };
-
-    function toggleVoice() { isSpeaking ? stopVoice() : playVoice(); }
-
-    function playVoice() {
-        if (!('speechSynthesis' in window)) {
-            document.getElementById('voice-status').textContent = 'Browser tidak mendukung text-to-speech'; return;
-        }
-        stopVoice();
-        var exp = voiceExplanations[osmosisType];
-        speechUtterance = new SpeechSynthesisUtterance(exp.text);
-        speechUtterance.lang = 'id-ID';
-        speechUtterance.rate = parseFloat(document.getElementById('voice-speed').value);
-        speechUtterance.pitch = 1; speechUtterance.volume = 1;
-        var voices = window.speechSynthesis.getVoices();
-        var idVoice = voices.find(function(v) { return v.lang.includes('id'); });
-        if (idVoice) speechUtterance.voice = idVoice;
-        speechUtterance.onstart = function() {
-            isSpeaking = true;
-            document.getElementById('voice-btn').textContent = '⏸️';
-            document.getElementById('voice-status').textContent = '🔊 Memutar: ' + exp.title;
-        };
-        speechUtterance.onend = function() {
-            isSpeaking = false;
-            document.getElementById('voice-btn').textContent = '🔊';
-            document.getElementById('voice-status').textContent = 'Klik tombol speaker untuk mendengarkan penjelasan';
-        };
-        speechUtterance.onerror = function() {
-            isSpeaking = false;
-            document.getElementById('voice-btn').textContent = '🔊';
-            document.getElementById('voice-status').textContent = 'Error memutar suara. Coba lagi.';
-        };
-        window.speechSynthesis.speak(speechUtterance);
-    }
-
-    function stopVoice() {
-        if (window.speechSynthesis) window.speechSynthesis.cancel();
-        isSpeaking = false;
-        document.getElementById('voice-btn').textContent = '🔊';
-        document.getElementById('voice-status').textContent = 'Klik tombol speaker untuk mendengarkan penjelasan';
-    }
-
-    function changeVoiceSpeed() { if (isSpeaking) playVoice(); }
-
-    if ('speechSynthesis' in window) window.speechSynthesis.onvoiceschanged = function() {};
-
-    // ============================================================
-    // OSMOSIS 2D CANVAS
-    // ============================================================
-    function initOsmosisCanvas() {
-        animalCanvas = document.getElementById('animal-canvas');
-        plantCanvas  = document.getElementById('plant-canvas');
-        if (!animalCanvas || !plantCanvas) return;
-        animalCtx = animalCanvas.getContext('2d');
-        plantCtx  = plantCanvas.getContext('2d');
-        resizeOsmosisCanvas();
-        window.addEventListener('resize', resizeOsmosisCanvas);
-        setOsmosisType('hypotonic');
-        animateOsmosis();
-    }
-
-    function resizeOsmosisCanvas() {
-        [animalCanvas, plantCanvas].forEach(function(cv) {
-            if (!cv) return;
-            var r = cv.parentElement.getBoundingClientRect();
-            cv.width  = r.width;
-            cv.height = 350;
-        });
-        if (waterParticles.length > 0) createParticles();
-    }
-
-    function setOsmosisType(type) {
-        osmosisType = type;
-        ['btn-osm-hypotonic', 'btn-osm-isotonic', 'btn-osm-hypertonic'].forEach(function(id) {
-            var b = document.getElementById(id);
-            if (!b) return;
-            b.classList.remove('bg-green-500/20','bg-yellow-500/20','bg-red-500/20','border-green-500/50','border-yellow-500/50','border-red-500/50','text-green-300','text-yellow-300','text-red-300');
-            b.classList.add('bg-gray-700','border-gray-600','text-gray-300');
-        });
-        var ab = document.getElementById('btn-osm-' + type);
-        if (ab) {
-            ab.classList.remove('bg-gray-700','border-gray-600','text-gray-300');
-            var cm = {
-                hypotonic:  ['bg-green-500/20',  'border-green-500/50',  'text-green-300'],
-                isotonic:   ['bg-yellow-500/20', 'border-yellow-500/50', 'text-yellow-300'],
-                hypertonic: ['bg-red-500/20',    'border-red-500/50',    'text-red-300']
-            };
-            cm[type].forEach(function(c) { ab.classList.add(c); });
-        }
-
-        ['hypotonic','isotonic','hypertonic'].forEach(function(t) {
-            document.getElementById('info-' + t).classList.add('hidden');
-        });
-        document.getElementById('info-' + type).classList.remove('hidden');
-
-        var sm = {
-            hypotonic:  { animal: 'Air masuk → Sel membesar (lisis)',   plant: 'Air masuk → Sel turgid' },
-            isotonic:   { animal: 'Seimbang → Sel normal',              plant: 'Seimbang → Flasid' },
-            hypertonic: { animal: 'Air keluar → Krenasi',               plant: 'Air keluar → Plasmolisis' }
-        };
-        document.getElementById('animal-status').textContent = sm[type].animal;
-        document.getElementById('plant-status').textContent  = sm[type].plant;
-
-        createParticles();
-        renderOsmosisCallouts(type);
-        if (isSpeaking) { stopVoice(); setTimeout(function() { playVoice(); }, 500); }
-    }
-
-    function createParticles() {
-        waterParticles = []; soluteParticles = [];
-        var cw = animalCanvas ? animalCanvas.width : 400;
-        var ch = animalCanvas ? animalCanvas.height : 350;
-
-        for (var i = 0; i < 60; i++) {
-            waterParticles.push({
-                x: Math.random() * cw, y: Math.random() * ch,
-                vx: (Math.random() - 0.5) * 1.5, vy: (Math.random() - 0.5) * 1.5,
-                radius: 3 + Math.random() * 2, alpha: 0.4 + Math.random() * 0.4
-            });
-        }
-
-        var sc = osmosisType === 'isotonic' ? 20 : 15;
-        var pl = osmosisType === 'hypotonic' ? 'inside' : osmosisType === 'isotonic' ? 'even' : 'outside';
-        var cx = cw / 2, cy = ch / 2;
-
-        for (var i = 0; i < sc; i++) {
-            var x, y;
-            if (pl === 'inside') {
-                x = cx + (Math.random() - 0.5) * 80; y = cy + (Math.random() - 0.5) * 80;
-            } else if (pl === 'outside') {
-                var a = Math.random() * Math.PI * 2, d = 120 + Math.random() * 80;
-                x = cx + Math.cos(a) * d; y = cy + Math.sin(a) * d;
-            } else {
-                x = Math.random() * cw; y = Math.random() * ch;
-            }
-            soluteParticles.push({ x: x, y: y, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5, radius: 5 + Math.random() * 3, alpha: 0.6 + Math.random() * 0.4 });
-        }
-    }
-
-    function getCellTargetRadius(type, osmosis) {
-        if (type === 'animal') return osmosis === 'hypotonic' ? 95 : osmosis === 'hypertonic' ? 50 : 70;
-        return osmosis === 'hypotonic' ? 85 : osmosis === 'hypertonic' ? 55 : 70;
-    }
-
-    function drawCell(ctx, cx, cy, type) {
-        var target = getCellTargetRadius(type, osmosisType);
-        if (type === 'animal') {
-            animalRadiusCurrent += (target - animalRadiusCurrent) * 0.035;
-        } else {
-            plantRadiusCurrent += (target - plantRadiusCurrent) * 0.035;
-        }
-        var r = Math.round((type === 'animal' ? animalRadiusCurrent : plantRadiusCurrent) * 10) / 10;
-
-        if (type === 'plant') {
-            var wallR = 95;
-            ctx.beginPath();
-            ctx.rect(cx - wallR, cy - wallR, wallR * 2, wallR * 2);
-            ctx.strokeStyle = 'rgba(34,197,94,0.8)'; ctx.lineWidth = 4; ctx.stroke();
-            ctx.fillStyle = 'rgba(34,197,94,0.07)'; ctx.fill();
-            ctx.strokeStyle = 'rgba(34,197,94,0.18)'; ctx.lineWidth = 1;
-            for (var i = -wallR; i <= wallR; i += 15) {
-                ctx.beginPath(); ctx.moveTo(cx - wallR, cy + i); ctx.lineTo(cx + wallR, cy + i); ctx.stroke();
-            }
-        }
-
-        ctx.beginPath();
-        if (type === 'animal') {
-            ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        } else {
-            var rr = r;
-            ctx.moveTo(cx - rr + 10, cy - rr);
-            ctx.lineTo(cx + rr - 10, cy - rr);
-            ctx.quadraticCurveTo(cx + rr, cy - rr, cx + rr, cy - rr + 10);
-            ctx.lineTo(cx + rr, cy + rr - 10);
-            ctx.quadraticCurveTo(cx + rr, cy + rr, cx + rr - 10, cy + rr);
-            ctx.lineTo(cx - rr + 10, cy + rr);
-            ctx.quadraticCurveTo(cx - rr, cy + rr, cx - rr, cy + rr - 10);
-            ctx.lineTo(cx - rr, cy - rr + 10);
-            ctx.quadraticCurveTo(cx - rr, cy - rr, cx - rr + 10, cy - rr);
-        }
-        ctx.strokeStyle = type === 'animal' ? 'rgba(244,114,182,0.9)' : 'rgba(96,165,250,0.9)';
-        ctx.lineWidth = 3; ctx.stroke();
-        ctx.fillStyle = type === 'animal' ? 'rgba(244,114,182,0.15)' : 'rgba(96,165,250,0.15)';
-        ctx.fill();
-
-        ctx.beginPath(); ctx.arc(cx, cy, r * 0.25, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(139,92,246,0.6)'; ctx.fill();
-        ctx.strokeStyle = 'rgba(139,92,246,0.8)'; ctx.lineWidth = 2; ctx.stroke();
-
-        if (type === 'plant') {
-            var vs = r * (osmosisType === 'hypotonic' ? 0.68 : osmosisType === 'hypertonic' ? 0.28 : 0.48);
-            ctx.beginPath(); ctx.ellipse(cx, cy, vs, vs * 0.7, 0, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(250,204,21,0.3)'; ctx.fill();
-            ctx.strokeStyle = 'rgba(250,204,21,0.5)'; ctx.lineWidth = 1.5; ctx.stroke();
-        }
-
-        for (var i = 0; i < 8; i++) {
-            var a = (i / 8) * Math.PI * 2 + Date.now() * 0.0005;
-            ctx.beginPath(); ctx.arc(cx + Math.cos(a) * r * 0.5, cy + Math.sin(a) * r * 0.5, 3, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.fill();
-        }
-        return r;
-    }
-
-    function animateOsmosis() {
-        animationFrameId = requestAnimationFrame(animateOsmosis);
-        if (!animalCtx || !plantCtx) return;
-
-        [{ctx: animalCtx, canvas: animalCanvas, type: 'animal'}, {ctx: plantCtx, canvas: plantCanvas, type: 'plant'}].forEach(function(item) {
-            var ctx = item.ctx, canvas = item.canvas, type = item.type;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            var g = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            g.addColorStop(0, 'rgba(31,41,55,0.5)');
-            g.addColorStop(1, 'rgba(17,24,39,0.8)');
-            ctx.fillStyle = g; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            var radius = drawCell(ctx, canvas.width / 2, canvas.height / 2, type);
-            updateWaterParticles(ctx, canvas.width, canvas.height, radius);
-            drawSoluteParticles(ctx);
-            drawDirectionArrows(ctx, canvas.width / 2, canvas.height / 2, radius);
-            ctx.font = 'bold 11px Poppins,sans-serif';
-            ctx.fillStyle = 'rgba(156,163,175,0.7)';
-            ctx.textAlign = 'center';
-            ctx.fillText('Dalam Sel', canvas.width / 2, canvas.height - 6);
-        });
-    }
-
-    function updateWaterParticles(ctx, w, h, cr) {
-        var cx = w / 2, cy = h / 2;
-        waterParticles.forEach(function(p, i) {
-            var dist = Math.hypot(p.x - cx, p.y - cy);
-            var inside = dist < cr;
-            if (osmosisType === 'hypotonic' && !inside && i % 3 === 0) {
-                p.x += (cx + (p.x - cx) * 0.7 - p.x) * 0.02;
-                p.y += (cy + (p.y - cy) * 0.7 - p.y) * 0.02;
-            } else if (osmosisType === 'hypertonic' && inside && i % 3 === 0) {
-                p.x += (cx + (p.x - cx) * 1.5 - p.x) * 0.02;
-                p.y += (cy + (p.y - cy) * 1.5 - p.y) * 0.02;
-            }
-            p.x += p.vx; p.y += p.vy;
-            if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
-            if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
-            ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(96,165,250,' + p.alpha + ')'; ctx.fill();
-            ctx.beginPath(); ctx.arc(p.x, p.y, p.radius * 2, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(96,165,250,' + (p.alpha * 0.2) + ')'; ctx.fill();
-        });
-    }
-
-    function drawSoluteParticles(ctx) {
-        soluteParticles.forEach(function(p) {
-            p.x += p.vx; p.y += p.vy;
-            if (p.x < 0 || p.x > ctx.canvas.width)  p.vx *= -1;
-            if (p.y < 0 || p.y > ctx.canvas.height) p.vy *= -1;
-            ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(248,113,113,' + p.alpha + ')'; ctx.fill();
-            ctx.beginPath();
-            ctx.moveTo(p.x - p.radius * 0.5, p.y - p.radius * 0.5);
-            ctx.lineTo(p.x + p.radius * 0.5, p.y + p.radius * 0.5);
-            ctx.moveTo(p.x + p.radius * 0.5, p.y - p.radius * 0.5);
-            ctx.lineTo(p.x - p.radius * 0.5, p.y + p.radius * 0.5);
-            ctx.strokeStyle = 'rgba(255,255,255,' + (p.alpha * 0.5) + ')'; ctx.lineWidth = 1; ctx.stroke();
-        });
-    }
-
-    function drawArrow(ctx, fx, fy, tx, ty, color) {
-        var a = Math.atan2(ty - fy, tx - fx);
-        ctx.beginPath(); ctx.moveTo(fx, fy); ctx.lineTo(tx, ty);
-        ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(tx, ty);
-        ctx.lineTo(tx - 10 * Math.cos(a - Math.PI / 6), ty - 10 * Math.sin(a - Math.PI / 6));
-        ctx.lineTo(tx - 10 * Math.cos(a + Math.PI / 6), ty - 10 * Math.sin(a + Math.PI / 6));
-        ctx.closePath(); ctx.fillStyle = color; ctx.fill();
-    }
-
-    function drawDirectionArrows(ctx, cx, cy, cr) {
-        var t = Date.now() * 0.001;
-        if (osmosisType === 'hypotonic') {
-            for (var i = 0; i < 6; i++) {
-                var a = (i / 6) * Math.PI * 2 + t * 0.5;
-                drawArrow(ctx, cx + Math.cos(a) * (cr + 40), cy + Math.sin(a) * (cr + 40), cx + Math.cos(a) * (cr + 10), cy + Math.sin(a) * (cr + 10), 'rgba(96,165,250,0.8)');
-            }
-        } else if (osmosisType === 'hypertonic') {
-            for (var i = 0; i < 6; i++) {
-                var a = (i / 6) * Math.PI * 2 + t * 0.5;
-                drawArrow(ctx, cx + Math.cos(a) * (cr - 5), cy + Math.sin(a) * (cr - 5), cx + Math.cos(a) * (cr + 35), cy + Math.sin(a) * (cr + 35), 'rgba(96,165,250,0.8)');
-            }
-        }
-    }
-
-    // ============================================================
-    // QUIZ
-    // ============================================================
-    var quizData = [
-        { question: "Perpindahan zat tanpa energi disebut...", options: ["Transport aktif", "Difusi", "Endositosis", "Eksositosis"], correct: 1, explanation: "Difusi adalah perpindahan zat dari konsentrasi tinggi ke rendah tanpa energi." },
-        { question: "Osmosis adalah perpindahan...", options: ["Ion", "Air", "Protein", "Glukosa"], correct: 1, explanation: "Osmosis adalah perpindahan air melalui membran semipermeabel dari konsentrasi zat terlarut rendah ke tinggi." },
-        { question: "Transport yang melawan gradien adalah...", options: ["Difusi", "Osmosis", "Transport aktif", "Difusi terfasilitasi"], correct: 2, explanation: "Transport aktif membutuhkan energi ATP dan melawan gradien konsentrasi (rendah ke tinggi)." },
-        { question: "Sebuah sel dimasukkan ke larutan yang sangat asin. Apa yang paling mungkin terjadi?", options: ["Sel membesar", "Sel tetap normal", "Sel menyusut karena kehilangan air", "Sel langsung mati tanpa perubahan"], correct: 2, explanation: "Larutan asin = hipertonik. Air keluar dari sel sehingga sel menyusut." },
-        { question: "Jika membran sel rusak dan tidak bisa mengatur zat yang masuk, dampaknya adalah...", options: ["Sel bekerja lebih cepat", "Sel tetap normal", "Zat keluar-masuk tidak terkontrol", "Sel hanya kekurangan air"], correct: 2, explanation: "Membran sel berfungsi mengatur zat yang keluar masuk. Jika rusak, transport tidak terkontrol." },
-        { question: "Di mana proses transport membran terjadi?", options: ["Inti sel", "Sitoplasma", "Membran sel", "Ribosom"], correct: 2, explanation: "Transport membran terjadi di membran sel karena membran sel bersifat semi-permeabel." }
-    ];
-    var currentQuestion = 0, score = 0, answered = false;
-
-    function loadQuestion() {
-        answered = false;
-        var q = quizData[currentQuestion];
-        document.getElementById('question-text').textContent = (currentQuestion + 1) + '. ' + q.question;
-        document.getElementById('progress-text').textContent = (currentQuestion + 1) + '/' + quizData.length;
-        document.getElementById('progress-bar').style.width = (((currentQuestion + 1) / quizData.length) * 100) + '%';
-        var oc = document.getElementById('options-container');
-        oc.innerHTML = '';
-        ['A', 'B', 'C', 'D'].forEach(function(lbl, idx) {
-            var btn = document.createElement('button');
-            btn.className = 'quiz-option w-full text-left p-3 md:p-4 rounded-xl bg-gray-700/50 border border-gray-600 hover:bg-gray-700 hover:border-blue-500/50 transition flex items-center gap-3 group touch-feedback';
-            btn.innerHTML = '<span class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gray-600 flex items-center justify-center text-xs md:text-sm font-bold group-hover:bg-blue-500 transition flex-shrink-0">' + lbl + '</span><span class="text-gray-300 group-hover:text-white text-sm md:text-base">' + q.options[idx] + '</span>';
-            btn.onclick = function() { checkAnswer(idx, btn); };
-            oc.appendChild(btn);
-        });
-        document.getElementById('feedback').classList.add('hidden');
-    }
-
-    function checkAnswer(sel, btn) {
-        if (answered) return;
-        answered = true;
-        var q = quizData[currentQuestion];
-        var ok = sel === q.correct;
-        document.querySelectorAll('#options-container button').forEach(function(b) { b.disabled = true; b.classList.add('opacity-50'); });
-        btn.classList.remove('opacity-50');
-        if (ok) {
-            score += 10;
-            document.getElementById('score').textContent = score;
-            btn.classList.add('bg-green-500/20', 'border-green-500', 'text-green-400');
-            btn.querySelector('span:first-child').classList.add('bg-green-500');
-            document.getElementById('feedback').className = 'mt-4 md:mt-6 p-3 md:p-4 rounded-xl border border-green-500/50 bg-green-500/10 text-center';
-            document.getElementById('feedback-text').textContent = '✅ Benar! ' + q.explanation;
-            document.getElementById('feedback-text').className = 'font-semibold text-sm md:text-base text-green-400';
-        } else {
-            btn.classList.add('bg-red-500/20', 'border-red-500', 'text-red-400');
-            btn.querySelector('span:first-child').classList.add('bg-red-500');
-            var cb = document.querySelectorAll('#options-container button')[q.correct];
-            cb.classList.remove('opacity-50', 'bg-gray-700/50', 'border-gray-600');
-            cb.classList.add('bg-green-500/20', 'border-green-500', 'text-green-400');
-            cb.querySelector('span:first-child').classList.add('bg-green-500');
-            document.getElementById('feedback').className = 'mt-4 md:mt-6 p-3 md:p-4 rounded-xl border border-red-500/50 bg-red-500/10 text-center';
-            document.getElementById('feedback-text').textContent = '❌ Salah. ' + q.explanation;
-            document.getElementById('feedback-text').className = 'font-semibold text-sm md:text-base text-red-400';
-        }
-        document.getElementById('feedback').classList.remove('hidden');
-        if (currentQuestion === quizData.length - 1) document.getElementById('next-btn').textContent = 'Lihat Hasil 🏆';
-    }
-
-    function nextQuestion() {
-        currentQuestion++;
-        if (currentQuestion >= quizData.length) showResults(); else loadQuestion();
-    }
-
-    function showResults() {
-        document.getElementById('question-container').classList.add('hidden');
-        document.getElementById('feedback').classList.add('hidden');
-        document.getElementById('results').classList.remove('hidden');
-        document.getElementById('final-score').textContent = score + '/60';
-        document.getElementById('result-message').textContent = score >= 50 ? '🌟 Luar biasa! Kamu sudah menguasai materi transport membran dengan sangat baik!' : score >= 30 ? '👍 Bagus! Pemahamanmu sudah cukup baik, tingkatkan lagi dengan membaca materi.' : '📚 Jangan menyerah! Pelajari lagi materi transport membran dan coba kuisnya lagi.';
-        saveQuizHistory(score, 60);
-    }
-
-    function restartQuiz() {
-        currentQuestion = 0; score = 0; answered = false;
-        document.getElementById('score').textContent = '0';
-        document.getElementById('question-container').classList.remove('hidden');
-        document.getElementById('results').classList.add('hidden');
-        document.getElementById('next-btn').textContent = 'Pertanyaan Selanjutnya →';
-        loadQuestion();
-    }
-
-    // ============================================================
-    // DRAG AND DROP GAME
-    // ============================================================
-    var draggedElement = null, gameScore = 0, answeredItems = 0;
-    var TOTAL_ITEMS = 8;
-
-    function dragEnter(e) { e.preventDefault(); var z = e.target.closest('.drop-zone'); if (z) z.classList.add('drag-over'); }
-    function dragLeave(e) { var z = e.target.closest('.drop-zone'); if (z && !z.contains(e.relatedTarget)) z.classList.remove('drag-over'); }
-    function allowDrop(e) { e.preventDefault(); }
-    function drag(e) { draggedElement = e.target; e.dataTransfer.setData('text/plain', e.target.dataset.type); e.dataTransfer.effectAllowed = 'move'; }
-
-    function drop(e, category) {
-        e.preventDefault();
-        var dz = e.target.closest('.drop-zone');
-        if (!dz) return;
-        dz.classList.remove('drag-over');
-        if (!draggedElement || draggedElement.getAttribute('draggable') === 'false') return;
-        processDropResult(draggedElement, e.dataTransfer.getData('text/plain'), category, dz);
-    }
-
-    function processDropResult(item, itemType, category, dropZone) {
-        answeredItems++;
-        if (itemType === category) {
-            dropZone.classList.add('correct');
-            item.style.opacity = '0.5';
-            item.setAttribute('draggable', 'false');
-            item.classList.add('cursor-not-allowed');
-            item.classList.remove('cursor-grab');
-            var ind = document.createElement('div');
-            ind.className = 'text-xs text-green-400 mt-1';
-            ind.textContent = '✓ ' + item.textContent.trim();
-            dropZone.appendChild(ind);
-            gameScore++;
-        } else {
-            dropZone.classList.add('wrong');
-            setTimeout(function() { dropZone.classList.remove('wrong'); }, 1000);
-            answeredItems--;
-        }
-        if (answeredItems >= TOTAL_ITEMS) showGameResults();
-    }
-
-    var touchDraggedElement = null, touchOffsetX = 0, touchOffsetY = 0;
-
-    function touchStart(e) {
-        if (e.target.getAttribute('draggable') === 'false') return;
-        var t = e.touches[0];
-        touchDraggedElement = e.target;
-        var r = e.target.getBoundingClientRect();
-        touchOffsetX = t.clientX - r.left;
-        touchOffsetY = t.clientY - r.top;
-        e.target.style.cssText += 'position:fixed;z-index:1000;left:' + (t.clientX - touchOffsetX) + 'px;top:' + (t.clientY - touchOffsetY) + 'px;width:' + r.width + 'px;';
-    }
-
-    function touchMove(e) {
-        if (!touchDraggedElement) return;
-        e.preventDefault();
-        var t = e.touches[0];
-        touchDraggedElement.style.left = (t.clientX - touchOffsetX) + 'px';
-        touchDraggedElement.style.top  = (t.clientY - touchOffsetY) + 'px';
-    }
-
-    function touchEnd(e) {
-        if (!touchDraggedElement) return;
-        var t = e.changedTouches[0];
-        touchDraggedElement.style.position = '';
-        touchDraggedElement.style.zIndex   = '';
-        touchDraggedElement.style.left     = '';
-        touchDraggedElement.style.top      = '';
-        touchDraggedElement.style.width    = '';
-        var el = document.elementFromPoint(t.clientX, t.clientY);
-        var dz = el ? el.closest('.drop-zone') : null;
-        if (dz) processDropResult(touchDraggedElement, touchDraggedElement.dataset.type, dz.dataset.category, dz);
-        touchDraggedElement = null;
-    }
-
-    function showGameResults() {
-        document.getElementById('game-score').classList.remove('hidden');
-        document.getElementById('game-score-value').textContent = gameScore;
-        document.getElementById('game-message').textContent = gameScore >= 7 ? '🌟 Sempurna! Kamu sudah ahli dalam mengklasifikasikan jenis transport membran!' : gameScore >= 5 ? '👍 Bagus! Kamu sudah memahami sebagian besar konsep transport membran.' : '📚 Pelajari lagi materinya dan coba lagi untuk meningkatkan pemahamanmu!';
-        saveGameHistory(gameScore, TOTAL_ITEMS);
-    }
-
-    function restartGame() {
-        gameScore = 0; answeredItems = 0;
-        document.getElementById('game-score').classList.add('hidden');
-        document.querySelectorAll('.drop-zone').forEach(function(z) {
-            z.classList.remove('correct', 'wrong');
-            z.querySelectorAll('div.text-xs.text-green-400').forEach(function(el) { el.remove(); });
-        });
-        document.querySelectorAll('.draggable-item').forEach(function(it) {
-            it.style.opacity = '1';
-            it.setAttribute('draggable', 'true');
-            it.classList.remove('cursor-not-allowed');
-            it.classList.add('cursor-grab');
-        });
-    }
-
-    // ============================================================
-    // HERO 3D MINI
-    // ============================================================
-    function initHero3D() {
-        var c = document.getElementById('hero-3d');
-        if (!c) return;
-
-        var hs = new THREE.Scene();
-        hs.background = new THREE.Color(0x1f2937);
-
-        var hc = new THREE.PerspectiveCamera(45, c.clientWidth / c.clientHeight, 0.1, 100);
-        hc.position.set(0, 0, 8);
-
-        var hr = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        hr.setSize(c.clientWidth, c.clientHeight);
-        hr.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        c.appendChild(hr.domElement);
-
-        var aLight = new THREE.AmbientLight(0xffffff, 0.7);
-        hs.add(aLight);
-
-        var dLight = new THREE.DirectionalLight(0x667eea, 1);
-        dLight.position.set(5, 5, 5);
-        hs.add(dLight);
-
-        var pLight = new THREE.PointLight(0x764ba2, 0.8);
-        pLight.position.set(-5, -5, 5);
-        hs.add(pLight);
-
-        var sphere = new THREE.Mesh(
-            new THREE.SphereGeometry(2.5, 32, 32),
-            new THREE.MeshPhongMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.3, shininess: 100, side: THREE.DoubleSide })
-        );
-        hs.add(sphere);
-
-        var parts = [];
-        for (var i = 0; i < 20; i++) {
-            var p = new THREE.Mesh(
-                new THREE.SphereGeometry(0.15, 8, 8),
-                new THREE.MeshPhongMaterial({ color: 0xfacc15, emissive: 0xfacc15, emissiveIntensity: 0.5 })
-            );
-            var th = Math.random() * Math.PI * 2;
-            var ph = Math.random() * Math.PI;
-            var r2 = Math.random() * 2;
-            p.position.set(r2 * Math.sin(ph) * Math.cos(th), r2 * Math.sin(ph) * Math.sin(th), r2 * Math.cos(ph));
-            p.userData.velocity = new THREE.Vector3((Math.random() - 0.5) * 0.02, (Math.random() - 0.5) * 0.02, (Math.random() - 0.5) * 0.02);
-            parts.push(p);
-            hs.add(p);
-        }
-
-        var ringGeo = new THREE.TorusGeometry(2.5, 0.05, 8, 64);
-        var ringMat = new THREE.MeshPhongMaterial({ color: 0x60a5fa, transparent: true, opacity: 0.4 });
-        var ring1 = new THREE.Mesh(ringGeo, ringMat);
-        ring1.rotation.x = Math.PI / 2;
-        hs.add(ring1);
-        var ring2 = new THREE.Mesh(ringGeo, ringMat);
-        ring2.rotation.x = Math.PI / 3;
-        hs.add(ring2);
-
-        (function animHero() {
-            requestAnimationFrame(animHero);
-            sphere.rotation.y += 0.005;
-            sphere.rotation.x += 0.002;
-            ring1.rotation.z += 0.003;
-            ring2.rotation.y += 0.004;
-            parts.forEach(function(p) {
-                p.position.add(p.userData.velocity);
-                if (p.position.length() > 2.3) p.userData.velocity.multiplyScalar(-1);
-            });
-            hr.render(hs, hc);
-        })();
-
-        window.addEventListener('resize', function() {
-            var nw = c.clientWidth, nh = c.clientHeight;
-            hc.aspect = nw / nh;
-            hc.updateProjectionMatrix();
-            hr.setSize(nw, nh);
-        });
-    }
-
-    // ============================================================
-    // INIT
-    // ============================================================
-    document.addEventListener('DOMContentLoaded', function() {
-        createBgParticles();
-        initThreeJS();
-        initHero3D();
-        initOsmosisCanvas();
-        setTimeout(function() { renderOsmosisCallouts('hypotonic'); }, 200);
-        loadQuestion();
-        document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-            a.addEventListener('click', function(e) {
-                e.preventDefault();
-                var t = document.querySelector(this.getAttribute('href'));
-                if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
+            })(card,ax,ay,lbl.color,lbl.marker,delay);
         });
     });
-    </script>
+}
+
+// ============================================================
+// VOICE
+// ============================================================
+var voiceExplanations={
+    hypotonic:{title:'Osmosis Hipotonik',text:'Osmosis hipotonik. Dalam larutan hipotonik, konsentrasi zat terlarut di luar sel lebih rendah dibandingkan di dalam sel. Akibatnya, air bergerak masuk ke dalam sel melalui membran semipermeabel. Pada sel hewan, air masuk menyebabkan sel membesar dan bisa pecah, yang disebut lisis. Namun, pada sel tumbuhan, meskipun air juga masuk, sel tidak pecah karena dilindungi oleh dinding sel yang kaku. Sel tumbuhan justru menjadi turgid, yaitu kaku dan tegang.'},
+    isotonic:{title:'Osmosis Isotonik',text:'Osmosis isotonik. Dalam larutan isotonik, konsentrasi zat terlarut di luar dan di dalam sel adalah sama. Karena tidak ada perbedaan gradien konsentrasi, tidak ada pergerakan air bersih yang signifikan melintasi membran sel. Pada sel hewan, sel tetap dalam kondisi normal dan stabil. Sedangkan pada sel tumbuhan, sel berada dalam kondisi flasid, yaitu sedikit layu karena tidak ada tekanan turgor.'},
+    hypertonic:{title:'Osmosis Hipertonik',text:'Osmosis hipertonik. Dalam larutan hipertonik, konsentrasi zat terlarut di luar sel lebih tinggi dibandingkan di dalam sel. Akibatnya, air keluar dari sel menuju ke luar melalui membran semipermeabel. Pada sel hewan, air keluar menyebabkan sel mengkerut, yang disebut krenasi. Pada sel tumbuhan, air keluar menyebabkan membran sel menjauh dari dinding sel, yang disebut plasmolisis, dan tanaman menjadi layu.'}
+};
+
+function toggleVoice(){isSpeaking?stopVoice():playVoice();}
+function playVoice(){
+    if(!('speechSynthesis'in window)){document.getElementById('voice-status').textContent='Browser tidak mendukung text-to-speech';return;}
+    stopVoice();
+    var exp=voiceExplanations[osmosisType];
+    speechUtterance=new SpeechSynthesisUtterance(exp.text);
+    speechUtterance.lang='id-ID'; speechUtterance.rate=parseFloat(document.getElementById('voice-speed').value); speechUtterance.pitch=1; speechUtterance.volume=1;
+    var voices=window.speechSynthesis.getVoices(); var idVoice=voices.find(function(v){return v.lang.includes('id');});
+    if(idVoice)speechUtterance.voice=idVoice;
+    speechUtterance.onstart=function(){isSpeaking=true;document.getElementById('voice-btn').textContent='⏸️';document.getElementById('voice-status').textContent='🔊 Memutar: '+exp.title;};
+    speechUtterance.onend=function(){isSpeaking=false;document.getElementById('voice-btn').textContent='🔊';document.getElementById('voice-status').textContent='Klik tombol speaker untuk mendengarkan penjelasan';};
+    speechUtterance.onerror=function(){isSpeaking=false;document.getElementById('voice-btn').textContent='🔊';document.getElementById('voice-status').textContent='Error memutar suara. Coba lagi.';};
+    window.speechSynthesis.speak(speechUtterance);
+}
+function stopVoice(){if(window.speechSynthesis)window.speechSynthesis.cancel();isSpeaking=false;document.getElementById('voice-btn').textContent='🔊';document.getElementById('voice-status').textContent='Klik tombol speaker untuk mendengarkan penjelasan';}
+function changeVoiceSpeed(){if(isSpeaking)playVoice();}
+if('speechSynthesis'in window)window.speechSynthesis.onvoiceschanged=function(){};
+
+// ============================================================
+// OSMOSIS 2D CANVAS
+// ============================================================
+function initOsmosisCanvas(){
+    animalCanvas=document.getElementById('animal-canvas'); plantCanvas=document.getElementById('plant-canvas');
+    if(!animalCanvas||!plantCanvas)return;
+    animalCtx=animalCanvas.getContext('2d'); plantCtx=plantCanvas.getContext('2d');
+    resizeOsmosisCanvas(); window.addEventListener('resize',resizeOsmosisCanvas);
+    setOsmosisType('hypotonic'); animateOsmosis();
+}
+function resizeOsmosisCanvas(){
+    [animalCanvas,plantCanvas].forEach(function(cv){
+        if(!cv)return; var r=cv.parentElement.getBoundingClientRect(); cv.width=r.width; cv.height=350;
+    });
+    if(waterParticles.length>0)createParticles();
+}
+function setOsmosisType(type){
+    osmosisType=type;
+    ['btn-osm-hypotonic','btn-osm-isotonic','btn-osm-hypertonic'].forEach(function(id){
+        var b=document.getElementById(id); if(!b)return;
+        b.classList.remove('bg-green-500/20','bg-yellow-500/20','bg-red-500/20','border-green-500/50','border-yellow-500/50','border-red-500/50','text-green-300','text-yellow-300','text-red-300');
+        b.classList.add('bg-gray-700','border-gray-600','text-gray-300');
+    });
+    var ab=document.getElementById('btn-osm-'+type);
+    if(ab){ab.classList.remove('bg-gray-700','border-gray-600','text-gray-300');var cm={hypotonic:['bg-green-500/20','border-green-500/50','text-green-300'],isotonic:['bg-yellow-500/20','border-yellow-500/50','text-yellow-300'],hypertonic:['bg-red-500/20','border-red-500/50','text-red-300']};cm[type].forEach(function(c){ab.classList.add(c);});}
+    ['hypotonic','isotonic','hypertonic'].forEach(function(t){document.getElementById('info-'+t).classList.add('hidden');});
+    document.getElementById('info-'+type).classList.remove('hidden');
+    var sm={hypotonic:{animal:'Air masuk → Sel membesar (lisis)',plant:'Air masuk → Sel turgid'},isotonic:{animal:'Seimbang → Sel normal',plant:'Seimbang → Flasid'},hypertonic:{animal:'Air keluar → Krenasi',plant:'Air keluar → Plasmolisis'}};
+    document.getElementById('animal-status').textContent=sm[type].animal; document.getElementById('plant-status').textContent=sm[type].plant;
+    createParticles(); renderOsmosisCallouts(type);
+    if(isSpeaking){stopVoice();setTimeout(function(){playVoice();},500);}
+}
+function createParticles(){
+    waterParticles=[];soluteParticles=[];
+    var cw=animalCanvas?animalCanvas.width:400, ch=animalCanvas?animalCanvas.height:350;
+    for(var i=0;i<60;i++){waterParticles.push({x:Math.random()*cw,y:Math.random()*ch,vx:(Math.random()-0.5)*1.5,vy:(Math.random()-0.5)*1.5,radius:3+Math.random()*2,alpha:0.4+Math.random()*0.4});}
+    var sc=osmosisType==='isotonic'?20:15, pl=osmosisType==='hypotonic'?'inside':osmosisType==='isotonic'?'even':'outside', cx=cw/2, cy=ch/2;
+    for(var i=0;i<sc;i++){
+        var x,y;
+        if(pl==='inside'){x=cx+(Math.random()-0.5)*80;y=cy+(Math.random()-0.5)*80;}
+        else if(pl==='outside'){var a=Math.random()*Math.PI*2,d=120+Math.random()*80;x=cx+Math.cos(a)*d;y=cy+Math.sin(a)*d;}
+        else{x=Math.random()*cw;y=Math.random()*ch;}
+        soluteParticles.push({x:x,y:y,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,radius:5+Math.random()*3,alpha:0.6+Math.random()*0.4});
+    }
+}
+function getCellTargetRadius(type,osmosis){if(type==='animal')return osmosis==='hypotonic'?95:osmosis==='hypertonic'?50:70;return osmosis==='hypotonic'?85:osmosis==='hypertonic'?55:70;}
+function drawCell(ctx,cx,cy,type){
+    var target=getCellTargetRadius(type,osmosisType);
+    if(type==='animal'){animalRadiusCurrent+=(target-animalRadiusCurrent)*0.035;}else{plantRadiusCurrent+=(target-plantRadiusCurrent)*0.035;}
+    var r=Math.round((type==='animal'?animalRadiusCurrent:plantRadiusCurrent)*10)/10;
+    if(type==='plant'){
+        var wallR=95;
+        ctx.beginPath();ctx.rect(cx-wallR,cy-wallR,wallR*2,wallR*2);ctx.strokeStyle='rgba(34,197,94,0.8)';ctx.lineWidth=4;ctx.stroke();ctx.fillStyle='rgba(34,197,94,0.07)';ctx.fill();
+        ctx.strokeStyle='rgba(34,197,94,0.18)';ctx.lineWidth=1;
+        for(var i=-wallR;i<=wallR;i+=15){ctx.beginPath();ctx.moveTo(cx-wallR,cy+i);ctx.lineTo(cx+wallR,cy+i);ctx.stroke();}
+    }
+    ctx.beginPath();
+    if(type==='animal'){ctx.arc(cx,cy,r,0,Math.PI*2);}
+    else{var rr=r;ctx.moveTo(cx-rr+10,cy-rr);ctx.lineTo(cx+rr-10,cy-rr);ctx.quadraticCurveTo(cx+rr,cy-rr,cx+rr,cy-rr+10);ctx.lineTo(cx+rr,cy+rr-10);ctx.quadraticCurveTo(cx+rr,cy+rr,cx+rr-10,cy+rr);ctx.lineTo(cx-rr+10,cy+rr);ctx.quadraticCurveTo(cx-rr,cy+rr,cx-rr,cy+rr-10);ctx.lineTo(cx-rr,cy-rr+10);ctx.quadraticCurveTo(cx-rr,cy-rr,cx-rr+10,cy-rr);}
+    ctx.strokeStyle=type==='animal'?'rgba(244,114,182,0.9)':'rgba(96,165,250,0.9)';ctx.lineWidth=3;ctx.stroke();ctx.fillStyle=type==='animal'?'rgba(244,114,182,0.15)':'rgba(96,165,250,0.15)';ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy,r*0.25,0,Math.PI*2);ctx.fillStyle='rgba(139,92,246,0.6)';ctx.fill();ctx.strokeStyle='rgba(139,92,246,0.8)';ctx.lineWidth=2;ctx.stroke();
+    if(type==='plant'){var vs=r*(osmosisType==='hypotonic'?0.68:osmosisType==='hypertonic'?0.28:0.48);ctx.beginPath();ctx.ellipse(cx,cy,vs,vs*0.7,0,0,Math.PI*2);ctx.fillStyle='rgba(250,204,21,0.3)';ctx.fill();ctx.strokeStyle='rgba(250,204,21,0.5)';ctx.lineWidth=1.5;ctx.stroke();}
+    for(var i=0;i<8;i++){var a=(i/8)*Math.PI*2+Date.now()*0.0005;ctx.beginPath();ctx.arc(cx+Math.cos(a)*r*0.5,cy+Math.sin(a)*r*0.5,3,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.3)';ctx.fill();}
+    return r;
+}
+function animateOsmosis(){
+    animationFrameId=requestAnimationFrame(animateOsmosis);
+    if(!animalCtx||!plantCtx)return;
+    [{ctx:animalCtx,canvas:animalCanvas,type:'animal'},{ctx:plantCtx,canvas:plantCanvas,type:'plant'}].forEach(function(item){
+        var ctx=item.ctx,canvas=item.canvas,type=item.type;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        var g=ctx.createLinearGradient(0,0,0,canvas.height);g.addColorStop(0,'rgba(31,41,55,0.5)');g.addColorStop(1,'rgba(17,24,39,0.8)');ctx.fillStyle=g;ctx.fillRect(0,0,canvas.width,canvas.height);
+        var radius=drawCell(ctx,canvas.width/2,canvas.height/2,type);
+        updateWaterParticles(ctx,canvas.width,canvas.height,radius);drawSoluteParticles(ctx);drawDirectionArrows(ctx,canvas.width/2,canvas.height/2,radius);
+        ctx.font='bold 11px Poppins,sans-serif';ctx.fillStyle='rgba(156,163,175,0.7)';ctx.textAlign='center';ctx.fillText('Dalam Sel',canvas.width/2,canvas.height-6);
+    });
+}
+function updateWaterParticles(ctx,w,h,cr){
+    var cx=w/2,cy=h/2;
+    waterParticles.forEach(function(p,i){
+        var dist=Math.hypot(p.x-cx,p.y-cy), inside=dist<cr;
+        if(osmosisType==='hypotonic'&&!inside&&i%3===0){p.x+=(cx+(p.x-cx)*0.7-p.x)*0.02;p.y+=(cy+(p.y-cy)*0.7-p.y)*0.02;}
+        else if(osmosisType==='hypertonic'&&inside&&i%3===0){p.x+=(cx+(p.x-cx)*1.5-p.x)*0.02;p.y+=(cy+(p.y-cy)*1.5-p.y)*0.02;}
+        p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+        ctx.beginPath();ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);ctx.fillStyle='rgba(96,165,250,'+p.alpha+')';ctx.fill();
+        ctx.beginPath();ctx.arc(p.x,p.y,p.radius*2,0,Math.PI*2);ctx.fillStyle='rgba(96,165,250,'+(p.alpha*0.2)+')';ctx.fill();
+    });
+}
+function drawSoluteParticles(ctx){
+    soluteParticles.forEach(function(p){
+        p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>ctx.canvas.width)p.vx*=-1;if(p.y<0||p.y>ctx.canvas.height)p.vy*=-1;
+        ctx.beginPath();ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);ctx.fillStyle='rgba(248,113,113,'+p.alpha+')';ctx.fill();
+        ctx.beginPath();ctx.moveTo(p.x-p.radius*0.5,p.y-p.radius*0.5);ctx.lineTo(p.x+p.radius*0.5,p.y+p.radius*0.5);ctx.moveTo(p.x+p.radius*0.5,p.y-p.radius*0.5);ctx.lineTo(p.x-p.radius*0.5,p.y+p.radius*0.5);ctx.strokeStyle='rgba(255,255,255,'+(p.alpha*0.5)+')';ctx.lineWidth=1;ctx.stroke();
+    });
+}
+function drawArrow(ctx,fx,fy,tx,ty,color){var a=Math.atan2(ty-fy,tx-fx);ctx.beginPath();ctx.moveTo(fx,fy);ctx.lineTo(tx,ty);ctx.strokeStyle=color;ctx.lineWidth=2;ctx.stroke();ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(tx-10*Math.cos(a-Math.PI/6),ty-10*Math.sin(a-Math.PI/6));ctx.lineTo(tx-10*Math.cos(a+Math.PI/6),ty-10*Math.sin(a+Math.PI/6));ctx.closePath();ctx.fillStyle=color;ctx.fill();}
+function drawDirectionArrows(ctx,cx,cy,cr){
+    var t=Date.now()*0.001;
+    if(osmosisType==='hypotonic'){for(var i=0;i<6;i++){var a=(i/6)*Math.PI*2+t*0.5;drawArrow(ctx,cx+Math.cos(a)*(cr+40),cy+Math.sin(a)*(cr+40),cx+Math.cos(a)*(cr+10),cy+Math.sin(a)*(cr+10),'rgba(96,165,250,0.8)');}}
+    else if(osmosisType==='hypertonic'){for(var i=0;i<6;i++){var a=(i/6)*Math.PI*2+t*0.5;drawArrow(ctx,cx+Math.cos(a)*(cr-5),cy+Math.sin(a)*(cr-5),cx+Math.cos(a)*(cr+35),cy+Math.sin(a)*(cr+35),'rgba(96,165,250,0.8)');}}
+}
+
+// ============================================================
+// QUIZ
+// ============================================================
+var quizData=[
+    {question:"Perpindahan zat tanpa energi disebut...",options:["Transport aktif","Difusi","Endositosis","Eksositosis"],correct:1,explanation:"Difusi adalah perpindahan zat dari konsentrasi tinggi ke rendah tanpa energi."},
+    {question:"Osmosis adalah perpindahan...",options:["Ion","Air","Protein","Glukosa"],correct:1,explanation:"Osmosis adalah perpindahan air melalui membran semipermeabel dari konsentrasi zat terlarut rendah ke tinggi."},
+    {question:"Transport yang melawan gradien adalah...",options:["Difusi","Osmosis","Transport aktif","Difusi terfasilitasi"],correct:2,explanation:"Transport aktif membutuhkan energi ATP dan melawan gradien konsentrasi (rendah ke tinggi)."},
+    {question:"Sebuah sel dimasukkan ke larutan yang sangat asin. Apa yang paling mungkin terjadi?",options:["Sel membesar","Sel tetap normal","Sel menyusut karena kehilangan air","Sel langsung mati tanpa perubahan"],correct:2,explanation:"Larutan asin = hipertonik. Air keluar dari sel sehingga sel menyusut."},
+    {question:"Jika membran sel rusak dan tidak bisa mengatur zat yang masuk, dampaknya adalah...",options:["Sel bekerja lebih cepat","Sel tetap normal","Zat keluar-masuk tidak terkontrol","Sel hanya kekurangan air"],correct:2,explanation:"Membran sel berfungsi mengatur zat yang keluar masuk. Jika rusak, transport tidak terkontrol."},
+    {question:"Di mana proses transport membran terjadi?",options:["Inti sel","Sitoplasma","Membran sel","Ribosom"],correct:2,explanation:"Transport membran terjadi di membran sel karena membran sel bersifat semi-permeabel."}
+];
+var currentQuestion=0, score=0, answered=false;
+
+function loadQuestion(){
+    answered=false;
+    var q=quizData[currentQuestion];
+    document.getElementById('question-text').textContent=(currentQuestion+1)+'. '+q.question;
+    document.getElementById('progress-text').textContent=(currentQuestion+1)+'/'+quizData.length;
+    document.getElementById('progress-bar').style.width=(((currentQuestion+1)/quizData.length)*100)+'%';
+    var oc=document.getElementById('options-container'); oc.innerHTML='';
+    ['A','B','C','D'].forEach(function(lbl,idx){
+        var btn=document.createElement('button');
+        btn.className='quiz-option w-full text-left p-3 md:p-4 rounded-xl bg-gray-700/50 border border-gray-600 hover:bg-gray-700 hover:border-blue-500/50 transition flex items-center gap-3 group touch-feedback';
+        btn.innerHTML='<span class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gray-600 flex items-center justify-center text-xs md:text-sm font-bold group-hover:bg-blue-500 transition flex-shrink-0">'+lbl+'</span><span class="text-gray-300 group-hover:text-white text-sm md:text-base">'+q.options[idx]+'</span>';
+        btn.onclick=function(){checkAnswer(idx,btn);}; oc.appendChild(btn);
+    });
+    document.getElementById('feedback').classList.add('hidden');
+}
+function checkAnswer(sel,btn){
+    if(answered)return; answered=true;
+    var q=quizData[currentQuestion], ok=sel===q.correct;
+    document.querySelectorAll('#options-container button').forEach(function(b){b.disabled=true;b.classList.add('opacity-50');});
+    btn.classList.remove('opacity-50');
+    if(ok){
+        score+=10; document.getElementById('score').textContent=score;
+        btn.classList.add('bg-green-500/20','border-green-500','text-green-400'); btn.querySelector('span:first-child').classList.add('bg-green-500');
+        document.getElementById('feedback').className='mt-4 md:mt-6 p-3 md:p-4 rounded-xl border border-green-500/50 bg-green-500/10 text-center';
+        document.getElementById('feedback-text').textContent='✅ Benar! '+q.explanation; document.getElementById('feedback-text').className='font-semibold text-sm md:text-base text-green-400';
+    }else{
+        btn.classList.add('bg-red-500/20','border-red-500','text-red-400'); btn.querySelector('span:first-child').classList.add('bg-red-500');
+        var cb=document.querySelectorAll('#options-container button')[q.correct];
+        cb.classList.remove('opacity-50','bg-gray-700/50','border-gray-600'); cb.classList.add('bg-green-500/20','border-green-500','text-green-400'); cb.querySelector('span:first-child').classList.add('bg-green-500');
+        document.getElementById('feedback').className='mt-4 md:mt-6 p-3 md:p-4 rounded-xl border border-red-500/50 bg-red-500/10 text-center';
+        document.getElementById('feedback-text').textContent='❌ Salah. '+q.explanation; document.getElementById('feedback-text').className='font-semibold text-sm md:text-base text-red-400';
+    }
+    document.getElementById('feedback').classList.remove('hidden');
+    if(currentQuestion===quizData.length-1)document.getElementById('next-btn').textContent='Lihat Hasil 🏆';
+}
+function nextQuestion(){currentQuestion++;if(currentQuestion>=quizData.length)showResults();else loadQuestion();}
+function showResults(){
+    document.getElementById('question-container').classList.add('hidden');
+    document.getElementById('feedback').classList.add('hidden');
+    document.getElementById('results').classList.remove('hidden');
+    document.getElementById('final-score').textContent=score+'/60';
+    document.getElementById('result-message').textContent=score>=50?'🌟 Luar biasa! Kamu sudah menguasai materi transport membran dengan sangat baik!':score>=30?'👍 Bagus! Pemahamanmu sudah cukup baik, tingkatkan lagi dengan membaca materi.':'📚 Jangan menyerah! Pelajari lagi materi transport membran dan coba kuisnya lagi.';
+    saveQuizHistory(score,60);
+}
+function restartQuiz(){
+    currentQuestion=0;score=0;answered=false;
+    document.getElementById('score').textContent='0';
+    document.getElementById('question-container').classList.remove('hidden');
+    document.getElementById('results').classList.add('hidden');
+    document.getElementById('next-btn').textContent='Pertanyaan Selanjutnya →';
+    loadQuestion();
+}
+
+// ============================================================
+// DRAG AND DROP GAME
+// ============================================================
+var draggedElement=null, gameScore=0, answeredItems=0;
+var TOTAL_ITEMS=8;
+
+function dragEnter(e){e.preventDefault();var z=e.target.closest('.drop-zone');if(z)z.classList.add('drag-over');}
+function dragLeave(e){var z=e.target.closest('.drop-zone');if(z&&!z.contains(e.relatedTarget))z.classList.remove('drag-over');}
+function allowDrop(e){e.preventDefault();}
+function drag(e){draggedElement=e.target;e.dataTransfer.setData('text/plain',e.target.dataset.type);e.dataTransfer.effectAllowed='move';}
+function drop(e,category){
+    e.preventDefault();var dz=e.target.closest('.drop-zone');if(!dz)return;dz.classList.remove('drag-over');
+    if(!draggedElement||draggedElement.getAttribute('draggable')==='false')return;
+    processDropResult(draggedElement,e.dataTransfer.getData('text/plain'),category,dz);
+}
+function processDropResult(item,itemType,category,dropZone){
+    answeredItems++;
+    if(itemType===category){
+        dropZone.classList.add('correct');item.style.opacity='0.5';item.setAttribute('draggable','false');item.classList.add('cursor-not-allowed');item.classList.remove('cursor-grab');
+        var ind=document.createElement('div');ind.className='text-xs text-green-400 mt-1';ind.textContent='✓ '+item.textContent.trim();dropZone.appendChild(ind);
+        gameScore++;
+    }else{dropZone.classList.add('wrong');setTimeout(function(){dropZone.classList.remove('wrong');},1000);answeredItems--;}
+    if(answeredItems>=TOTAL_ITEMS)showGameResults();
+}
+var touchDraggedElement=null,touchOffsetX=0,touchOffsetY=0;
+function touchStart(e){if(e.target.getAttribute('draggable')==='false')return;var t=e.touches[0];touchDraggedElement=e.target;var r=e.target.getBoundingClientRect();touchOffsetX=t.clientX-r.left;touchOffsetY=t.clientY-r.top;e.target.style.cssText+='position:fixed;z-index:1000;left:'+(t.clientX-touchOffsetX)+'px;top:'+(t.clientY-touchOffsetY)+'px;width:'+r.width+'px;';}
+function touchMove(e){if(!touchDraggedElement)return;e.preventDefault();var t=e.touches[0];touchDraggedElement.style.left=(t.clientX-touchOffsetX)+'px';touchDraggedElement.style.top=(t.clientY-touchOffsetY)+'px';}
+function touchEnd(e){if(!touchDraggedElement)return;var t=e.changedTouches[0];touchDraggedElement.style.position='';touchDraggedElement.style.zIndex='';touchDraggedElement.style.left='';touchDraggedElement.style.top='';touchDraggedElement.style.width='';var el=document.elementFromPoint(t.clientX,t.clientY);var dz=el?el.closest('.drop-zone'):null;if(dz)processDropResult(touchDraggedElement,touchDraggedElement.dataset.type,dz.dataset.category,dz);touchDraggedElement=null;}
+function showGameResults(){
+    document.getElementById('game-score').classList.remove('hidden');
+    document.getElementById('game-score-value').textContent=gameScore;
+    document.getElementById('game-message').textContent=gameScore>=7?'🌟 Sempurna! Kamu sudah ahli dalam mengklasifikasikan jenis transport membran!':gameScore>=5?'👍 Bagus! Kamu sudah memahami sebagian besar konsep transport membran.':'📚 Pelajari lagi materinya dan coba lagi untuk meningkatkan pemahamanmu!';
+    saveGameHistory(gameScore,TOTAL_ITEMS);
+}
+function restartGame(){
+    gameScore=0;answeredItems=0;
+    document.getElementById('game-score').classList.add('hidden');
+    document.querySelectorAll('.drop-zone').forEach(function(z){z.classList.remove('correct','wrong');z.querySelectorAll('div.text-xs.text-green-400').forEach(function(el){el.remove();});});
+    document.querySelectorAll('.draggable-item').forEach(function(it){it.style.opacity='1';it.setAttribute('draggable','true');it.classList.remove('cursor-not-allowed');it.classList.add('cursor-grab');});
+}
+
+// ============================================================
+// HERO 3D MINI
+// ============================================================
+function initHero3D(){
+    var c=document.getElementById('hero-3d');if(!c)return;
+    var hs=new THREE.Scene();hs.background=new THREE.Color(0x1f2937);
+    var hc=new THREE.PerspectiveCamera(45,c.clientWidth/c.clientHeight,0.1,100);hc.position.set(0,0,8);
+    var hr=new THREE.WebGLRenderer({antialias:true,alpha:true});hr.setSize(c.clientWidth,c.clientHeight);hr.setPixelRatio(Math.min(window.devicePixelRatio,2));c.appendChild(hr.domElement);
+    var aLight=new THREE.AmbientLight(0xffffff,0.7);hs.add(aLight);
+    var dLight=new THREE.DirectionalLight(0x667eea,1);dLight.position.set(5,5,5);hs.add(dLight);
+    var pLight=new THREE.PointLight(0x764ba2,0.8);pLight.position.set(-5,-5,5);hs.add(pLight);
+    var sphere=new THREE.Mesh(new THREE.SphereGeometry(2.5,32,32),new THREE.MeshPhongMaterial({color:0x3b82f6,transparent:true,opacity:0.3,shininess:100,side:THREE.DoubleSide}));hs.add(sphere);
+    var parts=[];
+    for(var i=0;i<20;i++){var p=new THREE.Mesh(new THREE.SphereGeometry(0.15,8,8),new THREE.MeshPhongMaterial({color:0xfacc15,emissive:0xfacc15,emissiveIntensity:0.5}));var th=Math.random()*Math.PI*2,ph=Math.random()*Math.PI,r2=Math.random()*2;p.position.set(r2*Math.sin(ph)*Math.cos(th),r2*Math.sin(ph)*Math.sin(th),r2*Math.cos(ph));p.userData.velocity=new THREE.Vector3((Math.random()-0.5)*0.02,(Math.random()-0.5)*0.02,(Math.random()-0.5)*0.02);parts.push(p);hs.add(p);}
+    var ringGeo=new THREE.TorusGeometry(2.5,0.05,8,64),ringMat=new THREE.MeshPhongMaterial({color:0x60a5fa,transparent:true,opacity:0.4});
+    var ring1=new THREE.Mesh(ringGeo,ringMat);ring1.rotation.x=Math.PI/2;hs.add(ring1);
+    var ring2=new THREE.Mesh(ringGeo,ringMat);ring2.rotation.x=Math.PI/3;hs.add(ring2);
+    (function animHero(){requestAnimationFrame(animHero);sphere.rotation.y+=0.005;sphere.rotation.x+=0.002;ring1.rotation.z+=0.003;ring2.rotation.y+=0.004;parts.forEach(function(p){p.position.add(p.userData.velocity);if(p.position.length()>2.3)p.userData.velocity.multiplyScalar(-1);});hr.render(hs,hc);})();
+    window.addEventListener('resize',function(){var nw=c.clientWidth,nh=c.clientHeight;hc.aspect=nw/nh;hc.updateProjectionMatrix();hr.setSize(nw,nh);});
+}
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Load persistent data from localStorage
+    loadQuizHistory();
+    loadGameHistory();
+
+    // 2. Track this visit
+    trackVisitor();
+
+    // 3. Render dashboard with all persisted data
+    renderDashboard();
+    renderActivityFeed();
+    renderQuizHistory();
+    renderQuizStats();
+    renderGameHistory();
+    renderGameStats();
+
+    // 4. Init 3D and canvas features
+    createBgParticles();
+    initThreeJS();
+    initHero3D();
+    initOsmosisCanvas();
+    setTimeout(function(){renderOsmosisCallouts('hypotonic');}, 200);
+
+    // 5. Trigger ring chart animation after paint
+    setTimeout(function(){
+        var qh = lsGet(LS_KEYS.quizHistory, []);
+        var passed = qh.filter(function(e){return e.pct>=50;}).length;
+        var total  = qh.length;
+        var pct    = total ? Math.round(passed/total*100) : 0;
+        var circumference = 276.46;
+        var ring = document.getElementById('ring-quiz');
+        if (ring) ring.style.strokeDashoffset = circumference - (pct/100)*circumference;
+    }, 600);
+
+    // 6. Load quiz
+    loadQuestion();
+
+    // 7. Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+        a.addEventListener('click',function(e){
+            e.preventDefault();
+            var t=document.querySelector(this.getAttribute('href'));
+            if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+        });
+    });
+});
+</script>
 </body>
 </html>
