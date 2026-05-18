@@ -705,12 +705,14 @@ var currentSimulation = 'diffusion';
 var osmDividerGroup = null;
 var animalRadiusCurrent = 70, plantRadiusCurrent = 70;
 
-// ── DIFFUSION STATE: track global spread progress ──
-var diffusionTime = 0;          // counts up each frame
-var DIFFUSION_SPREAD_SPEED = 0.004; // how fast molecules spread downward
+// ── DIFFUSION STATE ──
+var diffusionTime = 0;          // counts up each frame — increment SEKALI per frame
+var DIFFUSION_SPREAD_SPEED = 0.0012;
 
-// ── OSMOSIS 3D STATE: membrane shrink ──
-var membraneShrinkFactor = 1.0; // 1 = full size, shrinks toward ~0.6 in osmosis
+// ── OSMOSIS 3D STATE ──
+var membraneShrinkFactor = 1.0; // 1 = full size, shrinks toward ~0.6
+var osmosisTime = 0;            // global timer osmosis, increment sekali per frame
+var OSMOSIS_SALT_LAND_TIME = 5.0; // detik simulasi sampai garam mencapai membran
 
 function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
 
@@ -862,8 +864,8 @@ function addOsmosisDivider(){
     var plane=new THREE.Mesh(planeGeo,planeMat);plane.rotation.y=Math.PI/2;osmDividerGroup.add(plane);
     var lineMat=new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0.3});
     [-7,7].forEach(function(y){var pts=[new THREE.Vector3(0,y,-4),new THREE.Vector3(0,y,4)];osmDividerGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),lineMat));});
-    addTextSprite(osmDividerGroup,'💧 Air Dalam Membran',-5,6,0,0x93c5fd);
-    addTextSprite(osmDividerGroup,'🧂 Larutan Garam (Luar)',5,6,0,0xfca5a5);
+    addTextSprite(osmDividerGroup,'💧 Air (Dalam Membran)',-5,6,0,0x93c5fd);
+    addTextSprite(osmDividerGroup,'🧂 Garam Turun ke Membran',5,6,0,0xfca5a5);
     scene.add(osmDividerGroup);
 }
 
@@ -882,7 +884,7 @@ function removeOsmosisDivider(){if(osmDividerGroup){scene.remove(osmDividerGroup
 
 function setSimulation(type){
     currentSimulation=type; clearMolecules();
-    diffusionTime=0; membraneShrinkFactor=1.0;
+    diffusionTime=0; membraneShrinkFactor=1.0; osmosisTime=0;
 
     ['btn-sim-diffusion','btn-sim-osmosis','btn-sim-active'].forEach(function(id){
         var b=document.getElementById(id);if(!b)return;
@@ -897,39 +899,58 @@ function setSimulation(type){
         desc.textContent='Molekul zat terlarut (kuning) awalnya bergerombol pekat di atas membran. Secara perlahan menyebar menembus membran menuju zona konsentrasi rendah di bawah — tanpa energi, tanpa protein.';
         if(icon)icon.textContent='🌊'; lp.classList.add('hidden');
 
-        // ── DIFFUSION: semua molekul mulai bergerombol di atas (y = 3..7) ──
+        // ── DIFFUSION: molekul bergerombol pekat di atas, menyebar SANGAT PELAN ke bawah ──
         for(var i=0;i<35;i++){
-            // Cluster padat di zona atas (y antara 3.5–7)
-            var cx=(Math.random()-0.5)*6;   // X sempit = bergerombol
-            var cy=4+Math.random()*3;       // Y atas
-            var cz=(Math.random()-0.5)*3;
-            var m=createMolecule(cx,cy,cz,0xfacc15,0.25);
+            // Cluster sangat padat di zona atas, X dan Z sempit
+            var dcx=(Math.random()-0.5)*3.5;
+            var dcy=4.5+Math.random()*2.5;
+            var dcz=(Math.random()-0.5)*2.5;
+            var m=createMolecule(dcx,dcy,dcz,0xfacc15,0.28);
             m.userData.phase=Math.random()*Math.PI*2;
-            m.userData.startY=cy;           // simpan posisi awal
-            m.userData.spreadProgress=0;    // 0=belum menyebar, 1=sudah ke bawah
-            m.userData.spreadDelay=Math.random()*3; // detik delay sebelum mulai turun
+            m.userData.startX=dcx;
+            m.userData.startY=dcy;
+            m.userData.startZ=dcz;
+            m.userData.spreadProgress=0;
+            // Delay panjang & bertahap: setiap molekul mulai menyebar bergantian
+            m.userData.spreadDelay=i * 0.4 + Math.random()*1.5;
+            // Target akhir: tersebar luas di bawah membran
+            m.userData.targetY=-3.5 - Math.random()*3;
+            m.userData.targetX=(Math.random()-0.5)*13;
+            m.userData.targetZ=(Math.random()-0.5)*6.5;
             molecules.push(m); scene.add(m);
         }
 
     }else if(type==='osmosis'){
-        addOsmosisDivider(); membraneShrinkFactor=1.0;
+        addOsmosisDivider(); membraneShrinkFactor=1.0; osmosisTime=0;
         document.getElementById('btn-sim-osmosis').className='sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-green-500/20 border border-green-500/50 font-semibold text-green-300 text-xs md:text-sm';
         title.textContent='Osmosis'; title.className='font-bold text-base md:text-lg mb-1 text-green-400';
-        desc.textContent='Air di dalam membran bergerak keluar menuju larutan garam (konsentrasi tinggi). Akibatnya membran fosfolipid mengalami penyusutan karena kehilangan air.';
+        desc.textContent='Garam turun mendekati membran → menyentuh membran → air di dalam mulai keluar menuju larutan garam. Membran fosfolipid menyusut karena kehilangan air.';
         if(icon)icon.textContent='💧'; lp.classList.remove('hidden');
 
-        // Air di sisi kiri/dalam membran (x < 0)
-        for(var i=0;i<30;i++){
-            var m=createMolecule(-4-Math.random()*3,(Math.random()-0.5)*9,(Math.random()-0.5)*7,0x60a5fa,0.2);
+        // ── AIR di dalam membran (kiri, x negatif) — diam dulu, keluar setelah garam tiba ──
+        for(var i=0;i<28;i++){
+            var m=createMolecule(-3.5-Math.random()*3,(Math.random()-0.5)*9,(Math.random()-0.5)*7,0x60a5fa,0.2);
             m.userData.isWater=true;
-            m.userData.exitProgress=0;      // progress keluar membran
-            m.userData.exitDelay=Math.random()*4;
+            m.userData.waterIndex=i;
+            // exitDelay BESAR supaya air tidak langsung keluar; akan di-override saat garam tiba
+            m.userData.exitDelay=9999;
             molecules.push(m); scene.add(m);
         }
-        // Garam di sisi kanan/luar membran (x > 0) — tidak bergerak
-        for(var i=0;i<18;i++){
-            var m=createMolecule(3+Math.random()*5,(Math.random()-0.5)*8,(Math.random()-0.5)*6,0xf87171,0.4);
+        // ── GARAM mulai di atas jauh (y tinggi, x kanan), turun mendekati membran (x→0) ──
+        for(var i=0;i<16;i++){
+            var saltX=3.5+Math.random()*4;   // mulai di kanan, jauh dari membran
+            var saltY=6+Math.random()*3;     // mulai tinggi di atas
+            var saltZ=(Math.random()-0.5)*6;
+            var m=createMolecule(saltX,saltY,saltZ,0xf87171,0.4);
             m.userData.isSolute=true;
+            m.userData.saltIndex=i;
+            m.userData.saltLanded=false;
+            // target: dekat membran (x kecil ~1.5–2.5), y tersebar
+            m.userData.targetSaltX=1.5+Math.random()*1.5;
+            m.userData.targetSaltY=(Math.random()-0.5)*7;
+            m.userData.targetSaltZ=(Math.random()-0.5)*5;
+            // delay turun berbeda-beda agar tidak serentak
+            m.userData.saltDropDelay=i*0.25+Math.random()*0.5;
             molecules.push(m); scene.add(m);
         }
 
@@ -966,72 +987,103 @@ function animate(){
         }
     }
 
+    // ── Increment timers SEKALI per frame ──
+    if(currentSimulation==='diffusion') diffusionTime += DIFFUSION_SPREAD_SPEED;
+    if(currentSimulation==='osmosis') osmosisTime += 0.003;
+
     molecules.forEach(function(mol,i){
         if(currentSimulation==='diffusion'){
-            // ── DIFUSI: bergerombol atas → menyebar ke bawah ──
-            diffusionTime+=DIFFUSION_SPREAD_SPEED;
-
+            // ── DIFUSI: bergerombol atas → menyebar PELAN ke bawah ──
             if(mol.userData.startY !== undefined){
+                // Berapa "waktu efektif" setelah delay individu molekul
                 var delayedT = Math.max(0, diffusionTime - mol.userData.spreadDelay);
-                var progress = Math.min(1, delayedT * 0.18); // 0 → 1 slowly
+                // progress 0→1, sangat lambat: delayedT * 0.055
+                var progress = Math.min(1, delayedT * 0.055);
                 mol.userData.spreadProgress = progress;
 
-                // Target Y: dari startY (atas) → random di bawah membran (-3 sampai -6)
-                if(!mol.userData.targetY){
-                    mol.userData.targetY = -3 - Math.random()*3;
-                    mol.userData.targetX = (Math.random()-0.5)*14;
-                    mol.userData.targetZ = (Math.random()-0.5)*7;
-                }
+                // Ease in-out: lambat di awal, lambat di akhir
+                var eased = progress < 0.5
+                    ? 2*progress*progress
+                    : -1+(4-2*progress)*progress;
 
-                // Interpolasi posisi: lerp dari awal ke target
-                var eased = progress < 0.5 ? 2*progress*progress : -1+(4-2*progress)*progress; // ease in-out
+                // Y: interpolasi dari startY (atas, pekat) → targetY (bawah, rendah)
                 mol.position.y = mol.userData.startY + (mol.userData.targetY - mol.userData.startY) * eased;
-                mol.position.x += (mol.userData.targetX - mol.position.x) * 0.008;
-                mol.position.z += (mol.userData.targetZ - mol.position.z) * 0.008;
 
-                // Acak kecil saat sudah tersebar
-                if(progress > 0.8){
-                    mol.position.x += (Math.random()-0.5)*0.06;
-                    mol.position.y += (Math.random()-0.5)*0.04;
-                    mol.position.z += (Math.random()-0.5)*0.06;
+                // X dan Z: melebar perlahan dari cluster ketat ke sebaran luas
+                mol.position.x += (mol.userData.targetX - mol.position.x) * 0.004;
+                mol.position.z += (mol.userData.targetZ - mol.position.z) * 0.004;
+
+                // Getar acak kecil saat sudah menyebar (terlihat Brownian)
+                if(progress > 0.85){
+                    mol.position.x += (Math.random()-0.5)*0.04;
+                    mol.position.y += (Math.random()-0.5)*0.025;
+                    mol.position.z += (Math.random()-0.5)*0.04;
                 }
 
-                // Opacity: saat masih bergerombol lebih terang
+                // Emissive lebih terang saat masih bergerombol, redup saat sudah menyebar
                 if(mol.material){
-                    mol.material.emissiveIntensity = 0.8 - progress*0.5;
+                    mol.material.emissiveIntensity = 0.9 - progress*0.6;
                 }
             }
 
         }else if(currentSimulation==='osmosis'){
+            // ── Increment osmosis timer sekali per molekul pertama (pakai flag) ──
             if(mol.userData.isSolute){
-                // Garam di luar — gerak kecil, tetap di kanan
-                mol.position.x = Math.max(2.5, mol.position.x);
-                mol.position.y += Math.sin(time+mol.userData.phase)*0.004;
-                mol.position.z += Math.cos(time*0.7+mol.userData.phase)*0.003;
-            } else if(mol.userData.isWater){
-                // Air di dalam — bergerak ke kanan (keluar menembus membran)
-                var delay = mol.userData.exitDelay || 0;
-                var elapsed = Math.max(0, time - delay);
-                var prog = Math.min(1, elapsed * 0.12);
-                mol.userData.exitProgress = prog;
-
-                // Gerak ke kanan (x bertambah) = keluar dari membran
-                mol.position.x += 0.015 * (1 - prog*0.7);
-                mol.position.y += Math.sin(time*2+mol.userData.phase)*0.004;
-
-                // Saat sudah keluar, reset ke dalam agar loop berkelanjutan
-                if(mol.position.x > 9){
-                    mol.position.x = -4 - Math.random()*3;
-                    mol.position.y = (Math.random()-0.5)*9;
-                    mol.position.z = (Math.random()-0.5)*7;
-                    mol.userData.exitDelay = time + Math.random()*2;
+                // ── GARAM: turun dari atas mendekati membran, bertahap ──
+                var saltEffT = Math.max(0, osmosisTime - (mol.userData.saltDropDelay||0));
+                if(saltEffT > 0 && !mol.userData.saltLanded){
+                    // Lerp ke target (dekat membran)
+                    mol.position.x += (mol.userData.targetSaltX - mol.position.x)*0.025;
+                    mol.position.y += (mol.userData.targetSaltY - mol.position.y)*0.025;
+                    mol.position.z += (mol.userData.targetSaltZ - mol.position.z)*0.025;
+                    // Cek apakah sudah mendekati target → tandai landed
+                    var distToTarget = Math.abs(mol.position.y - mol.userData.targetSaltY) + Math.abs(mol.position.x - mol.userData.targetSaltX);
+                    if(distToTarget < 0.4) mol.userData.saltLanded = true;
+                } else if(mol.userData.saltLanded){
+                    // Sudah mendarat — gerak melayang kecil di posisi membran
+                    mol.position.y += Math.sin(time*0.8+mol.userData.saltIndex)*0.006;
+                    mol.position.z += Math.cos(time*0.6+mol.userData.saltIndex)*0.004;
                 }
 
-                // Opacity berkurang saat dekat membran (x mendekati 0)
-                if(mol.material){
-                    var alpha = mol.position.x < -1 ? 1 : Math.max(0.2, 1 - (mol.position.x+1)*0.15);
-                    mol.material.opacity = alpha;
-                    mol.material.transparent = true;
+                // Hitung berapa banyak garam yang sudah landed → trigger air keluar
+                var landedCount=0;
+                molecules.forEach(function(mm){ if(mm.userData.isSolute && mm.userData.saltLanded) landedCount++; });
+                // Jika >=6 garam sudah tiba di membran, buka pintu air
+                if(landedCount >= 6){
+                    molecules.forEach(function(mm){
+                        if(mm.userData.isWater && mm.userData.exitDelay===9999){
+                            mm.userData.exitDelay = time + mm.userData.waterIndex * 0.15 + Math.random()*0.5;
+                        }
+                    });
+                }
+
+            } else if(mol.userData.isWater){
+                // ── AIR: diam dulu, keluar setelah garam menyentuh membran ──
+                if(mol.userData.exitDelay === 9999){
+                    // Masih menunggu — getar kecil di tempat
+                    mol.position.x += (Math.random()-0.5)*0.005;
+                    mol.position.y += (Math.random()-0.5)*0.005;
+                } else {
+                    var delay = mol.userData.exitDelay;
+                    if(time >= delay){
+                        // Mulai bergerak ke kanan (keluar menembus membran menuju garam)
+                        mol.position.x += 0.018;
+                        mol.position.y += Math.sin(time*2+(mol.userData.waterIndex||0))*0.005;
+                        // Opacity berkurang saat melewati membran
+                        if(mol.material){
+                            var alpha = mol.position.x < -0.5 ? 1.0 : Math.max(0.15, 1-(mol.position.x+0.5)*0.25);
+                            mol.material.opacity = alpha;
+                            mol.material.transparent = true;
+                        }
+                        // Reset loop: setelah keluar jauh, kembali ke dalam
+                        if(mol.position.x > 8){
+                            mol.position.x = -3.5 - Math.random()*2.5;
+                            mol.position.y = (Math.random()-0.5)*9;
+                            mol.position.z = (Math.random()-0.5)*7;
+                            mol.userData.exitDelay = time + Math.random()*1.5;
+                            if(mol.material){ mol.material.opacity=1; }
+                        }
+                    }
                 }
             }
 
