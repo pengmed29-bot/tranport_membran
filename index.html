@@ -707,7 +707,7 @@ var animalRadiusCurrent = 70, plantRadiusCurrent = 70;
 
 // ── DIFFUSION STATE ──
 var diffusionTime = 0;          // counts up each frame — increment SEKALI per frame
-var DIFFUSION_SPREAD_SPEED = 0.0012;
+var DIFFUSION_SPREAD_SPEED = 0.006;  // lebih cepat: menyebar dalam ~8 detik
 
 // ── OSMOSIS 3D STATE ──
 var membraneShrinkFactor = 1.0; // 1 = full size, shrinks toward ~0.6
@@ -911,8 +911,8 @@ function setSimulation(type){
             m.userData.startY=dcy;
             m.userData.startZ=dcz;
             m.userData.spreadProgress=0;
-            // Delay panjang & bertahap: setiap molekul mulai menyebar bergantian
-            m.userData.spreadDelay=i * 0.4 + Math.random()*1.5;
+            // Delay bertahap tapi tidak terlalu lama
+            m.userData.spreadDelay=i * 0.12 + Math.random()*0.4;
             // Target akhir: tersebar luas di bawah membran
             m.userData.targetY=-3.5 - Math.random()*3;
             m.userData.targetX=(Math.random()-0.5)*13;
@@ -997,8 +997,8 @@ function animate(){
             if(mol.userData.startY !== undefined){
                 // Berapa "waktu efektif" setelah delay individu molekul
                 var delayedT = Math.max(0, diffusionTime - mol.userData.spreadDelay);
-                // progress 0→1, sangat lambat: delayedT * 0.055
-                var progress = Math.min(1, delayedT * 0.055);
+                // progress 0→1 cukup cepat setelah delay individu
+                var progress = Math.min(1, delayedT * 0.14);
                 mol.userData.spreadProgress = progress;
 
                 // Ease in-out: lambat di awal, lambat di akhir
@@ -1009,9 +1009,9 @@ function animate(){
                 // Y: interpolasi dari startY (atas, pekat) → targetY (bawah, rendah)
                 mol.position.y = mol.userData.startY + (mol.userData.targetY - mol.userData.startY) * eased;
 
-                // X dan Z: melebar perlahan dari cluster ketat ke sebaran luas
-                mol.position.x += (mol.userData.targetX - mol.position.x) * 0.004;
-                mol.position.z += (mol.userData.targetZ - mol.position.z) * 0.004;
+                // X dan Z: melebar cukup cepat mengikuti spread
+                mol.position.x += (mol.userData.targetX - mol.position.x) * 0.012;
+                mol.position.z += (mol.userData.targetZ - mol.position.z) * 0.012;
 
                 // Getar acak kecil saat sudah menyebar (terlihat Brownian)
                 if(progress > 0.85){
