@@ -785,6 +785,9 @@ function createMolecule(x,y,z,color,size){
 function clearMolecules(){
     molecules.forEach(function(m){scene.remove(m);}); molecules=[];
     if(proteinMesh){membraneGroup.remove(proteinMesh);proteinMesh=null;}
+    // Restore membran fosfolipid dan hapus osmosis membrane
+    if(membraneGroup) membraneGroup.visible=true;
+    removeOsmosisMembrane();
 }
 
 var SIM_LABELS = {
@@ -796,11 +799,11 @@ var SIM_LABELS = {
         {anchor:{x:55,y:78},label:{x:62,y:86},color:'#facc15',markerKey:'yellow',title:'Zona Konsentrasi Rendah (Bawah)',sub:'Molekul menyebar → tanpa ATP'}
     ],
     osmosis:[
-        {anchor:{x:50,y:18},label:{x:58,y:5},color:'#86efac',markerKey:'lime',title:'Cluster Awal (Atas)',sub:'Air + Garam bergerombol bersama di atas'},
-        {anchor:{x:38,y:18},label:{x:3,y:5},color:'#60a5fa',markerKey:'blue',title:'Molekul Air (H₂O)',sub:'Ikut turun → menembus membran ke bawah'},
-        {anchor:{x:62,y:18},label:{x:65,y:25},color:'#f87171',markerKey:'red',title:'Molekul Garam (NaCl)',sub:'Ikut turun → berhenti di atas membran'},
-        {anchor:{x:50,y:50},label:{x:3,y:42},color:'#60a5fa',markerKey:'blue',title:'Membran Semipermeabel',sub:'Hanya air yang bisa melewati membran'},
-        {anchor:{x:50,y:78},label:{x:55,y:87},color:'#60a5fa',markerKey:'blue',title:'Konsentrasi Rendah (Bawah)',sub:'Air terkumpul di sisi rendah — osmosis'}
+        {anchor:{x:50,y:50},label:{x:3,y:18},color:'#60a5fa',markerKey:'blue',title:'Membran Fosfolipid',sub:'Semipermeabel — hanya air yang bisa lewat'},
+        {anchor:{x:40,y:22},label:{x:3,y:52},color:'#60a5fa',markerKey:'blue',title:'Air Belum Lewat (Biru)',sub:'Di atas membran — konsentrasi tinggi'},
+        {anchor:{x:65,y:22},label:{x:58,y:8},color:'#f87171',markerKey:'red',title:'Garam (Merah)',sub:'Tetap di atas — tidak bisa tembus membran'},
+        {anchor:{x:50,y:78},label:{x:55,y:88},color:'#22d3ee',markerKey:'blue',title:'Air Sudah Lewat (Cyan)',sub:'Warna berubah saat menembus membran!'},
+        {anchor:{x:30,y:78},label:{x:3,y:82},color:'#86efac',markerKey:'lime',title:'Konsentrasi Rendah (Bawah)',sub:'Air keluar dari zona tinggi → rendah'}
     ],
     active:[
         {anchor:{x:48,y:20},label:{x:60,y:7},color:'#facc15',markerKey:'yellow',title:'Ion Na⁺ (Natrium)',sub:'Dipompa keluar — melawan gradien'},
@@ -813,7 +816,7 @@ var SIM_LABELS = {
 
 var SIM_STEPS = {
     diffusion:[{dot:'#86efac',text:'① Molekul bergerombol pekat di atas'},{dot:'#facc15',text:'② Menyebar perlahan menembus membran'},{dot:'#60a5fa',text:'③ Konsentrasi merata — seimbang'}],
-    osmosis:[{dot:'#60a5fa',text:'① Air keluar menuju larutan garam'},{dot:'#f87171',text:'② Zat terlarut tidak bisa masuk'},{dot:'#22c55e',text:'③ Membran menyusut (kehilangan air)'}],
+    osmosis:[{dot:'#60a5fa',text:'① Air biru turun dari atas membran'},{dot:'#22d3ee',text:'② Menembus → berubah warna CYAN'},{dot:'#22d3ee',text:'③ Naik ke atas sebagai air cyan'}],
     active:[{dot:'#f472b6',text:'① ATP dipecah → ADP + Pᵢ'},{dot:'#22c55e',text:'② Pompa berubah bentuk'},{dot:'#facc15',text:'③ 3 Na⁺ keluar, 2 K⁺ masuk'}]
 };
 
@@ -882,6 +885,59 @@ function addTextSprite(group,text,x,y,z,color){
 
 function removeOsmosisDivider(){if(osmDividerGroup){scene.remove(osmDividerGroup);osmDividerGroup=null;}}
 
+// Membran transparan berbentuk bola untuk osmosis (batas dalam/luar sel)
+var osmosisMembraneMesh=null;
+function createOsmosisMembrane(){
+    removeOsmosisMembrane();
+    // Bola besar transparan = membran semipermeabel sel
+    var geo=new THREE.SphereGeometry(4.5,48,48);
+    var mat=new THREE.MeshPhongMaterial({
+        color:0x60a5fa, transparent:true, opacity:0.10,
+        side:THREE.DoubleSide, shininess:80,
+        emissive:0x3b82f6, emissiveIntensity:0.08
+    });
+    osmosisMembraneMesh=new THREE.Mesh(geo,mat);
+    scene.add(osmosisMembraneMesh);
+
+    // Garis tepi membran (wireframe tipis) agar batas jelas
+    var wireMat=new THREE.MeshBasicMaterial({color:0x93c5fd,transparent:true,opacity:0.25,wireframe:true});
+    var wireGeo=new THREE.SphereGeometry(4.5,24,24);
+    var wire=new THREE.Mesh(wireGeo,wireMat);
+    wire.userData.isOsmWire=true;
+    scene.add(wire);
+    osmosisMembraneMesh.userData.wire=wire;
+
+    // Label sprite di atas bola
+    addSpriteLabel('Membran Semipermeabel (Transparan)', 0, 5.2, 0, 0x93c5fd);
+    addSpriteLabel('Dalam Sel (konsentrasi air tinggi)', -2, 0, 0, 0x60a5fa);
+    addSpriteLabel('Luar Sel (larutan garam pekat)', 6.5, 0, 0, 0xfca5a5);
+}
+function removeOsmosisMembrane(){
+    if(osmosisMembraneMesh){
+        if(osmosisMembraneMesh.userData.wire) scene.remove(osmosisMembraneMesh.userData.wire);
+        scene.remove(osmosisMembraneMesh);
+        osmosisMembraneMesh=null;
+    }
+    // remove old sprites
+    var toRemove=[];
+    scene.children.forEach(function(c){ if(c.userData.isOsmLabel) toRemove.push(c); });
+    toRemove.forEach(function(c){ scene.remove(c); });
+}
+function addSpriteLabel(text,x,y,z,color){
+    var cv=document.createElement('canvas');cv.width=320;cv.height=56;
+    var ctx=cv.getContext('2d');ctx.clearRect(0,0,320,56);
+    ctx.fillStyle='rgba(0,0,0,0.6)';ctx.beginPath();
+    if(ctx.roundRect)ctx.roundRect(2,2,316,52,10);else ctx.rect(2,2,316,52);ctx.fill();
+    ctx.strokeStyle='rgba('+((color>>16)&255)+','+((color>>8)&255)+','+(color&255)+',0.8)';ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle='rgba('+((color>>16)&255)+','+((color>>8)&255)+','+(color&255)+',1)';
+    ctx.font='bold 16px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,160,28);
+    var tex=new THREE.CanvasTexture(cv);
+    var mat=new THREE.SpriteMaterial({map:tex,transparent:true,opacity:0.9});
+    var sp=new THREE.Sprite(mat);sp.position.set(x,y,z);sp.scale.set(5,0.9,1);
+    sp.userData.isOsmLabel=true;
+    scene.add(sp);
+}
+
 function setSimulation(type){
     currentSimulation=type; clearMolecules();
     diffusionTime=0; membraneShrinkFactor=1.0; osmosisTime=0;
@@ -922,55 +978,50 @@ function setSimulation(type){
 
     }else if(type==='osmosis'){
         removeOsmosisDivider(); membraneShrinkFactor=1.0; osmosisTime=0;
+        // Membran fosfolipid TETAP, tidak disembunyikan
+
         document.getElementById('btn-sim-osmosis').className='sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-green-500/20 border border-green-500/50 font-semibold text-green-300 text-xs md:text-sm';
         title.textContent='Osmosis'; title.className='font-bold text-base md:text-lg mb-1 text-green-400';
-        desc.textContent='Larutan garam (merah) dan air (biru) bergerombol di atas. Keduanya turun menuju membran. Garam berhenti di atas membran — tidak bisa lewat. Air terus menembus membran ke bawah (konsentrasi rendah).';
+        desc.textContent='Air biru (di atas membran) masuk menembus membran → turun ke bawah → naik kembali ke atas dengan warna CYAN (sudah melewati membran). Garam merah tetap di atas membran, tidak bisa menembus.';
         if(icon)icon.textContent='💧'; lp.classList.remove('hidden');
 
-        // ── Cluster bersama di atas: AIR (biru) + GARAM (merah) bergerombol campuran ──
-        // FASE 1: bergerombol di atas membran (y = 4..7, x sempit, z sempit)
-        // FASE 2: turun bersama ke membran (y = 1..2)
-        // FASE 3: garam berhenti di atas membran (y ≈ 1.5); air terus turun ke bawah
+        // MEMBRAN ada di y = -1 sampai +1 (kepala fosfolipid di y=±1)
+        // Atas membran = y > 1.5 (konsentrasi tinggi: ada air + garam)
+        // Bawah membran = y < -1.5 (konsentrasi rendah: tempat air keluar)
 
-        // -- Air: 20 molekul --
-        for(var i=0;i<20;i++){
-            var wx=(Math.random()-0.5)*4.0;
-            var wy=5.0+Math.random()*2.5;
-            var wz=(Math.random()-0.5)*3.0;
-            var m=createMolecule(wx,wy,wz,0x60a5fa,0.22);
+        // ── AIR: mulai di atas membran (biru #60a5fa), akan turun & naik dengan warna cyan ──
+        for(var i=0;i<22;i++){
+            var wx=(Math.random()-0.5)*12;
+            var wy=2.0+Math.random()*5.0;   // di atas membran
+            var wz=(Math.random()-0.5)*7;
+            var m=createMolecule(wx,wy,wz,0x60a5fa,0.22); // biru normal = belum lewat membran
             m.userData.isWater=true;
             m.userData.molIndex=i;
-            m.userData.startX=wx; m.userData.startY=wy; m.userData.startZ=wz;
             m.userData.phase=Math.random()*Math.PI*2;
-            // Target garam berhenti: tepat di atas membran (y ≈ 1.2..2.2)
-            m.userData.stopY=1.2+Math.random()*1.0;
-            m.userData.stopX=(Math.random()-0.5)*10;
-            m.userData.stopZ=(Math.random()-0.5)*5;
-            // Target akhir air: di bawah membran (y = -3 .. -6)
-            m.userData.targetY=-3.0-Math.random()*3.0;
-            m.userData.targetX=(Math.random()-0.5)*10;
-            m.userData.targetZ=(Math.random()-0.5)*5;
-            // Delay individual sebelum mulai turun (stagger kecil)
-            m.userData.dropDelay=i*0.08+Math.random()*0.3;
+            // Posisi asal (atas, sebelum turun)
+            m.userData.originX=wx; m.userData.originY=wy; m.userData.originZ=wz;
+            // Target bawah membran (setelah menembus)
+            m.userData.belowX=(Math.random()-0.5)*12;
+            m.userData.belowY=-2.5-Math.random()*4.0;
+            m.userData.belowZ=(Math.random()-0.5)*7;
+            // State: 'above'=di atas, 'crossing'=sedang menembus, 'below'=di bawah, 'rising'=naik ke atas sbg cyan
+            m.userData.osmState='above';
+            m.userData.osmProg=0;
+            m.userData.osmDelay=i*0.15+Math.random()*0.5; // stagger
+            m.userData.hasCrossed=false; // belum pernah melewati membran
             molecules.push(m); scene.add(m);
         }
 
-        // -- Garam: 14 molekul --
-        for(var i=0;i<14;i++){
-            var sx=(Math.random()-0.5)*4.0;
-            var sy=5.0+Math.random()*2.5;
-            var sz=(Math.random()-0.5)*3.0;
-            var m=createMolecule(sx,sy,sz,0xf87171,0.35);
+        // ── GARAM: di atas membran, TIDAK turun (tidak menembus) ──
+        for(var i=0;i<16;i++){
+            var sx=(Math.random()-0.5)*12;
+            var sy=2.5+Math.random()*5.0;   // di atas membran
+            var sz=(Math.random()-0.5)*7;
+            var m=createMolecule(sx,sy,sz,0xf87171,0.35); // merah = garam
             m.userData.isSolute=true;
             m.userData.molIndex=i;
-            m.userData.startX=sx; m.userData.startY=sy; m.userData.startZ=sz;
             m.userData.phase=Math.random()*Math.PI*2;
-            // Target garam: berhenti TEPAT di atas membran (y ≈ 1.5..2.5)
-            m.userData.stopY=1.5+Math.random()*1.2;
-            m.userData.stopX=(Math.random()-0.5)*10;
-            m.userData.stopZ=(Math.random()-0.5)*5;
-            m.userData.saltLanded=false;
-            m.userData.dropDelay=i*0.08+Math.random()*0.3;
+            m.userData.baseX=sx; m.userData.baseY=sy; m.userData.baseZ=sz;
             molecules.push(m); scene.add(m);
         }
 
@@ -994,17 +1045,9 @@ function animate(){
 
     // ── Membrane group: gentle sway ──
     if(membraneGroup){
-        if(currentSimulation==='osmosis'){
-            // Membran menyusut perlahan saat air keluar
-            membraneShrinkFactor=Math.max(0.62, membraneShrinkFactor-0.0003);
-            var s=membraneShrinkFactor;
-            membraneGroup.scale.set(s, 1, s); // hanya X dan Z yang menyusut (pipih)
-            membraneGroup.rotation.y=Math.sin(time*0.2)*0.08;
-        } else {
-            // reset skala untuk simulasi lain
-            membraneGroup.scale.set(1,1,1);
-            membraneGroup.rotation.y=Math.sin(time*0.2)*0.1;
-        }
+        // Membran fosfolipid tetap normal di semua simulasi
+        membraneGroup.scale.set(1,1,1);
+        membraneGroup.rotation.y=Math.sin(time*0.2)*0.1;
     }
 
     // ── Increment timers SEKALI per frame ──
@@ -1047,88 +1090,103 @@ function animate(){
             }
 
         }else if(currentSimulation==='osmosis'){
-            // osmosisTime sudah diincrement di atas (0.003/frame)
-            // ── 3 FASE: (1) bergerombol atas, (2) turun bersama ke membran, (3) garam berhenti / air tembus ──
-            // Fase ditentukan oleh osmosisTime:
-            //   t < dropDelay          → diam bergerombol
-            //   dropDelay ≤ t < t+dur  → turun ke stopY (kedua-duanya)
-            //   setelah sampai stopY   → garam melayang di sana; air lanjut turun ke targetY
-
-            var effT = Math.max(0, osmosisTime - (mol.userData.dropDelay||0));
-            // progress turun ke membran: 0→1 dalam ~1.2 unit waktu
-            var downProg = Math.min(1, effT * 0.55);
-            var downEased = downProg<0.5 ? 2*downProg*downProg : -1+(4-2*downProg)*downProg;
+            // osmosisTime diincrement di atas (0.003/frame)
+            // MEMBRAN ada di y = -1 sampai +1
+            // State machine: 'above' → 'crossing' → 'below' → 'rising' → kembali ke 'above' (cyan)
 
             if(mol.userData.isSolute){
-                if(downProg < 1){
-                    // FASE 1+2: turun dari startY ke stopY (atas membran)
-                    mol.position.y = mol.userData.startY + (mol.userData.stopY - mol.userData.startY)*downEased;
-                    mol.position.x += (mol.userData.stopX - mol.position.x)*0.018;
-                    mol.position.z += (mol.userData.stopZ - mol.position.z)*0.018;
-                } else {
-                    // FASE 3: GARAM BERHENTI — melayang tipis di atas membran, TIDAK turun lagi
-                    if(!mol.userData.saltLanded) mol.userData.saltLanded=true;
-                    mol.position.y = mol.userData.stopY + Math.sin(time*0.7+(mol.userData.molIndex||0)*0.8)*0.08;
-                    mol.position.x += (mol.userData.stopX - mol.position.x)*0.04;
-                    mol.position.z = mol.userData.stopZ + Math.cos(time*0.5+(mol.userData.molIndex||0))*0.06;
-                }
+                // ── GARAM: melayang di atas membran, TIDAK turun ──
+                mol.position.x = mol.userData.baseX + Math.sin(time*0.35+(mol.userData.molIndex||0)*1.4)*0.20;
+                mol.position.y = mol.userData.baseY + Math.cos(time*0.25+(mol.userData.molIndex||0)*1.0)*0.15;
+                mol.position.z = mol.userData.baseZ + Math.sin(time*0.45+(mol.userData.molIndex||0)*1.2)*0.14;
 
             } else if(mol.userData.isWater){
-                if(downProg < 1){
-                    // FASE 1+2: air juga ikut turun bersama garam ke stopY
-                    mol.position.y = mol.userData.startY + (mol.userData.stopY - mol.userData.startY)*downEased;
-                    mol.position.x += (mol.userData.stopX - mol.position.x)*0.018;
-                    mol.position.z += (mol.userData.stopZ - mol.position.z)*0.018;
-                    // Tandai belum menembus
-                    mol.userData.passedMembrane=false;
-                } else {
-                    // FASE 3: AIR MENEMBUS membran — terus turun ke targetY (bawah)
-                    // Hitung seberapa jauh air sudah lewat membran
-                    if(!mol.userData.passProg) mol.userData.passProg=0;
-                    mol.userData.passProg = Math.min(1, mol.userData.passProg + 0.004);
-                    var pp=mol.userData.passProg;
-                    var ppEased = pp<0.5 ? 2*pp*pp : -1+(4-2*pp)*pp;
+                var st = mol.userData.osmState || 'above';
+                var pr = mol.userData.osmProg  || 0;
+                var idx= mol.userData.molIndex  || 0;
 
-                    mol.position.y = mol.userData.stopY + (mol.userData.targetY - mol.userData.stopY)*ppEased;
-                    mol.position.x += (mol.userData.targetX - mol.position.x)*0.01;
-                    mol.position.z += (mol.userData.targetZ - mol.position.z)*0.01;
+                // Efektif setelah delay stagger
+                var effT = Math.max(0, osmosisTime - (mol.userData.osmDelay||0));
 
-                    // Sedikit getar Brownian di akhir
-                    if(pp > 0.9){
-                        mol.position.x += (Math.random()-0.5)*0.04;
-                        mol.position.z += (Math.random()-0.5)*0.04;
+                if(st==='above'){
+                    // Gerak mengambang kecil di atas
+                    mol.position.x += Math.sin(time*0.6+idx*0.8)*0.006;
+                    mol.position.y += Math.cos(time*0.5+idx*0.7)*0.005;
+
+                    // Mulai turun saat waktunya
+                    if(effT > 0){
+                        mol.userData.osmState='crossing';
+                        mol.userData.osmProg=0;
+                        mol.userData.crossStartX=mol.position.x;
+                        mol.userData.crossStartY=mol.position.y;
+                        mol.userData.crossStartZ=mol.position.z;
                     }
 
-                    // Opacity memudar saat melewati membran (y antara stopY dan stopY-2)
-                    if(mol.material){
-                        var fadeZone = mol.userData.stopY - mol.position.y;
-                        var alpha = fadeZone < 1.5 ? 1.0 : Math.max(0.25, 1-(fadeZone-1.5)*0.35);
-                        mol.material.opacity=alpha; mol.material.transparent=true;
+                } else if(st==='crossing'){
+                    // ── Turun dari atas ke bawah membran ──
+                    pr = Math.min(1, pr + 0.008);
+                    mol.userData.osmProg = pr;
+                    var pe = pr<0.5 ? 2*pr*pr : -1+(4-2*pr)*pr;
+
+                    mol.position.x = mol.userData.crossStartX + (mol.userData.belowX - mol.userData.crossStartX)*pe;
+                    mol.position.y = mol.userData.crossStartY + (mol.userData.belowY - mol.userData.crossStartY)*pe;
+                    mol.position.z = mol.userData.crossStartZ + (mol.userData.belowZ - mol.userData.crossStartZ)*pe;
+
+                    // Tepat saat melewati membran (y < 0): ubah ke CYAN
+                    if(mol.position.y < 0 && !mol.userData.hasCrossed){
+                        mol.userData.hasCrossed = true;
+                        mol.material.color.setHex(0x22d3ee);       // cyan terang
+                        mol.material.emissive.setHex(0x22d3ee);
+                        mol.material.emissiveIntensity = 0.7;
                     }
 
-                    // Setelah sampai target → reset loop
-                    if(pp >= 1){
-                        mol.userData.passProg=0;
-                        mol.userData.startY=mol.userData.targetY;
-                        mol.userData.stopY=mol.userData.targetY;
-                        // Reset ke atas lagi setelah jeda
-                        setTimeout(function(mm){
-                            mm.userData.passProg=null;
-                            mm.position.set(
-                                (Math.random()-0.5)*4,
-                                5.0+Math.random()*2.5,
-                                (Math.random()-0.5)*3
-                            );
-                            mm.userData.startY=mm.position.y;
-                            mm.userData.stopY=1.2+Math.random()*1.0;
-                            mm.userData.stopX=(Math.random()-0.5)*10;
-                            mm.userData.stopZ=(Math.random()-0.5)*5;
-                            mm.userData.targetY=-3.0-Math.random()*3.0;
-                            mm.userData.targetX=(Math.random()-0.5)*10;
-                            mm.userData.targetZ=(Math.random()-0.5)*5;
-                            mm.userData.dropDelay = osmosisTime + 0.3 + Math.random()*0.8;
-                            if(mm.material){ mm.material.opacity=1; }
-                        }, 300+Math.random()*400, mol);
+                    if(pr >= 1){
+                        mol.userData.osmState = 'below';
+                        mol.userData.osmProg  = 0;
+                        // Tunggu sebentar di bawah lalu naik
+                        mol.userData.belowWait = osmosisTime + 0.3 + Math.random()*0.6;
+                    }
+
+                } else if(st==='below'){
+                    // ── Di bawah membran: melayang sebentar (cyan) ──
+                    mol.position.x += Math.sin(time*0.7+idx*1.1)*0.005;
+                    mol.position.y += Math.cos(time*0.6+idx*0.9)*0.004;
+
+                    // Mulai naik ke atas setelah jeda
+                    if(osmosisTime >= (mol.userData.belowWait||0)){
+                        mol.userData.osmState = 'rising';
+                        mol.userData.osmProg  = 0;
+                        mol.userData.riseStartX = mol.position.x;
+                        mol.userData.riseStartY = mol.position.y;
+                        mol.userData.riseStartZ = mol.position.z;
+                        // Posisi target naik: di atas membran (posisi baru, beda dari asal)
+                        mol.userData.riseTargetX = (Math.random()-0.5)*12;
+                        mol.userData.riseTargetY = 2.5 + Math.random()*4.5;
+                        mol.userData.riseTargetZ = (Math.random()-0.5)*7;
+                    }
+
+                } else if(st==='rising'){
+                    // ── Naik kembali ke atas (WARNA CYAN — sudah pernah lewat membran) ──
+                    pr = Math.min(1, pr + 0.007);
+                    mol.userData.osmProg = pr;
+                    var pe2 = pr<0.5 ? 2*pr*pr : -1+(4-2*pr)*pr;
+
+                    mol.position.x = mol.userData.riseStartX + (mol.userData.riseTargetX - mol.userData.riseStartX)*pe2;
+                    mol.position.y = mol.userData.riseStartY + (mol.userData.riseTargetY - mol.userData.riseStartY)*pe2;
+                    mol.position.z = mol.userData.riseStartZ + (mol.userData.riseTargetZ - mol.userData.riseStartZ)*pe2;
+
+                    if(pr >= 1){
+                        // Kembali ke state 'above' — tetap CYAN, tunggu giliran turun lagi
+                        mol.userData.osmState = 'above';
+                        mol.userData.osmProg  = 0;
+                        mol.userData.originX  = mol.position.x;
+                        mol.userData.originY  = mol.position.y;
+                        mol.userData.originZ  = mol.position.z;
+                        mol.userData.belowX   = (Math.random()-0.5)*12;
+                        mol.userData.belowY   = -2.5 - Math.random()*4.0;
+                        mol.userData.belowZ   = (Math.random()-0.5)*7;
+                        // Delay sebelum turun lagi
+                        mol.userData.osmDelay = osmosisTime + 0.5 + Math.random()*1.5;
                     }
                 }
             }
