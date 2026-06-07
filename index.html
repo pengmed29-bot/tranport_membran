@@ -87,7 +87,6 @@
         @keyframes countUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
         .stat-value { animation: countUp 0.5s ease forwards; }
 
-        /* ── DASHBOARD STYLES ── */
         .dashboard-card {
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.08);
@@ -126,6 +125,7 @@
                 <a href="#materi" class="nav-link hover:text-yellow-400 transition">Materi</a>
                 <a href="#simulasi" class="nav-link hover:text-yellow-400 transition">Simulasi 3D</a>
                 <a href="#osmosis-anim" class="nav-link hover:text-yellow-400 transition">Osmosis</a>
+                <a href="#transport-aktif" class="nav-link hover:text-yellow-400 transition">Na⁺/K⁺ Pump</a>
                 <a href="#kuis" class="nav-link hover:text-yellow-400 transition">Kuis</a>
                 <a href="#game" class="nav-link hover:text-yellow-400 transition">Game</a>
             </div>
@@ -137,6 +137,7 @@
                 <a href="#materi" class="py-2 px-4 hover:bg-white/10 rounded-lg transition" onclick="toggleMobileMenu()">📚 Materi</a>
                 <a href="#simulasi" class="py-2 px-4 hover:bg-white/10 rounded-lg transition" onclick="toggleMobileMenu()">🔬 Simulasi 3D</a>
                 <a href="#osmosis-anim" class="py-2 px-4 hover:bg-white/10 rounded-lg transition" onclick="toggleMobileMenu()">💧 Osmosis</a>
+                <a href="#transport-aktif" class="py-2 px-4 hover:bg-white/10 rounded-lg transition" onclick="toggleMobileMenu()">⚡ Na⁺/K⁺ Pump</a>
                 <a href="#kuis" class="py-2 px-4 hover:bg-white/10 rounded-lg transition" onclick="toggleMobileMenu()">📝 Kuis</a>
                 <a href="#game" class="py-2 px-4 hover:bg-white/10 rounded-lg transition" onclick="toggleMobileMenu()">🎮 Game</a>
             </div>
@@ -393,6 +394,7 @@
                             <marker id="arr-orange" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#fb923c" opacity="0.9"/></marker>
                             <marker id="arr-lime"   markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#86efac" opacity="0.9"/></marker>
                             <marker id="arr-amber"  markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#fbbf24" opacity="0.9"/></marker>
+                            <marker id="arr-cyan"   markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#22d3ee" opacity="0.9"/></marker>
                         </defs>
                     </svg>
                 </div>
@@ -454,10 +456,72 @@
                 <div id="info-hypertonic" class="bg-red-500/10 rounded-xl p-4 md:p-5 border border-red-500/30 hidden"><div class="flex items-center gap-2 mb-2"><span class="text-xl">🧂</span><h4 class="font-bold text-red-400 text-sm md:text-base">Hipertonik</h4></div><p class="text-xs md:text-sm text-gray-300 leading-relaxed">Konsentrasi zat terlarut di luar sel <strong>lebih tinggi</strong> dari dalam sel. Air keluar dari sel.</p><div class="mt-3 space-y-1 text-xs text-gray-400"><div>🐛 <strong>Hewan:</strong> Sel mengkerut (krenasi)</div><div>🌱 <strong>Tumbuhan:</strong> Plasmolisis (layu)</div></div></div>
             </div>
             <div class="mt-6 flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm text-gray-400 slide-in">
-                <div class="flex items-center gap-2"><span class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-blue-400"></span><span>Molekul Air</span></div>
+                <div class="flex items-center gap-2"><span class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-blue-400"></span><span>Air Bebas</span></div>
                 <div class="flex items-center gap-2"><span class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-red-400"></span><span>Zat Terlarut (Garam)</span></div>
                 <div class="flex items-center gap-2"><span class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-pink-400 border-2 border-pink-300"></span><span>Membran Sel Hewan</span></div>
                 <div class="flex items-center gap-2"><span class="w-3 h-3 md:w-4 md:h-4 rounded bg-green-600 border-2 border-green-400"></span><span>Dinding Sel Tumbuhan</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFOGRAFIS POMPA Na⁺/K⁺ -->
+    <section id="transport-aktif" class="py-12 md:py-20 bg-gray-900 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5" style="background-image:radial-gradient(circle at 20% 50%, #a78bfa 0%, transparent 50%), radial-gradient(circle at 80% 50%, #facc15 0%, transparent 50%);"></div>
+        <div class="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+            <div class="text-center mb-8 md:mb-12 slide-in">
+                <div class="inline-block px-4 py-2 rounded-full bg-purple-500/20 text-purple-400 text-sm font-semibold mb-3">⚡ Infografis Edukatif</div>
+                <h2 class="section-title text-3xl md:text-4xl font-bold mb-3 md:mb-4">Pompa Natrium-Kalium (Na⁺/K⁺)</h2>
+                <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto">Transport aktif menggunakan <strong class="text-yellow-400">1 ATP</strong> untuk memompa <strong class="text-yellow-400">3 Na⁺ keluar</strong> dan <strong class="text-purple-400">2 K⁺ masuk</strong> melawan gradien konsentrasi</p>
+            </div>
+
+            <!-- Main infographic canvas -->
+            <div class="bg-gray-800 rounded-2xl md:rounded-3xl border border-gray-700 shadow-2xl overflow-hidden slide-in mb-6">
+                <canvas id="pump-canvas" style="width:100%;display:block;"></canvas>
+            </div>
+
+            <!-- Step controls -->
+            <div class="flex flex-wrap justify-center gap-2 mb-6 slide-in">
+                <button onclick="setPumpStep(0)" id="pump-btn-0" class="px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold border transition bg-yellow-500/20 border-yellow-500/50 text-yellow-300">① Mulai</button>
+                <button onclick="setPumpStep(1)" id="pump-btn-1" class="px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold border transition bg-gray-700 border-gray-600 text-gray-400">② Na⁺ terikat</button>
+                <button onclick="setPumpStep(2)" id="pump-btn-2" class="px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold border transition bg-gray-700 border-gray-600 text-gray-400">③ ATP → ADP</button>
+                <button onclick="setPumpStep(3)" id="pump-btn-3" class="px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold border transition bg-gray-700 border-gray-600 text-gray-400">④ Na⁺ keluar</button>
+                <button onclick="setPumpStep(4)" id="pump-btn-4" class="px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold border transition bg-gray-700 border-gray-600 text-gray-400">⑤ K⁺ terikat</button>
+                <button onclick="setPumpStep(5)" id="pump-btn-5" class="px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold border transition bg-gray-700 border-gray-600 text-gray-400">⑥ K⁺ masuk</button>
+                <button onclick="togglePumpAuto()" id="pump-auto-btn" class="px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold border transition bg-green-500/20 border-green-500/50 text-green-300">▶ Auto</button>
+            </div>
+
+            <!-- Step description box -->
+            <div id="pump-desc-box" class="max-w-3xl mx-auto bg-gray-800/80 border border-purple-500/30 rounded-2xl px-5 py-4 flex items-start gap-4 slide-in mb-6">
+                <div id="pump-step-icon" class="text-2xl flex-shrink-0 mt-0.5">⚡</div>
+                <div>
+                    <h4 id="pump-step-title" class="font-bold text-sm md:text-base mb-1 text-purple-400"></h4>
+                    <p id="pump-step-desc" class="text-xs md:text-sm text-gray-300 leading-relaxed"></p>
+                </div>
+            </div>
+
+            <!-- Info cards -->
+            <div class="grid md:grid-cols-3 gap-3 md:gap-4 slide-in">
+                <div class="bg-yellow-500/10 rounded-xl p-4 border border-yellow-500/30">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 rounded-full bg-yellow-500/30 flex items-center justify-center font-bold text-yellow-400 text-sm">Na⁺</div>
+                        <h4 class="font-bold text-yellow-400 text-sm">Natrium (Na⁺)</h4>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed">Konsentrasi <strong>lebih tinggi di luar sel</strong>. Dipompa keluar sebanyak <strong>3 ion</strong> per siklus. Berperan dalam potensial aksi neuron.</p>
+                </div>
+                <div class="bg-purple-500/10 rounded-xl p-4 border border-purple-500/30">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 rounded-full bg-purple-500/30 flex items-center justify-center font-bold text-purple-400 text-sm">K⁺</div>
+                        <h4 class="font-bold text-purple-400 text-sm">Kalium (K⁺)</h4>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed">Konsentrasi <strong>lebih tinggi di dalam sel</strong>. Dipompa masuk sebanyak <strong>2 ion</strong> per siklus. Menjaga potensial membran istirahat.</p>
+                </div>
+                <div class="bg-pink-500/10 rounded-xl p-4 border border-pink-500/30">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 rounded-full bg-pink-500/30 flex items-center justify-center font-bold text-pink-400 text-sm">ATP</div>
+                        <h4 class="font-bold text-pink-400 text-sm">Energi ATP</h4>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed"><strong>1 ATP</strong> dipecah menjadi ADP + fosfat per siklus. Energi ini mengubah bentuk protein pompa sehingga ion dapat dipindahkan.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -705,14 +769,12 @@ var currentSimulation = 'diffusion';
 var osmDividerGroup = null;
 var animalRadiusCurrent = 70, plantRadiusCurrent = 70;
 
-// ── DIFFUSION STATE ──
-var diffusionTime = 0;          // counts up each frame — increment SEKALI per frame
-var DIFFUSION_SPREAD_SPEED = 0.006;  // lebih cepat: menyebar dalam ~8 detik
+// Diffusion state
+var diffusionTime = 0;
+var DIFFUSION_SPREAD_SPEED = 0.006;
 
-// ── OSMOSIS 3D STATE ──
-var membraneShrinkFactor = 1.0; // 1 = full size, shrinks toward ~0.6
-var osmosisTime = 0;            // global timer osmosis, increment sekali per frame
-var OSMOSIS_SALT_LAND_TIME = 5.0; // detik simulasi sampai garam mencapai membran
+// Osmosis 3D state
+var osmosisTime = 0;
 
 function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
 
@@ -785,11 +847,13 @@ function createMolecule(x,y,z,color,size){
 function clearMolecules(){
     molecules.forEach(function(m){scene.remove(m);}); molecules=[];
     if(proteinMesh){membraneGroup.remove(proteinMesh);proteinMesh=null;}
-    // Restore membran fosfolipid dan hapus osmosis membrane
     if(membraneGroup) membraneGroup.visible=true;
     removeOsmosisMembrane();
 }
 
+// ============================================================
+// LABELS CONFIG
+// ============================================================
 var SIM_LABELS = {
     diffusion:[
         {anchor:{x:62,y:20},label:{x:72,y:8},color:'#facc15',markerKey:'yellow',title:'Molekul Zat Terlarut (Pekat)',sub:'Awalnya bergerombol — konsentrasi tinggi'},
@@ -798,12 +862,13 @@ var SIM_LABELS = {
         {anchor:{x:50,y:57},label:{x:3,y:62},color:'#9ca3af',markerKey:'gray',title:'Ekor Fosfolipid',sub:'Hidrofobik — tolak air'},
         {anchor:{x:55,y:78},label:{x:62,y:86},color:'#facc15',markerKey:'yellow',title:'Zona Konsentrasi Rendah (Bawah)',sub:'Molekul menyebar → tanpa ATP'}
     ],
+    // NEW osmosis labels sesuai mekanisme baru
     osmosis:[
-        {anchor:{x:50,y:50},label:{x:3,y:18},color:'#60a5fa',markerKey:'blue',title:'Membran Fosfolipid',sub:'Semipermeabel — hanya air yang bisa lewat'},
-        {anchor:{x:40,y:22},label:{x:3,y:52},color:'#60a5fa',markerKey:'blue',title:'Air Belum Lewat (Biru)',sub:'Di atas membran — konsentrasi tinggi'},
-        {anchor:{x:65,y:22},label:{x:58,y:8},color:'#f87171',markerKey:'red',title:'Garam (Merah)',sub:'Tetap di atas — tidak bisa tembus membran'},
-        {anchor:{x:50,y:78},label:{x:55,y:88},color:'#22d3ee',markerKey:'blue',title:'Air Sudah Lewat (Cyan)',sub:'Warna berubah saat menembus membran!'},
-        {anchor:{x:30,y:78},label:{x:3,y:82},color:'#86efac',markerKey:'lime',title:'Konsentrasi Rendah (Bawah)',sub:'Air keluar dari zona tinggi → rendah'}
+        {anchor:{x:50,y:50},label:{x:3,y:18},color:'#e2e8f0',markerKey:'gray',title:'Membran Semipermeabel',sub:'Lapisan putih — air bebas bisa lewat, klaster garam tidak'},
+        {anchor:{x:35,y:22},label:{x:3,y:48},color:'#60a5fa',markerKey:'blue',title:'Air Bebas (Biru)',sub:'Molekul air tanpa ikatan garam — di atas membran'},
+        {anchor:{x:65,y:25},label:{x:58,y:8},color:'#fb923c',markerKey:'orange',title:'Klaster Air+Garam (Oranye)',sub:'Air berikatan dgn garam — tertahan di atas membran'},
+        {anchor:{x:45,y:75},label:{x:3,y:76},color:'#22d3ee',markerKey:'cyan',title:'Air Bebas Bawah (Cyan)',sub:'Naik karena perbedaan tekanan osmotik'},
+        {anchor:{x:50,y:85},label:{x:55,y:88},color:'#22d3ee',markerKey:'cyan',title:'Air Menembus Membran ↑',sub:'Hanya air murni yang bisa naik ke atas'}
     ],
     active:[
         {anchor:{x:48,y:20},label:{x:60,y:7},color:'#facc15',markerKey:'yellow',title:'Ion Na⁺ (Natrium)',sub:'Dipompa keluar — melawan gradien'},
@@ -816,7 +881,12 @@ var SIM_LABELS = {
 
 var SIM_STEPS = {
     diffusion:[{dot:'#86efac',text:'① Molekul bergerombol pekat di atas'},{dot:'#facc15',text:'② Menyebar perlahan menembus membran'},{dot:'#60a5fa',text:'③ Konsentrasi merata — seimbang'}],
-    osmosis:[{dot:'#60a5fa',text:'① Air biru turun dari atas membran'},{dot:'#22d3ee',text:'② Menembus → berubah warna CYAN'},{dot:'#22d3ee',text:'③ Naik ke atas sebagai air cyan'}],
+    // NEW osmosis steps
+    osmosis:[
+        {dot:'#fb923c',text:'① Garam+air berikatan → klaster oranye di atas'},
+        {dot:'#60a5fa',text:'② Air bebas biru tetap di atas (tidak berikatan)'},
+        {dot:'#22d3ee',text:'③ Air bawah (cyan) naik menembus membran ↑'}
+    ],
     active:[{dot:'#f472b6',text:'① ATP dipecah → ADP + Pᵢ'},{dot:'#22c55e',text:'② Pompa berubah bentuk'},{dot:'#facc15',text:'③ 3 Na⁺ keluar, 2 K⁺ masuk'}]
 };
 
@@ -860,87 +930,24 @@ function renderMolLabels(type){
     });
 }
 
-function addOsmosisDivider(){
-    if(osmDividerGroup){scene.remove(osmDividerGroup);osmDividerGroup=null;}
-    osmDividerGroup=new THREE.Group();
-    var planeGeo=new THREE.PlaneGeometry(0.15,14,1,1), planeMat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0.08,side:THREE.DoubleSide});
-    var plane=new THREE.Mesh(planeGeo,planeMat);plane.rotation.y=Math.PI/2;osmDividerGroup.add(plane);
-    var lineMat=new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0.3});
-    [-7,7].forEach(function(y){var pts=[new THREE.Vector3(0,y,-4),new THREE.Vector3(0,y,4)];osmDividerGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),lineMat));});
-    addTextSprite(osmDividerGroup,'🔵 Air melewati membran',-5,6,0,0x93c5fd);
-    addTextSprite(osmDividerGroup,'🔴 Garam berhenti di membran',5,6,0,0xfca5a5);
-    scene.add(osmDividerGroup);
-}
-
-function addTextSprite(group,text,x,y,z,color){
-    var cv=document.createElement('canvas');cv.width=256;cv.height=64;
-    var ctx=cv.getContext('2d');ctx.clearRect(0,0,256,64);
-    ctx.fillStyle='rgba(0,0,0,0.55)';ctx.beginPath();if(ctx.roundRect)ctx.roundRect(4,8,248,48,12);else ctx.rect(4,8,248,48);ctx.fill();
-    ctx.strokeStyle='rgba('+((color>>16)&255)+','+((color>>8)&255)+','+(color&255)+',0.7)';ctx.lineWidth=2;ctx.stroke();
-    ctx.fillStyle='rgba('+((color>>16)&255)+','+((color>>8)&255)+','+(color&255)+',1)';
-    ctx.font='bold 18px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,128,34);
-    var texture=new THREE.CanvasTexture(cv), mat=new THREE.SpriteMaterial({map:texture,transparent:true,opacity:0.92});
-    var sprite=new THREE.Sprite(mat);sprite.position.set(x,y,z);sprite.scale.set(4,1,1);group.add(sprite);
-}
-
-function removeOsmosisDivider(){if(osmDividerGroup){scene.remove(osmDividerGroup);osmDividerGroup=null;}}
-
-// Membran transparan berbentuk bola untuk osmosis (batas dalam/luar sel)
 var osmosisMembraneMesh=null;
-function createOsmosisMembrane(){
-    removeOsmosisMembrane();
-    // Bola besar transparan = membran semipermeabel sel
-    var geo=new THREE.SphereGeometry(4.5,48,48);
-    var mat=new THREE.MeshPhongMaterial({
-        color:0x60a5fa, transparent:true, opacity:0.10,
-        side:THREE.DoubleSide, shininess:80,
-        emissive:0x3b82f6, emissiveIntensity:0.08
-    });
-    osmosisMembraneMesh=new THREE.Mesh(geo,mat);
-    scene.add(osmosisMembraneMesh);
-
-    // Garis tepi membran (wireframe tipis) agar batas jelas
-    var wireMat=new THREE.MeshBasicMaterial({color:0x93c5fd,transparent:true,opacity:0.25,wireframe:true});
-    var wireGeo=new THREE.SphereGeometry(4.5,24,24);
-    var wire=new THREE.Mesh(wireGeo,wireMat);
-    wire.userData.isOsmWire=true;
-    scene.add(wire);
-    osmosisMembraneMesh.userData.wire=wire;
-
-    // Label sprite di atas bola
-    addSpriteLabel('Membran Semipermeabel (Transparan)', 0, 5.2, 0, 0x93c5fd);
-    addSpriteLabel('Dalam Sel (konsentrasi air tinggi)', -2, 0, 0, 0x60a5fa);
-    addSpriteLabel('Luar Sel (larutan garam pekat)', 6.5, 0, 0, 0xfca5a5);
-}
 function removeOsmosisMembrane(){
     if(osmosisMembraneMesh){
         if(osmosisMembraneMesh.userData.wire) scene.remove(osmosisMembraneMesh.userData.wire);
         scene.remove(osmosisMembraneMesh);
         osmosisMembraneMesh=null;
     }
-    // remove old sprites
     var toRemove=[];
     scene.children.forEach(function(c){ if(c.userData.isOsmLabel) toRemove.push(c); });
     toRemove.forEach(function(c){ scene.remove(c); });
 }
-function addSpriteLabel(text,x,y,z,color){
-    var cv=document.createElement('canvas');cv.width=320;cv.height=56;
-    var ctx=cv.getContext('2d');ctx.clearRect(0,0,320,56);
-    ctx.fillStyle='rgba(0,0,0,0.6)';ctx.beginPath();
-    if(ctx.roundRect)ctx.roundRect(2,2,316,52,10);else ctx.rect(2,2,316,52);ctx.fill();
-    ctx.strokeStyle='rgba('+((color>>16)&255)+','+((color>>8)&255)+','+(color&255)+',0.8)';ctx.lineWidth=2;ctx.stroke();
-    ctx.fillStyle='rgba('+((color>>16)&255)+','+((color>>8)&255)+','+(color&255)+',1)';
-    ctx.font='bold 16px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,160,28);
-    var tex=new THREE.CanvasTexture(cv);
-    var mat=new THREE.SpriteMaterial({map:tex,transparent:true,opacity:0.9});
-    var sp=new THREE.Sprite(mat);sp.position.set(x,y,z);sp.scale.set(5,0.9,1);
-    sp.userData.isOsmLabel=true;
-    scene.add(sp);
-}
 
+// ============================================================
+// SIMULATION SETUP — OSMOSIS 3D BARU
+// ============================================================
 function setSimulation(type){
     currentSimulation=type; clearMolecules();
-    diffusionTime=0; membraneShrinkFactor=1.0; osmosisTime=0;
+    diffusionTime=0; osmosisTime=0;
 
     ['btn-sim-diffusion','btn-sim-osmosis','btn-sim-active'].forEach(function(id){
         var b=document.getElementById(id);if(!b)return;
@@ -949,84 +956,115 @@ function setSimulation(type){
     var title=document.getElementById('sim-title'), desc=document.getElementById('sim-desc'), icon=document.getElementById('sim-info-icon'), lp=document.getElementById('legend-protein');
 
     if(type==='diffusion'){
-        removeOsmosisDivider();
         document.getElementById('btn-sim-diffusion').className='sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-blue-500/20 border border-blue-500/50 font-semibold text-blue-300 text-xs md:text-sm';
         title.textContent='Difusi Sederhana'; title.className='font-bold text-base md:text-lg mb-1 text-blue-400';
         desc.textContent='Molekul zat terlarut (kuning) awalnya bergerombol pekat di atas membran. Secara perlahan menyebar menembus membran menuju zona konsentrasi rendah di bawah — tanpa energi, tanpa protein.';
         if(icon)icon.textContent='🌊'; lp.classList.add('hidden');
 
-        // ── DIFFUSION: molekul bergerombol pekat di atas, menyebar SANGAT PELAN ke bawah ──
         for(var i=0;i<35;i++){
-            // Cluster sangat padat di zona atas, X dan Z sempit
             var dcx=(Math.random()-0.5)*3.5;
             var dcy=4.5+Math.random()*2.5;
             var dcz=(Math.random()-0.5)*2.5;
             var m=createMolecule(dcx,dcy,dcz,0xfacc15,0.28);
             m.userData.phase=Math.random()*Math.PI*2;
-            m.userData.startX=dcx;
-            m.userData.startY=dcy;
-            m.userData.startZ=dcz;
+            m.userData.startX=dcx; m.userData.startY=dcy; m.userData.startZ=dcz;
             m.userData.spreadProgress=0;
-            // Delay bertahap tapi tidak terlalu lama
-            m.userData.spreadDelay=i * 0.12 + Math.random()*0.4;
-            // Target akhir: tersebar luas di bawah membran
-            m.userData.targetY=-3.5 - Math.random()*3;
+            m.userData.spreadDelay=i*0.12+Math.random()*0.4;
+            m.userData.targetY=-3.5-Math.random()*3;
             m.userData.targetX=(Math.random()-0.5)*13;
             m.userData.targetZ=(Math.random()-0.5)*6.5;
             molecules.push(m); scene.add(m);
         }
 
-    }else if(type==='osmosis'){
-        removeOsmosisDivider(); membraneShrinkFactor=1.0; osmosisTime=0;
-        // Membran fosfolipid TETAP, tidak disembunyikan
+    } else if(type==='osmosis'){
+        // ── OSMOSIS BARU ──
+        // ZONA ATAS (y > 1.5): larutan garam pekat
+        //   - Air bebas (biru): sebagian air yang TIDAK berikatan dgn garam
+        //   - Klaster Air+Garam (oranye): air yg berikatan dgn garam, TIDAK bisa lewat membran
+        // ZONA BAWAH (y < -1.5): air murni (konsentrasi lebih tinggi)
+        //   - Air bawah (cyan): naik ke atas karena tekanan osmotik lebih tinggi di bawah
+        //   - Air melewati membran, klaster garam TIDAK bisa turun
+        // MEMBRAN (y ≈ 0): lapisan putih fosfolipid — semipermeabel
 
         document.getElementById('btn-sim-osmosis').className='sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-green-500/20 border border-green-500/50 font-semibold text-green-300 text-xs md:text-sm';
-        title.textContent='Osmosis'; title.className='font-bold text-base md:text-lg mb-1 text-green-400';
-        desc.textContent='Air biru (di atas membran) masuk menembus membran → turun ke bawah → naik kembali ke atas dengan warna CYAN (sudah melewati membran). Garam merah tetap di atas membran, tidak bisa menembus.';
+        title.textContent='Osmosis — Ikatan Garam & Air';
+        title.className='font-bold text-base md:text-lg mb-1 text-green-400';
+        desc.textContent='Di atas membran: garam dan air membentuk klaster (oranye) — klaster ini TIDAK bisa melewati membran. Sebagian air bebas (biru) tetap sendiri. Di bawah membran: air murni (cyan) naik karena tekanan osmotik lebih tinggi — hanya air bebas yang bisa menembus membran ke atas.';
         if(icon)icon.textContent='💧'; lp.classList.remove('hidden');
 
-        // MEMBRAN ada di y = -1 sampai +1 (kepala fosfolipid di y=±1)
-        // Atas membran = y > 1.5 (konsentrasi tinggi: ada air + garam)
-        // Bawah membran = y < -1.5 (konsentrasi rendah: tempat air keluar)
-
-        // ── AIR: mulai di atas membran (biru #60a5fa), akan turun & naik dengan warna cyan ──
-        for(var i=0;i<22;i++){
-            var wx=(Math.random()-0.5)*12;
-            var wy=2.0+Math.random()*5.0;   // di atas membran
-            var wz=(Math.random()-0.5)*7;
-            var m=createMolecule(wx,wy,wz,0x60a5fa,0.22); // biru normal = belum lewat membran
-            m.userData.isWater=true;
+        // ── AIR BEBAS di atas (biru #60a5fa) — tidak berikatan ~~
+        for(var i=0;i<14;i++){
+            var wx=(Math.random()-0.5)*10;
+            var wy=2.2+Math.random()*4.5;
+            var wz=(Math.random()-0.5)*6;
+            var m=createMolecule(wx,wy,wz,0x60a5fa,0.22);
+            m.userData.isFreeWaterAbove=true;
             m.userData.molIndex=i;
             m.userData.phase=Math.random()*Math.PI*2;
-            // Posisi asal (atas, sebelum turun)
-            m.userData.originX=wx; m.userData.originY=wy; m.userData.originZ=wz;
-            // Target bawah membran (setelah menembus)
-            m.userData.belowX=(Math.random()-0.5)*12;
-            m.userData.belowY=-2.5-Math.random()*4.0;
-            m.userData.belowZ=(Math.random()-0.5)*7;
-            // State: 'above'=di atas, 'crossing'=sedang menembus, 'below'=di bawah, 'rising'=naik ke atas sbg cyan
-            m.userData.osmState='above';
+            m.userData.baseX=wx; m.userData.baseY=wy; m.userData.baseZ=wz;
+            // Air bebas di atas kadang bisa turun ke bawah (difusi lewat membran)
+            // tapi kita buat tetap di atas untuk kejelasan — float saja
+            molecules.push(m); scene.add(m);
+        }
+
+        // ── KLASTER AIR+GARAM di atas (oranye #fb923c) — tidak bisa lewat membran ──
+        // Representasi: bola besar oranye dengan bola kecil biru menempel (klaster)
+        for(var i=0;i<12;i++){
+            var sx=(Math.random()-0.5)*10;
+            var sy=2.5+Math.random()*4.5;
+            var sz=(Math.random()-0.5)*6;
+            // Bola besar = garam (oranye)
+            var mSalt=createMolecule(sx,sy,sz,0xfb923c,0.38);
+            mSalt.userData.isCluster=true;
+            mSalt.userData.molIndex=i;
+            mSalt.userData.phase=Math.random()*Math.PI*2;
+            mSalt.userData.baseX=sx; mSalt.userData.baseY=sy; mSalt.userData.baseZ=sz;
+            molecules.push(mSalt); scene.add(mSalt);
+
+            // Bola kecil biru menempel pada garam (air yg berikatan)
+            var wBound=createMolecule(sx+0.45, sy+0.2, sz+0.1, 0x93c5fd, 0.18);
+            wBound.userData.isBoundWater=true;
+            wBound.userData.parentIndex=i;
+            wBound.userData.offsetX=0.45; wBound.userData.offsetY=0.2; wBound.userData.offsetZ=0.1;
+            wBound.userData.baseX=sx; wBound.userData.baseY=sy; wBound.userData.baseZ=sz;
+            wBound.userData.phase=Math.random()*Math.PI*2;
+            molecules.push(wBound); scene.add(wBound);
+
+            // Kadang ada 2 air per garam
+            if(i%2===0){
+                var wBound2=createMolecule(sx-0.35, sy+0.35, sz-0.15, 0x93c5fd, 0.15);
+                wBound2.userData.isBoundWater=true;
+                wBound2.userData.parentIndex=i;
+                wBound2.userData.offsetX=-0.35; wBound2.userData.offsetY=0.35; wBound2.userData.offsetZ=-0.15;
+                wBound2.userData.baseX=sx; wBound2.userData.baseY=sy; wBound2.userData.baseZ=sz;
+                wBound2.userData.phase=Math.random()*Math.PI*2+1;
+                molecules.push(wBound2); scene.add(wBound2);
+            }
+        }
+
+        // ── AIR BAWAH MEMBRAN (cyan #22d3ee) — naik karena tekanan osmotik ──
+        // State machine: 'below' → 'rising' (naik menembus membran) → 'arrived' (di atas, bergabung dgn air bebas)
+        for(var i=0;i<18;i++){
+            var bx=(Math.random()-0.5)*11;
+            var by=-2.5-Math.random()*4.5;
+            var bz=(Math.random()-0.5)*6.5;
+            var m=createMolecule(bx,by,bz,0x22d3ee,0.22);
+            m.userData.isBottomWater=true;
+            m.userData.molIndex=i;
+            m.userData.phase=Math.random()*Math.PI*2;
+            m.userData.baseX=bx; m.userData.baseY=by; m.userData.baseZ=bz;
+            // Setiap molekul punya waktu mulai naik sendiri (stagger)
+            m.userData.riseDelay=i*0.2+Math.random()*1.0;
+            m.userData.osmState='below'; // 'below', 'rising', 'arrived'
             m.userData.osmProg=0;
-            m.userData.osmDelay=i*0.15+Math.random()*0.5; // stagger
-            m.userData.hasCrossed=false; // belum pernah melewati membran
+            // Target setelah naik: posisi di atas membran
+            m.userData.targetAboveX=(Math.random()-0.5)*11;
+            m.userData.targetAboveY=2.0+Math.random()*4.5;
+            m.userData.targetAboveZ=(Math.random()-0.5)*6.5;
             molecules.push(m); scene.add(m);
         }
 
-        // ── GARAM: di atas membran, TIDAK turun (tidak menembus) ──
-        for(var i=0;i<16;i++){
-            var sx=(Math.random()-0.5)*12;
-            var sy=2.5+Math.random()*5.0;   // di atas membran
-            var sz=(Math.random()-0.5)*7;
-            var m=createMolecule(sx,sy,sz,0xf87171,0.35); // merah = garam
-            m.userData.isSolute=true;
-            m.userData.molIndex=i;
-            m.userData.phase=Math.random()*Math.PI*2;
-            m.userData.baseX=sx; m.userData.baseY=sy; m.userData.baseZ=sz;
-            molecules.push(m); scene.add(m);
-        }
-
-    }else if(type==='active'){
-        removeOsmosisDivider();
+    } else if(type==='active'){
         document.getElementById('btn-sim-active').className='sim-btn-text btn-sim px-4 py-2 md:px-6 md:py-3 rounded-full bg-purple-500/20 border border-purple-500/50 font-semibold text-purple-300 text-xs md:text-sm';
         title.textContent='Transport Aktif (Na⁺/K⁺ Pump)'; title.className='font-bold text-base md:text-lg mb-1 text-purple-400';
         desc.textContent='Pompa Na⁺/K⁺-ATPase menggunakan energi ATP untuk memompa 3 ion Na⁺ keluar dan 2 ion K⁺ masuk melawan gradien konsentrasi.';
@@ -1039,159 +1077,154 @@ function setSimulation(type){
     renderMolLabels(type);
 }
 
+// ============================================================
+// ANIMATE LOOP
+// ============================================================
 function animate(){
     animationId=requestAnimationFrame(animate);
     var time=Date.now()*0.001;
 
-    // ── Membrane group: gentle sway ──
     if(membraneGroup){
-        // Membran fosfolipid tetap normal di semua simulasi
         membraneGroup.scale.set(1,1,1);
         membraneGroup.rotation.y=Math.sin(time*0.2)*0.1;
     }
 
-    // ── Increment timers SEKALI per frame ──
     if(currentSimulation==='diffusion') diffusionTime += DIFFUSION_SPREAD_SPEED;
     if(currentSimulation==='osmosis') osmosisTime += 0.003;
 
-    molecules.forEach(function(mol,i){
+    // Lookup klaster position by index
+    var clusterPositions = {};
+
+    molecules.forEach(function(mol){
         if(currentSimulation==='diffusion'){
-            // ── DIFUSI: bergerombol atas → menyebar PELAN ke bawah ──
             if(mol.userData.startY !== undefined){
-                // Berapa "waktu efektif" setelah delay individu molekul
                 var delayedT = Math.max(0, diffusionTime - mol.userData.spreadDelay);
-                // progress 0→1 cukup cepat setelah delay individu
                 var progress = Math.min(1, delayedT * 0.14);
                 mol.userData.spreadProgress = progress;
-
-                // Ease in-out: lambat di awal, lambat di akhir
-                var eased = progress < 0.5
-                    ? 2*progress*progress
-                    : -1+(4-2*progress)*progress;
-
-                // Y: interpolasi dari startY (atas, pekat) → targetY (bawah, rendah)
+                var eased = progress < 0.5 ? 2*progress*progress : -1+(4-2*progress)*progress;
                 mol.position.y = mol.userData.startY + (mol.userData.targetY - mol.userData.startY) * eased;
-
-                // X dan Z: melebar cukup cepat mengikuti spread
                 mol.position.x += (mol.userData.targetX - mol.position.x) * 0.012;
                 mol.position.z += (mol.userData.targetZ - mol.position.z) * 0.012;
-
-                // Getar acak kecil saat sudah menyebar (terlihat Brownian)
                 if(progress > 0.85){
                     mol.position.x += (Math.random()-0.5)*0.04;
                     mol.position.y += (Math.random()-0.5)*0.025;
                     mol.position.z += (Math.random()-0.5)*0.04;
                 }
-
-                // Emissive lebih terang saat masih bergerombol, redup saat sudah menyebar
-                if(mol.material){
-                    mol.material.emissiveIntensity = 0.9 - progress*0.6;
-                }
+                if(mol.material) mol.material.emissiveIntensity = 0.9 - progress*0.6;
             }
 
-        }else if(currentSimulation==='osmosis'){
-            // osmosisTime diincrement di atas (0.003/frame)
-            // MEMBRAN ada di y = -1 sampai +1
-            // State machine: 'above' → 'crossing' → 'below' → 'rising' → kembali ke 'above' (cyan)
+        } else if(currentSimulation==='osmosis'){
 
-            if(mol.userData.isSolute){
-                // ── GARAM: melayang di atas membran, TIDAK turun ──
-                mol.position.x = mol.userData.baseX + Math.sin(time*0.35+(mol.userData.molIndex||0)*1.4)*0.20;
-                mol.position.y = mol.userData.baseY + Math.cos(time*0.25+(mol.userData.molIndex||0)*1.0)*0.15;
-                mol.position.z = mol.userData.baseZ + Math.sin(time*0.45+(mol.userData.molIndex||0)*1.2)*0.14;
+            if(mol.userData.isFreeWaterAbove){
+                // ── Air bebas di atas: melayang, sesekali bergerak sedikit acak ──
+                var idx = mol.userData.molIndex||0;
+                mol.position.x = mol.userData.baseX + Math.sin(time*0.5+idx*1.3)*0.35;
+                mol.position.y = mol.userData.baseY + Math.cos(time*0.4+idx*0.9)*0.22;
+                mol.position.z = mol.userData.baseZ + Math.sin(time*0.6+idx*1.1)*0.28;
+                // Selalu di atas membran
+                if(mol.position.y < 1.8) mol.position.y = 1.8;
 
-            } else if(mol.userData.isWater){
-                var st = mol.userData.osmState || 'above';
-                var pr = mol.userData.osmProg  || 0;
-                var idx= mol.userData.molIndex  || 0;
+            } else if(mol.userData.isCluster){
+                // ── Klaster garam (oranye): melayang di atas, TIDAK turun ke bawah ──
+                var idx = mol.userData.molIndex||0;
+                mol.position.x = mol.userData.baseX + Math.sin(time*0.35+idx*1.6)*0.28;
+                mol.position.y = mol.userData.baseY + Math.cos(time*0.28+idx*1.2)*0.18;
+                mol.position.z = mol.userData.baseZ + Math.sin(time*0.42+idx*1.4)*0.22;
+                if(mol.position.y < 2.0) mol.position.y = 2.0; // TIDAK bisa lewat membran ke bawah
+                // Simpan posisi klaster untuk referensi air terikat
+                clusterPositions[idx] = { x: mol.position.x, y: mol.position.y, z: mol.position.z };
+                // Rotasi perlahan
+                mol.rotation.y += 0.008;
 
-                // Efektif setelah delay stagger
-                var effT = Math.max(0, osmosisTime - (mol.userData.osmDelay||0));
+            } else if(mol.userData.isBoundWater){
+                // ── Air terikat garam: mengikuti posisi klaster ──
+                var parentIdx = mol.userData.parentIndex||0;
+                var parent = clusterPositions[parentIdx];
+                if(parent){
+                    mol.position.x = parent.x + mol.userData.offsetX + Math.sin(time*0.8+parentIdx)*0.06;
+                    mol.position.y = parent.y + mol.userData.offsetY + Math.cos(time*0.7+parentIdx)*0.05;
+                    mol.position.z = parent.z + mol.userData.offsetZ + Math.sin(time*0.9+parentIdx)*0.06;
+                }
 
-                if(st==='above'){
-                    // Gerak mengambang kecil di atas
-                    mol.position.x += Math.sin(time*0.6+idx*0.8)*0.006;
-                    mol.position.y += Math.cos(time*0.5+idx*0.7)*0.005;
+            } else if(mol.userData.isBottomWater){
+                // ── Air bawah (cyan): naik karena tekanan osmotik ──
+                var st = mol.userData.osmState;
+                var pr = mol.userData.osmProg;
+                var idx = mol.userData.molIndex||0;
+                var effT = Math.max(0, osmosisTime - (mol.userData.riseDelay||0));
 
-                    // Mulai turun saat waktunya
+                if(st === 'below'){
+                    // Melayang di bawah membran
+                    mol.position.x = mol.userData.baseX + Math.sin(time*0.55+idx*1.2)*0.30;
+                    mol.position.y = mol.userData.baseY + Math.cos(time*0.45+idx*0.8)*0.20;
+                    mol.position.z = mol.userData.baseZ + Math.sin(time*0.65+idx*1.0)*0.25;
+                    if(mol.position.y > -1.8) mol.position.y = -1.8; // tetap di bawah sampai giliran naik
+
                     if(effT > 0){
-                        mol.userData.osmState='crossing';
-                        mol.userData.osmProg=0;
-                        mol.userData.crossStartX=mol.position.x;
-                        mol.userData.crossStartY=mol.position.y;
-                        mol.userData.crossStartZ=mol.position.z;
-                    }
-
-                } else if(st==='crossing'){
-                    // ── Turun dari atas ke bawah membran ──
-                    pr = Math.min(1, pr + 0.008);
-                    mol.userData.osmProg = pr;
-                    var pe = pr<0.5 ? 2*pr*pr : -1+(4-2*pr)*pr;
-
-                    mol.position.x = mol.userData.crossStartX + (mol.userData.belowX - mol.userData.crossStartX)*pe;
-                    mol.position.y = mol.userData.crossStartY + (mol.userData.belowY - mol.userData.crossStartY)*pe;
-                    mol.position.z = mol.userData.crossStartZ + (mol.userData.belowZ - mol.userData.crossStartZ)*pe;
-
-                    // Tepat saat melewati membran (y < 0): ubah ke CYAN
-                    if(mol.position.y < 0 && !mol.userData.hasCrossed){
-                        mol.userData.hasCrossed = true;
-                        mol.material.color.setHex(0x22d3ee);       // cyan terang
-                        mol.material.emissive.setHex(0x22d3ee);
-                        mol.material.emissiveIntensity = 0.7;
-                    }
-
-                    if(pr >= 1){
-                        mol.userData.osmState = 'below';
-                        mol.userData.osmProg  = 0;
-                        // Tunggu sebentar di bawah lalu naik
-                        mol.userData.belowWait = osmosisTime + 0.3 + Math.random()*0.6;
-                    }
-
-                } else if(st==='below'){
-                    // ── Di bawah membran: melayang sebentar (cyan) ──
-                    mol.position.x += Math.sin(time*0.7+idx*1.1)*0.005;
-                    mol.position.y += Math.cos(time*0.6+idx*0.9)*0.004;
-
-                    // Mulai naik ke atas setelah jeda
-                    if(osmosisTime >= (mol.userData.belowWait||0)){
                         mol.userData.osmState = 'rising';
-                        mol.userData.osmProg  = 0;
+                        mol.userData.osmProg = 0;
                         mol.userData.riseStartX = mol.position.x;
                         mol.userData.riseStartY = mol.position.y;
                         mol.userData.riseStartZ = mol.position.z;
-                        // Posisi target naik: di atas membran (posisi baru, beda dari asal)
-                        mol.userData.riseTargetX = (Math.random()-0.5)*12;
-                        mol.userData.riseTargetY = 2.5 + Math.random()*4.5;
-                        mol.userData.riseTargetZ = (Math.random()-0.5)*7;
+                        // Emissive lebih terang saat naik
+                        if(mol.material) mol.material.emissiveIntensity = 0.7;
                     }
 
-                } else if(st==='rising'){
-                    // ── Naik kembali ke atas (WARNA CYAN — sudah pernah lewat membran) ──
-                    pr = Math.min(1, pr + 0.007);
+                } else if(st === 'rising'){
+                    // ── Naik menembus membran (dari bawah ke atas) ──
+                    pr = Math.min(1, pr + 0.006);
                     mol.userData.osmProg = pr;
-                    var pe2 = pr<0.5 ? 2*pr*pr : -1+(4-2*pr)*pr;
+                    var pe = pr < 0.5 ? 2*pr*pr : -1+(4-2*pr)*pr;
 
-                    mol.position.x = mol.userData.riseStartX + (mol.userData.riseTargetX - mol.userData.riseStartX)*pe2;
-                    mol.position.y = mol.userData.riseStartY + (mol.userData.riseTargetY - mol.userData.riseStartY)*pe2;
-                    mol.position.z = mol.userData.riseStartZ + (mol.userData.riseTargetZ - mol.userData.riseStartZ)*pe2;
+                    mol.position.x = mol.userData.riseStartX + (mol.userData.targetAboveX - mol.userData.riseStartX)*pe;
+                    mol.position.y = mol.userData.riseStartY + (mol.userData.targetAboveY - mol.userData.riseStartY)*pe;
+                    mol.position.z = mol.userData.riseStartZ + (mol.userData.targetAboveZ - mol.userData.riseStartZ)*pe;
+
+                    // Flash effect saat melewati membran (y sekitar 0)
+                    if(mol.position.y > -0.5 && mol.position.y < 0.5){
+                        if(mol.material) mol.material.emissiveIntensity = 1.0;
+                    } else {
+                        if(mol.material) mol.material.emissiveIntensity = 0.5;
+                    }
 
                     if(pr >= 1){
-                        // Kembali ke state 'above' — tetap CYAN, tunggu giliran turun lagi
-                        mol.userData.osmState = 'above';
-                        mol.userData.osmProg  = 0;
-                        mol.userData.originX  = mol.position.x;
-                        mol.userData.originY  = mol.position.y;
-                        mol.userData.originZ  = mol.position.z;
-                        mol.userData.belowX   = (Math.random()-0.5)*12;
-                        mol.userData.belowY   = -2.5 - Math.random()*4.0;
-                        mol.userData.belowZ   = (Math.random()-0.5)*7;
-                        // Delay sebelum turun lagi
-                        mol.userData.osmDelay = osmosisTime + 0.5 + Math.random()*1.5;
+                        mol.userData.osmState = 'arrived';
+                        mol.userData.osmProg = 0;
+                        // Simpan posisi baru sebagai base melayang di atas
+                        mol.userData.floatBaseX = mol.position.x;
+                        mol.userData.floatBaseY = mol.position.y;
+                        mol.userData.floatBaseZ = mol.position.z;
+                        if(mol.material) mol.material.emissiveIntensity = 0.4;
+                    }
+
+                } else if(st === 'arrived'){
+                    // ── Sudah di atas membran: melayang sebagai air cyan ──
+                    // Setelah beberapa saat, kembali ke bawah dan naik lagi (siklus)
+                    mol.userData.osmProg += 0.003;
+                    mol.position.x = mol.userData.floatBaseX + Math.sin(time*0.5+idx*1.1)*0.35;
+                    mol.position.y = mol.userData.floatBaseY + Math.cos(time*0.4+idx*0.9)*0.22;
+                    mol.position.z = mol.userData.floatBaseZ + Math.sin(time*0.6+idx*1.3)*0.28;
+
+                    // Setelah sekitar 4 detik (osmosisTime ~0.003/frame * ~1300 frame), kembali ke bawah
+                    if(mol.userData.osmProg > 1.2){
+                        mol.userData.osmState = 'below';
+                        mol.userData.osmProg = 0;
+                        // Reset ke posisi bawah baru
+                        mol.userData.baseX = (Math.random()-0.5)*11;
+                        mol.userData.baseY = -2.5-Math.random()*4.5;
+                        mol.userData.baseZ = (Math.random()-0.5)*6.5;
+                        mol.position.set(mol.userData.baseX, mol.userData.baseY, mol.userData.baseZ);
+                        // Delay sebelum naik lagi
+                        mol.userData.riseDelay = osmosisTime + 0.3 + Math.random()*1.2;
+                        // Target naik baru
+                        mol.userData.targetAboveX = (Math.random()-0.5)*11;
+                        mol.userData.targetAboveY = 2.0+Math.random()*4.5;
+                        mol.userData.targetAboveZ = (Math.random()-0.5)*6.5;
                     }
                 }
             }
 
-        }else if(currentSimulation==='active'){
+        } else if(currentSimulation==='active'){
             if(mol.userData.isATP){mol.position.y=Math.sin(time*3)*0.5;mol.rotation.y+=0.02;mol.material.emissiveIntensity=Math.sin(time*3)>0.9?1:0.3;}
             else if(mol.userData.ionType){
                 var dy=mol.userData.targetY-mol.position.y;
@@ -1213,7 +1246,7 @@ window.addEventListener('resize',function(){
 });
 
 // ============================================================
-// OSMOSIS CALLOUT LABELS
+// OSMOSIS CALLOUT LABELS (2D canvas section)
 // ============================================================
 var OSMOSIS_LABELS={
     animal:{
@@ -1498,13 +1531,415 @@ function initHero3D(){
 }
 
 // ============================================================
+// Na⁺/K⁺ PUMP INFOGRAPHIC CANVAS
+// ============================================================
+var pumpCanvas, pumpCtx, pumpStep = 0, pumpAutoInterval = null, pumpAutoActive = false;
+var pumpAnimFrame = 0, pumpT = 0;
+
+var PUMP_STEPS = [
+    {
+        icon:'⚡', color:'#facc15',
+        title:'Kondisi Awal — Pompa Siap',
+        desc:'Pompa Na⁺/K⁺ berada dalam posisi terbuka ke dalam sel. Di dalam sel terdapat 3 ion Na⁺ yang siap diikat. Pompa memiliki afinitas tinggi terhadap Na⁺ pada kondisi ini.'
+    },
+    {
+        icon:'🔗', color:'#fb923c',
+        title:'Tahap 1 — 3 Na⁺ Mengikat Pompa',
+        desc:'Tiga ion Na⁺ dari dalam sel terikat pada sisi dalam pompa. Ini memicu fosforilasi — ATP akan segera digunakan untuk mengubah bentuk pompa.'
+    },
+    {
+        icon:'💥', color:'#f472b6',
+        title:'Tahap 2 — ATP → ADP + P (Fosforilasi)',
+        desc:'1 molekul ATP dipecah menjadi ADP + fosfat. Energi dari pemecahan ATP ini menyebabkan pompa berubah bentuk secara konformasi.'
+    },
+    {
+        icon:'🚀', color:'#f87171',
+        title:'Tahap 3 — 3 Na⁺ Dilepas ke Luar Sel',
+        desc:'Pompa terbuka ke sisi luar sel. Afinitas pompa terhadap Na⁺ menurun, sehingga 3 ion Na⁺ dilepaskan ke luar sel — melawan gradien konsentrasi.'
+    },
+    {
+        icon:'🎯', color:'#a78bfa',
+        title:'Tahap 4 — 2 K⁺ Mengikat Pompa',
+        desc:'Dua ion K⁺ dari luar sel terikat pada pompa. Fosfat dilepaskan, menyebabkan pompa mulai kembali ke bentuk semula.'
+    },
+    {
+        icon:'✅', color:'#22c55e',
+        title:'Tahap 5 — 2 K⁺ Dilepas ke Dalam Sel',
+        desc:'Pompa terbuka ke dalam sel. 2 ion K⁺ dilepaskan ke dalam sel — melawan gradien konsentrasi. Pompa kembali ke posisi awal dan siklus berulang.'
+    }
+];
+
+function initPumpCanvas(){
+    pumpCanvas = document.getElementById('pump-canvas'); if(!pumpCanvas) return;
+    pumpCtx = pumpCanvas.getContext('2d');
+    resizePumpCanvas();
+    window.addEventListener('resize', resizePumpCanvas);
+    setPumpStep(0);
+    animatePump();
+}
+
+function resizePumpCanvas(){
+    if(!pumpCanvas) return;
+    var container = pumpCanvas.parentElement;
+    var w = container.clientWidth;
+    var h = Math.min(Math.max(w * 0.55, 280), 480);
+    pumpCanvas.width = w;
+    pumpCanvas.height = h;
+    pumpCanvas.style.height = h + 'px';
+}
+
+function setPumpStep(step){
+    pumpStep = step;
+    var info = PUMP_STEPS[step];
+    document.getElementById('pump-step-icon').textContent = info.icon;
+    document.getElementById('pump-step-title').textContent = 'Langkah '+(step+1)+'/6 — '+info.title;
+    document.getElementById('pump-step-desc').textContent = info.desc;
+    document.getElementById('pump-desc-box').style.borderColor = info.color+'55';
+    document.getElementById('pump-step-title').style.color = info.color;
+
+    for(var i=0;i<6;i++){
+        var btn = document.getElementById('pump-btn-'+i);
+        if(!btn) continue;
+        var colors = [
+            ['bg-yellow-500/20','border-yellow-500/50','text-yellow-300'],
+            ['bg-orange-500/20','border-orange-500/50','text-orange-300'],
+            ['bg-pink-500/20','border-pink-500/50','text-pink-300'],
+            ['bg-red-500/20','border-red-500/50','text-red-300'],
+            ['bg-purple-500/20','border-purple-500/50','text-purple-300'],
+            ['bg-green-500/20','border-green-500/50','text-green-300']
+        ];
+        btn.className = 'px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold border transition ';
+        if(i === step){
+            btn.className += colors[i].join(' ');
+        } else {
+            btn.className += 'bg-gray-700 border-gray-600 text-gray-400';
+        }
+    }
+    pumpT = 0;
+}
+
+function togglePumpAuto(){
+    pumpAutoActive = !pumpAutoActive;
+    var btn = document.getElementById('pump-auto-btn');
+    if(pumpAutoActive){
+        btn.className = 'px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold border transition bg-red-500/20 border-red-500/50 text-red-300';
+        btn.textContent = '⏹ Stop';
+        pumpAutoInterval = setInterval(function(){
+            setPumpStep((pumpStep+1)%6);
+        }, 2500);
+    } else {
+        btn.className = 'px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold border transition bg-green-500/20 border-green-500/50 text-green-300';
+        btn.textContent = '▶ Auto';
+        if(pumpAutoInterval) clearInterval(pumpAutoInterval);
+    }
+}
+
+function animatePump(){
+    requestAnimationFrame(animatePump);
+    pumpT += 0.025;
+    drawPump();
+}
+
+function drawPump(){
+    if(!pumpCtx||!pumpCanvas) return;
+    var W = pumpCanvas.width, H = pumpCanvas.height;
+    var ctx = pumpCtx;
+    ctx.clearRect(0,0,W,H);
+
+    // Background gradient
+    var bg = ctx.createLinearGradient(0,0,W,H);
+    bg.addColorStop(0,'#0f172a');
+    bg.addColorStop(1,'#1e1b4b');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0,0,W,H);
+
+    var isMob = W < 600;
+    var membY = H * 0.5;
+    var membH = isMob ? 28 : 38;
+    var cx = W * 0.5;
+    var pumpW = isMob ? 64 : 88;
+    var pumpX = cx - pumpW/2;
+
+    // ── ZONE LABELS ──
+    ctx.font = 'bold '+(isMob?11:13)+'px Poppins,sans-serif';
+    ctx.fillStyle = 'rgba(250,204,21,0.85)';
+    ctx.textAlign = 'left';
+    ctx.fillText('LUAR SEL', isMob?8:14, isMob?20:24);
+    ctx.fillStyle = 'rgba(167,139,250,0.85)';
+    ctx.fillText('DALAM SEL', isMob?8:14, H-(isMob?8:12));
+
+    // Na⁺ konsentrasi luar (banyak)
+    ctx.font = isMob?'10px Poppins':'11px Poppins';
+    ctx.fillStyle = 'rgba(250,204,21,0.55)';
+    ctx.textAlign = 'right';
+    ctx.fillText('[Na⁺] tinggi di luar', W-(isMob?8:14), isMob?20:24);
+    ctx.fillStyle = 'rgba(167,139,250,0.55)';
+    ctx.fillText('[K⁺] tinggi di dalam', W-(isMob?8:14), H-(isMob?8:12));
+
+    // ── MEMBRAN ──
+    // Outer membrane strip
+    var memGrad = ctx.createLinearGradient(0, membY - membH/2, 0, membY + membH/2);
+    memGrad.addColorStop(0,'rgba(59,130,246,0.55)');
+    memGrad.addColorStop(0.4,'rgba(30,64,175,0.75)');
+    memGrad.addColorStop(0.6,'rgba(30,64,175,0.75)');
+    memGrad.addColorStop(1,'rgba(96,165,250,0.55)');
+    ctx.fillStyle = memGrad;
+    ctx.fillRect(0, membY - membH/2, W, membH);
+
+    // Phospholipid dots along membrane
+    var dotSp = isMob?22:26;
+    var dotR = isMob?4:5;
+    for(var dx=20; dx<W-pumpW-20; dx+=dotSp){
+        if(dx > cx-pumpW/2-20 && dx < cx+pumpW/2+20) continue;
+        // Head top
+        ctx.beginPath(); ctx.arc(dx, membY - membH/2 + dotR+2, dotR, 0, Math.PI*2);
+        ctx.fillStyle = '#3b82f6'; ctx.fill();
+        // Tail
+        ctx.beginPath(); ctx.moveTo(dx, membY - membH/2 + dotR*2+2); ctx.lineTo(dx, membY);
+        ctx.strokeStyle='rgba(156,163,175,0.5)'; ctx.lineWidth=isMob?1.5:2; ctx.stroke();
+        // Head bottom
+        ctx.beginPath(); ctx.arc(dx, membY + membH/2 - dotR-2, dotR, 0, Math.PI*2);
+        ctx.fillStyle = '#60a5fa'; ctx.fill();
+        // Tail bottom
+        ctx.beginPath(); ctx.moveTo(dx, membY + membH/2 - dotR*2-2); ctx.lineTo(dx, membY);
+        ctx.strokeStyle='rgba(156,163,175,0.5)'; ctx.lineWidth=isMob?1.5:2; ctx.stroke();
+    }
+
+    // ── PUMP PROTEIN ──
+    var pumpOpen = pumpStep; // 0=open-in, 1=binding-Na, 2=ATP, 3=open-out, 4=binding-K, 5=release-K
+    var pumpColor1, pumpColor2;
+    if(pumpStep<=1){ pumpColor1='#22c55e'; pumpColor2='#16a34a'; }
+    else if(pumpStep===2){ pumpColor1='#f472b6'; pumpColor2='#be185d'; }
+    else if(pumpStep===3){ pumpColor1='#f87171'; pumpColor2='#dc2626'; }
+    else if(pumpStep===4){ pumpColor1='#a78bfa'; pumpColor2='#7c3aed'; }
+    else { pumpColor1='#34d399'; pumpColor2='#059669'; }
+
+    // Pump body
+    var pumpBodyH = membH + (isMob?12:18);
+    var pumpBG = ctx.createLinearGradient(pumpX, membY-pumpBodyH/2, pumpX+pumpW, membY+pumpBodyH/2);
+    pumpBG.addColorStop(0, pumpColor1);
+    pumpBG.addColorStop(1, pumpColor2);
+
+    ctx.shadowColor = pumpColor1; ctx.shadowBlur = 18;
+    roundRect(ctx, pumpX, membY - pumpBodyH/2, pumpW, pumpBodyH, 10);
+    ctx.fillStyle = pumpBG; ctx.fill();
+    ctx.shadowBlur = 0;
+
+    // Pump border
+    ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 2;
+    roundRect(ctx, pumpX, membY - pumpBodyH/2, pumpW, pumpBodyH, 10);
+    ctx.stroke();
+
+    // Channel opening — top or bottom based on step
+    var channelR = isMob?8:11;
+    var openTop = (pumpStep===0||pumpStep===1||pumpStep===5);
+    var openBottom = (pumpStep===3||pumpStep===4);
+
+    if(openTop){
+        ctx.beginPath(); ctx.arc(cx, membY-pumpBodyH/2-channelR+4, channelR, Math.PI, 0);
+        ctx.fillStyle='rgba(0,0,0,0.5)'; ctx.fill();
+        ctx.strokeStyle='rgba(255,255,255,0.3)'; ctx.lineWidth=1.5; ctx.stroke();
+    }
+    if(openBottom){
+        ctx.beginPath(); ctx.arc(cx, membY+pumpBodyH/2+channelR-4, channelR, 0, Math.PI);
+        ctx.fillStyle='rgba(0,0,0,0.5)'; ctx.fill();
+        ctx.strokeStyle='rgba(255,255,255,0.3)'; ctx.lineWidth=1.5; ctx.stroke();
+    }
+
+    // Pump label
+    ctx.font = 'bold '+(isMob?9:11)+'px Poppins,sans-serif';
+    ctx.fillStyle='rgba(255,255,255,0.9)';
+    ctx.textAlign='center';
+    ctx.fillText('Na⁺/K⁺', cx, membY-3);
+    ctx.fillText('ATPase', cx, membY+(isMob?10:13));
+
+    // ── ION PARTICLES ──
+    var t = pumpT;
+    var iR = isMob?9:12; // ion radius
+    var zoneTop = membY - pumpBodyH/2 - 16;
+    var zoneBot = membY + pumpBodyH/2 + 16;
+
+    // ── Na⁺ ions (yellow-orange) ──
+    // Background Na⁺ — always many outside (top), few inside (bottom)
+    var naBgPositions = [
+        {x:W*0.08, y:H*0.12}, {x:W*0.18, y:H*0.22}, {x:W*0.28, y:H*0.08},
+        {x:W*0.72, y:H*0.15}, {x:W*0.82, y:H*0.25}, {x:W*0.88, y:H*0.10},
+        {x:W*0.12, y:H*0.35}, {x:W*0.92, y:H*0.32}
+    ];
+    naBgPositions.forEach(function(p,i){
+        if(p.x > pumpX-20 && p.x < pumpX+pumpW+20) return;
+        var yy = p.y + Math.sin(t*0.8+i*1.3)*4;
+        drawIon(ctx, p.x, yy, iR, '#facc15', '#fbbf24', 'Na⁺', isMob);
+    });
+
+    // Background K⁺ — always many inside (bottom), few outside
+    var kBgPositions = [
+        {x:W*0.10, y:H*0.72}, {x:W*0.22, y:H*0.82}, {x:W*0.32, y:H*0.68},
+        {x:W*0.68, y:H*0.75}, {x:W*0.80, y:H*0.85}, {x:W*0.90, y:H*0.70},
+        {x:W*0.15, y:H*0.90}, {x:W*0.85, y:H*0.88}
+    ];
+    kBgPositions.forEach(function(p,i){
+        if(p.x > pumpX-20 && p.x < pumpX+pumpW+20) return;
+        var yy = p.y + Math.sin(t*0.7+i*1.1)*4;
+        drawIon(ctx, p.x, yy, iR, '#a78bfa', '#8b5cf6', 'K⁺', isMob);
+    });
+
+    // Active Na⁺ ions (3 ions going through pump)
+    var naSpread = isMob?16:22;
+    var na1x = cx-naSpread, na2x=cx, na3x=cx+naSpread;
+
+    if(pumpStep===0){
+        // Inside cell, floating toward pump
+        var py0 = membY + pumpBodyH/2 + 30 + Math.sin(t*1.2)*6;
+        drawIon(ctx,na1x-6,py0+5,iR,'#facc15','#fbbf24','Na⁺',isMob);
+        drawIon(ctx,na2x+8,py0-5,iR,'#facc15','#fbbf24','Na⁺',isMob);
+        drawIon(ctx,na3x-2,py0+8,iR,'#facc15','#fbbf24','Na⁺',isMob);
+    } else if(pumpStep===1){
+        // Binding inside pump
+        var py1 = membY + 5 + Math.sin(t*2)*3;
+        drawIon(ctx,na1x,py1,iR*0.9,'#facc15','#fbbf24','Na⁺',isMob);
+        drawIon(ctx,na2x,py1+8,iR*0.9,'#facc15','#fbbf24','Na⁺',isMob);
+        drawIon(ctx,na3x,py1,iR*0.9,'#facc15','#fbbf24','Na⁺',isMob);
+        // Binding flash
+        ctx.beginPath(); ctx.arc(cx, membY+3, pumpW*0.4, 0, Math.PI*2);
+        ctx.strokeStyle='rgba(250,204,21,0.3)'; ctx.lineWidth=2; ctx.stroke();
+    } else if(pumpStep===2){
+        // ATP being consumed — ions locked in pump
+        var py2 = membY + Math.sin(t*3)*2;
+        drawIon(ctx,na1x,py2-4,iR*0.85,'#fb923c','#f97316','Na⁺',isMob);
+        drawIon(ctx,na2x,py2+6,iR*0.85,'#fb923c','#f97316','Na⁺',isMob);
+        drawIon(ctx,na3x,py2-2,iR*0.85,'#fb923c','#f97316','Na⁺',isMob);
+        // ATP → ADP label
+        drawATPBurst(ctx, cx+(isMob?38:54), membY-(isMob?28:38), isMob, t);
+    } else if(pumpStep===3){
+        // Released outside — flying up
+        var fly3 = Math.max(0, Math.min(1, Math.sin(t*1.5)*0.5+0.5));
+        var py3out = membY - pumpBodyH/2 - 20 - fly3*35;
+        drawIon(ctx,na1x-8,py3out,iR,'#facc15','#fbbf24','Na⁺',isMob);
+        drawIon(ctx,na2x+2,py3out-12,iR,'#facc15','#fbbf24','Na⁺',isMob);
+        drawIon(ctx,na3x+6,py3out,iR,'#facc15','#fbbf24','Na⁺',isMob);
+        // Arrow up
+        drawUpArrow(ctx, cx, membY-pumpBodyH/2-8, isMob, '#facc15');
+    } else if(pumpStep===4){
+        // K⁺ binding outside
+        var py4 = membY - 5 + Math.sin(t*2)*3;
+        var kR = isMob?8:11;
+        drawIon(ctx,na1x,py4,kR*0.9,'#a78bfa','#8b5cf6','K⁺',isMob);
+        drawIon(ctx,na3x,py4,kR*0.9,'#a78bfa','#8b5cf6','K⁺',isMob);
+        ctx.beginPath(); ctx.arc(cx, membY-3, pumpW*0.38, 0, Math.PI*2);
+        ctx.strokeStyle='rgba(167,139,250,0.3)'; ctx.lineWidth=2; ctx.stroke();
+    } else if(pumpStep===5){
+        // K⁺ released inside — flying down
+        var fly5 = Math.max(0, Math.min(1, Math.sin(t*1.5)*0.5+0.5));
+        var py5in = membY + pumpBodyH/2 + 20 + fly5*32;
+        drawIon(ctx,na1x-6,py5in,iR,'#a78bfa','#8b5cf6','K⁺',isMob);
+        drawIon(ctx,na3x+6,py5in-10,iR,'#a78bfa','#8b5cf6','K⁺',isMob);
+        drawDownArrow(ctx, cx, membY+pumpBodyH/2+8, isMob, '#a78bfa');
+    }
+
+    // ── STEP INDICATOR (mini progress dots) ──
+    var dotGap = isMob?22:28;
+    var startX = cx - (5*dotGap)/2;
+    for(var s=0;s<6;s++){
+        var dotX = startX + s*dotGap;
+        var dotY = H - (isMob?22:28);
+        var stepColors = ['#facc15','#fb923c','#f472b6','#f87171','#a78bfa','#22c55e'];
+        ctx.beginPath(); ctx.arc(dotX, dotY, s===pumpStep?7:5, 0, Math.PI*2);
+        ctx.fillStyle = s<=pumpStep ? stepColors[s] : 'rgba(255,255,255,0.12)';
+        ctx.fill();
+        if(s===pumpStep){
+            ctx.beginPath(); ctx.arc(dotX, dotY, 10+Math.sin(t*3)*2, 0, Math.PI*2);
+            ctx.strokeStyle = stepColors[s]+'66'; ctx.lineWidth=2; ctx.stroke();
+        }
+    }
+}
+
+function drawIon(ctx, x, y, r, fill, stroke, label, isMob){
+    var grad = ctx.createRadialGradient(x-r*0.3, y-r*0.3, r*0.1, x, y, r);
+    grad.addColorStop(0, 'rgba(255,255,255,0.7)');
+    grad.addColorStop(0.3, fill);
+    grad.addColorStop(1, stroke);
+    ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2);
+    ctx.shadowColor=fill; ctx.shadowBlur=10;
+    ctx.fillStyle=grad; ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.3)'; ctx.lineWidth=1; ctx.stroke();
+    ctx.shadowBlur=0;
+    ctx.font='bold '+(isMob?7:8.5)+'px Poppins,sans-serif';
+    ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(label,x,y);
+    ctx.textBaseline='alphabetic';
+}
+
+function drawATPBurst(ctx, x, y, isMob, t){
+    var sz = isMob?30:40;
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(Math.sin(t*4)*0.15);
+    // Glow
+    ctx.shadowColor='#f472b6'; ctx.shadowBlur=20;
+    ctx.beginPath(); ctx.arc(0,0,sz*0.55,0,Math.PI*2);
+    var g = ctx.createRadialGradient(-sz*0.2,-sz*0.2,2, 0,0,sz*0.55);
+    g.addColorStop(0,'rgba(255,200,240,0.9)');
+    g.addColorStop(0.5,'rgba(244,114,182,0.9)');
+    g.addColorStop(1,'rgba(190,24,93,0.9)');
+    ctx.fillStyle=g; ctx.fill();
+    ctx.shadowBlur=0;
+    ctx.font='bold '+(isMob?9:11)+'px Poppins,sans-serif';
+    ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText('ATP', 0, -sz*0.12);
+    ctx.font='bold '+(isMob?7:8)+'px Poppins,sans-serif';
+    ctx.fillStyle='rgba(255,230,240,0.85)';
+    ctx.fillText('→ADP+P', 0, sz*0.2);
+    ctx.textBaseline='alphabetic';
+    ctx.restore();
+}
+
+function drawUpArrow(ctx, x, y, isMob, color){
+    var len = isMob?22:30;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x, y-len);
+    ctx.strokeStyle=color; ctx.lineWidth=3; ctx.lineCap='round'; ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x-8,y-len+10); ctx.lineTo(x,y-len); ctx.lineTo(x+8,y-len+10);
+    ctx.stroke();
+    ctx.lineCap='butt';
+}
+
+function drawDownArrow(ctx, x, y, isMob, color){
+    var len = isMob?22:30;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x, y+len);
+    ctx.strokeStyle=color; ctx.lineWidth=3; ctx.lineCap='round'; ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x-8,y+len-10); ctx.lineTo(x,y+len); ctx.lineTo(x+8,y+len-10);
+    ctx.stroke();
+    ctx.lineCap='butt';
+}
+
+function roundRect(ctx, x, y, w, h, r){
+    ctx.beginPath();
+    ctx.moveTo(x+r, y);
+    ctx.lineTo(x+w-r, y);
+    ctx.quadraticCurveTo(x+w,y, x+w,y+r);
+    ctx.lineTo(x+w, y+h-r);
+    ctx.quadraticCurveTo(x+w,y+h, x+w-r,y+h);
+    ctx.lineTo(x+r, y+h);
+    ctx.quadraticCurveTo(x,y+h, x,y+h-r);
+    ctx.lineTo(x, y+r);
+    ctx.quadraticCurveTo(x,y, x+r,y);
+    ctx.closePath();
+}
+
+// ============================================================
 // INIT
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
     loadQuizHistory(); loadGameHistory();
     trackVisitor();
     renderDashboard(); renderActivityFeed(); renderQuizHistory(); renderQuizStats(); renderGameHistory(); renderGameStats();
-    createBgParticles(); initThreeJS(); initHero3D(); initOsmosisCanvas();
+    createBgParticles(); initThreeJS(); initHero3D(); initOsmosisCanvas(); initPumpCanvas();
     setTimeout(function(){renderOsmosisCallouts('hypotonic');}, 200);
     setTimeout(function(){
         var qh=lsGet(LS_KEYS.quizHistory,[]);
